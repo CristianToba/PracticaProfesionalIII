@@ -8,16 +8,16 @@
 <?php
  
 ## conexion a sql...
-	$conexion = mysql_connect("localhost", "root", "") or die(mysql_error());
+	$conexion = mysql_connect("localhost", "sa", "xxzza") or die(mysql_error());
 	## seleccionamos la base de datos
-    mysql_select_db("supermercado", $conexion);
+    mysql_select_db("DAMSU", $conexion);
 	## generamos el query
  
-if ($_POST['Nombre']) {
+
   
  //Comprobacion del envio del nombre de usuario y password
- $username=$_POST['Nombre'];
- $password=$_POST['Pass'];
+ $username=$_POST['txtUsuario'];
+ $password=$_POST['txtclave'];
 
      if ($password==NULL) {
         echo "La password no fue enviada";
@@ -58,7 +58,7 @@ if ($_POST['Nombre']) {
             }
         }
    }
- }
+
  mysql_close();
 
  ?> 
