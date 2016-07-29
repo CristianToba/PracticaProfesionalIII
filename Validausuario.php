@@ -1,3 +1,9 @@
+<?php
+
+setcookie('usuario', $_POST['txtUsuario'], time() + 604800);
+session_start();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,13 +14,19 @@
 <?php
  
 ## conexion a sql...
-	$conexion = mysql_connect("localhost", "sa", "xxzza") or die(mysql_error());
-	## seleccionamos la base de datos
-    mysql_select_db("DAMSU", $conexion);
+$serverName="CRISTIAN-PC\MSSQLSERVER";
+$connectionInfo =  array("Database"=>"DAMSU", "UID"=>"sa","PWD"=>"xxzza");
+$conn= sqlsrv_connect($serverName, $connectionInfo);
 	## generamos el query
- 
-
-  
+ if($conn){
+     echo  "Se realizo la conexion";
+ }else
+ {
+     echo "No se realizo la conexion";
+     echo " conexion" + $conn;
+     
+ }
+  /*
  //Comprobacion del envio del nombre de usuario y password
  $username=$_POST['txtUsuario'];
  $password=$_POST['txtclave'];
@@ -60,7 +72,7 @@
    }
 
  mysql_close();
-
+*/
  ?> 
 <body>
 </body>
