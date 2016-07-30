@@ -14,19 +14,17 @@ session_start();
 <?php
  
 ## conexion a sql...
-$serverName="CRISTIAN-PC\MSSQLSERVER";
-$connectionInfo =  array("Database"=>"DAMSU", "UID"=>"sa","PWD"=>"xxzza");
+$serverName="(local)";;
+$connectionInfo =  array("Database"=>"DAMSU", "UID"=>"DAMSU","PWD"=>"DAMSU");
 $conn= sqlsrv_connect($serverName, $connectionInfo);
 	## generamos el query
  if($conn){
-     echo  "Se realizo la conexion";
- }else
- {
-     echo "No se realizo la conexion";
-     echo " conexion" + $conn;
-     
- }
-  /*
+     ECHO "Se establecio conexion con el servidor";
+ }ELSE{
+        echo "No es posible conectarse al servidor.</br>";
+        die( print_r( sqlsrv_errors(), true));
+}
+ 
  //Comprobacion del envio del nombre de usuario y password
  $username=$_POST['txtUsuario'];
  $password=$_POST['txtclave'];
@@ -72,7 +70,7 @@ $conn= sqlsrv_connect($serverName, $connectionInfo);
    }
 
  mysql_close();
-*/
+
  ?> 
 <body>
 </body>
