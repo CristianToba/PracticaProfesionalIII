@@ -4,6 +4,8 @@ setcookie('usuario', $_POST['txtUsuario'], time() + 604800);
 session_start();
 ?>
 
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,6 +22,13 @@ $conn= sqlsrv_connect($serverName, $connectionInfo);
 	## generamos el query
  if($conn){
      ECHO "Se establecio conexion con el servidor";
+     
+     
+     
+     
+     
+     
+     
  }ELSE{
         echo "No es posible conectarse al servidor.</br>";
         die( print_r( sqlsrv_errors(), true));
@@ -28,32 +37,26 @@ $conn= sqlsrv_connect($serverName, $connectionInfo);
  //Comprobacion del envio del nombre de usuario y password
  $username=$_POST['txtUsuario'];
  $password=$_POST['txtclave'];
-
-     if ($password==NULL) {
-        echo "La password no fue enviada";
-     }else{
-
-       $usu=$_COOKIE['usuario'];
-       $query = mysql_query("SELECT usuario,pass FROM cliente WHERE usuario = '$usu'") or die(mysql_error());
+ $usu=$_COOKIE['usuario'];
+ $query = mysql_query("SELECT dni,clave FROM afiliado WHERE dni = '$usu' and dni = '$password'") or die(mysql_error());
  
        $data = mysql_fetch_array($query);
  
-        if($data['pass'] != $password) {
+        if($data['clave'] != $password) {
             ?>
             <script>
             alert("Login incorrecto");
-            actualiza();
             </script>
   
        <?php
         }else{
-            if($data['usuario']== $username && $data['pass']==$password){
+            if($data['dni']== $username && $data['clave']==$password){
 
               //comprobamos si existe la cookie
               if(isset($_COOKIE['usuario'])) {
               //como no existe le enviamos la cookie y ala vez asignamos un valor a la cookie
               
-              $_COOKIE['usuario'] = $_POST['Nombre'];
+              $_COOKIE['usuario'] = $_POST['txtUsuario'];
                 mysql_close();
               }
             ?>
@@ -67,7 +70,7 @@ $conn= sqlsrv_connect($serverName, $connectionInfo);
 
             }
         }
-   }
+   
 
  mysql_close();
 

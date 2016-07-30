@@ -15,6 +15,22 @@
 } 
 </script>
 
+<script language="javascript" type="text/javascript">
+/*FUNCION VALIDA NUMERO*/
+    
+    function ValidaNumero(e){
+        
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==8) return true;
+    patron =/[0-9\s]/;
+    te = String.fromCharCode(tecla);
+    return patron.test(te);
+    
+    }
+    //*** Fin del Codigo para Validar que sea un campo Numerico
+
+</script>
+
 
 <!--Cabecera-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -32,11 +48,12 @@
     <div class="panel-body">
     <div class="row-md-1" align="center" style="margin-top: 10px;">
       <label for="usuario" class="row-lg-2 control-label">Usuario: </label>
-      <INPUT TYPE ="text" NAME="txtUsuario" class="form-control"  onKeyPress="return ValidaCadena(event)" SIZE="MAXLENGTH=30" ID="nombre" placeholder="Ingrese su usuario" required >
+      <INPUT TYPE ="text" NAME="txtUsuario" SIZE="MAXLENGTH=20" onKeyPress="return ValidaNumero(event)"  class="form-control" ID="nombre" placeholder="Ingrese su usuario" required >
+      
     </div>
     <div class="row-md-2" align="center" style="margin-top: 10px;">
       <label for="clave" class="row-lg-2 control-label" >Clave: </label>
-      <input type ="text" name="txtclave" class="form-control" onKeyPress="return ValidaCadena(event)" size="MAXLENGTH=30" id="apellido" placeholder="Ingrese su clave" required >
+      <input type ="text" name="txtclave" class="form-control" size="MAXLENGTH=30" id="apellido" placeholder="Ingrese su clave" required >
     </div>
 
  <div class="row-md-2" align="center" style="margin-top: 10px;">
