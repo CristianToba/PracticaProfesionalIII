@@ -7,6 +7,7 @@
         <script src="../css/jquery.min.js"></script>
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Validaciones.js"></script>
+        <script src="../Funciones/Funciones.php"></script>
         
     </head>
     <body>
@@ -20,7 +21,7 @@
                 
                 <button class="btn btn-default" style="margin-left: 10px;"><a href="../Vista/AltaPais.html">Agregar</a></button>
                 
-                <b style="margin-left: 15px;">Criterio</b>: 
+                <b style="margin-left: 15px;">Criterio</b>
                 
               
                 <button class="btn btn-default" style="margin-left: 10px;"><a href="#"></a>
@@ -37,7 +38,9 @@
                       Paises 
                     </h4>
                 </div>
+                        
                 <?php  
+
                     //tomamos los datos del archivo conexion.php  
                     include("../Conexion/Conexion.php");
                     include("../Funciones/Consultas.php"); 
@@ -69,63 +72,11 @@
                     }
                     echo "</tbody>";
                     echo "</table>";  
-                    ?>  
-                  
+                   
+?>  
                 </div>
             </div>
                 
-                <!--<table class="table table-hover" id="tblpais">
-                    <tr>
-                        <th hidden=""> id </th>
-                        <th> Descripcion </th>
-                        <th> Eliminar </th>
-                        <th> Modificar </th>
-                        <th> Ver </th>
-                                            
-                    </tr>
-                        
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
-                        <td>
-                        <a href="../Vista/ModificarPais.html"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </td>
-                        <td><span>Consultar</span></td>
-                    <tr>
-                        
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
-                        <td>
-                            <a href="../Vista/ModificarPais.html"><span class="glyphicon glyphicon-pencil"></span></a>
-                                                                
-                        </td>
-                        <td><span>Consultar</span></td>
-                    </tr>
-                    
-                    <tr>
-                        
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
-                        <td><span class="glyphicon glyphicon-pencil"></span></td>
-                        <td><span>Consultar</span></td>
-                    </tr>
-                   
-                    <tr>
-                        
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
-                        <td><span class="glyphicon glyphicon-pencil"></span></td>
-                        <td><span>Consultar</span></td>
-                    </tr>
-                    
-                    <tr>
-                        
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
-                        <td><span class="glyphicon glyphicon-pencil"></span></td>
-                        <td><span>Consultar</span></td>
-                    </tr>
-                    
-                </table>-->
             </div>
             
             <div class="row-md-2" align="center" style="margin-top: 10px;">
