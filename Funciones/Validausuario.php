@@ -3,14 +3,6 @@
 setcookie('usuario', $_POST['txtUsuario'], time() + 604800);
 session_start();
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
-</head>
-
     
 <?php
     $user=($_POST["txtUsuario"]);
@@ -84,6 +76,3 @@ try {
     echo $exc->getTraceAsString();
 }
 ?>
-<body>
-</body>
-</html>
