@@ -16,13 +16,20 @@ and open the template in the editor.
     </head>
     <body>
     <div class="panel panel-primary">
-    <div class="panel-heading"> <b>Alta de Pais</b> </div>
+    <div class="panel-heading"> <b>Alta de Provincia</b> </div>
     
     <FORM name ="formulario" METHOD="POST" action = "../GestorPPL/AltaProvincia.php" class="form-inline">
         <div class="panel-body">
             <div class="row-md-1" align="center" style="margin-top: 10px;">
                 
                 Nombre del Pais: 
+                <select Name=txtPais class="form-control">
+                  <option value='0' selected>Seleccione una opcion</option>
+                  <option value=4>Mendoza</option>
+                  <option value=1>San Juan</option>
+                  <option value=3>etc</option>
+                  
+                </select>
                                
                 Nombre de Provincia: <input type="text" name="Pais" value="" />       
       

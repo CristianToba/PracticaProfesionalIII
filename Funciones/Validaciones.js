@@ -1,6 +1,5 @@
 
-  
-  
+
 
 function ValidaCampo(campo){
   

@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <!--Cabecera-->
@@ -10,30 +9,26 @@
 
     </head>
     <body>
-  
+<?php
+$CodPais=$_GET['codigoPais'];
+$nombre=$_GET['txtPais'];
+?>
         <div class="panel panel-primary">
-            <div class="panel-heading"> <b>Alta Pais</b> </div>
+            <div class="panel-heading"> <b>Modificar Pais</b> </div>
             <!--Consultar Pais 
             <div class="panel-heading"> <b>Alta de Pais</b> </div>
             -->
-            <FORM name ="formulario" METHOD="POST" action = "../GestorPPL/AltaModPais.php?valor=0" class="form-inline">
+            <FORM name ="formulario" method="POST" action = "../GestorPPL/AltaModPais.php?valor=1" class="form-inline">
                 <div class="panel-body">
                     <div class="row-md-1" align="center" style="margin-top: 10px;">
-                        
-                        Nombre del Pais: <input TYPE ="text" NAME="txtPais" class="form-control"  onKeyPress="return ValidaCadena(event)" ID="Pais" placeholder="Ingresar Pais" required>    
 
-                        <!-- Modificar Pais
-                         Nombre del Pais: <input TYPE ="text" NAME="txtPais" class="form-control"  onKeyPress="return ValidaCadena(event)" ID="Pais" placeholder="" required>  
-                        -->
+                        Nombre del Pais: <input NAME="codPais" class="form-control"  ID="CodPais" value="<?php echo $CodPais?>" readonly="true" value="<?php echo $CodPais ?>">    
+                        Nombre del Pais: <input TYPE ="text" NAME="txtPais" class="form-control"  onKeyPress="return ValidaCadena(event)" ID="Pais" value="<?php echo $nombre?>">    
+                        
                     </div>
 
                     <div class="row-md-2" align="center" style="margin-top: 10px;">
-                        <!--Instruccion para actualizar un pais y que los botones sean visibles 
-                        <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
-                        <input type="button"  value="Cancelar" class="btn btn-default" style="margin-top: 10px;">
-                        <input type="button" value="Salir" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
-                        -->
-                        <!--Instruccion para deshabilitar los botones al modificar un pais-->
+
                         <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
 
                         <input type="button" value="Salir" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
@@ -43,8 +38,10 @@
             </form>
 
         </div>
+
         <div class="panel-footer">
             <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
         </div>
+
     </body>
 </html>

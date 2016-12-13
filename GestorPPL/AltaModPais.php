@@ -1,50 +1,130 @@
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
-</head>
-
-    
 <?php
-    
-    $pais=($_POST["txtPais"]);
-    $alta= "20160926 20:39";
- 
-        $serverName="(local)";;
-        $connectionInfo =  array("Database"=>"DAMSU", "UID"=>"DAMSU","PWD"=>"DAMSU");
-        $conn= sqlsrv_connect($serverName, $connectionInfo);
-try {
-    
-    include("../Funciones/Consultas.php"); 
-	## Consulta para consultar el ultimo registro
-        $sql_ultimoCod= sqlsrv_query("$conn",$sql2);
-        while($row=sqlsrv_fetch_array($sql_ultimoCod)) {
-         $codigo=$row['codigo'];
-         $codigo=$codigo+1;
-        echo $codigo;  
-        }
+
+/*
+  include("../Conexion/Conexion.php");
+  $conectar= new Conexion();
+  $link = $conectar->Conectarse();
+  $parametro = $_GET['valor'];
+  $pais = $_POST['txtPais'];
+  $alta = "2016-12-06 00:00:00";
+  print ''+$parametro;
+
+  //Consulta si el registro se desea , Insertar(0), Modificar(1)o Eliminar(2)
+  //Insertar Registro
+  if ($parametro == 0) {
+
+  try {
+
+  include("../Funciones/Consultas.php");
+  ## Consulta para consultar el ultimo registro
+  $ultimoCod = new Consulta();
+  //Casteo el objeto Consulta(ultimoCod) como Integer para poder insertar el registro nuevo en la posicion max devuelta por ObtenerMaxPais
+  $numero = (Integer) $ultimoCod->ObtenerMaxPais();
+
+  ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
+  $sql_Consulta = "INSERT INTO PAIS(codigoPais,descripcionPais, alta, baja, habilitado,usuarioAuditoria) VALUES ('$numero','$pais','$alta','',1,'')";
+
+  $stmt = sqlsrv_query($link, $sql_Consulta);
+  if ($stmt === false) {
+
+  print "<script>alert('Registro ya existente ')</script>";
+  die(print_r(sqlsrv_errors(), true));
+  //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+  } else {
+  print "<script>alert('Se registro un pais nuevo')</script>";
+
+  print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+  }
+  } catch (Exception $exc) {
+  echo $exc->getTraceAsString();
+  }
+  }
+  //Modificar Registro
+  if ($parametro == 1) {
+  print_r("Hola estas modificando");
+  }
+  //Eliminar un registro
+  if ($parametro == 2) {
+
+  }
+
+
+  sqlsrv_close($link);
+ */
+
+
+include("../Conexion/Conexion.php");
+$conectar = new Conexion();
+$link = $conectar->Conectarse();
+$parametro = $_GET['valor'];
+$pais = $_POST['txtPais'];
+$codigoPais= $_POST['codPais'];
+$alta = "2016-12-06 00:00:00";
+
+
+//Consulta si el registro se desea , Insertar(0), Modificar(1)o Eliminar(2)
+//Insertar Registro
+if ($parametro == 0) {
+
+    try {
+
+        include("../Funciones/Consultas.php");
+        ## Consulta para consultar el ultimo registro
+        $numero=ObtenerMaxPais();
         
         ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
-	$sql_Consulta="INSERT INTO PAIS(codigoPais,descripcionPais, alta, baja, estado) VALUES ('$codigo','$pais','$alta','',1)";
-        
-        $stmt = sqlsrv_query( $conn, $sql_Consulta);
-        if( $stmt === false ) {
-             die( print_r( sqlsrv_errors(), true));
-        }  else {
-             print "<script>alert('Se registro un pais nuevo')</script>";
-             print("<script>window.location.replace('../Vista/AltaPais.html');</script>"); 
+        $sql_Consulta = "INSERT INTO PAIS(codigoPais,descripcionPais, alta, baja, habilitado,usuarioAuditoria) VALUES ('$numero','$pais','$alta','',1,'')";
 
-        }      
-        
-	
-} catch (Exception $exc) {
-    echo $exc->getTraceAsString();
+        $stmt = sqlsrv_query($link, $sql_Consulta);
+        if ($stmt === false) {
+
+            print "<script>alert('Registro ya existente ')</script>";
+            die(print_r(sqlsrv_errors(), true));
+            //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+        } else {
+            print "<script>alert('Se registro un pais nuevo')</script>";
+
+            print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+        }
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
 }
-sqlsrv_close( $conn );
+//Modificar Registro    
+if ($parametro == 1) {
+    
+     try {
+
+        include("../Funciones/Consultas.php");
+        //$codigoPais=(Integer)$codigoPais;
+        //$pais=(String)$pais;
+        echo 'pais'+$codigoPais;
+        ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
+        $sql_Consulta = "UPDATE PAIS SET descripcionPais='$pais' where codigoPais='$codigoPais'";
+      
+        $stmt = sqlsrv_query($link, $sql_Consulta);
+        if ($stmt === false) {
+
+            print "<script>alert('Registro no modificado')</script>";
+            die(print_r(sqlsrv_errors(), true));
+           
+        } else {
+            print "<script>alert('Se registro modificacion de pais')</script>";
+
+            print("<script>window.location.replace('../Vista/AdministrarPais.php');</script>");
+        }
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
+    
+}
+//Eliminar un registro
+if ($parametro == 2) {
+    
+}
+
+
+sqlsrv_close($link);
 ?>
-<body>
-</body>
-</html>
+     
