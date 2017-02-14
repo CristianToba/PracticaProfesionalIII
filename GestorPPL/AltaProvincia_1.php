@@ -1,3 +1,10 @@
+<?php
+        session_start();
+       
+        if ($_SESSION['login_user'] == '') {
+            header("Location: http://localhost/PracticaProfesionalIII/index.php");
+        }
+        ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

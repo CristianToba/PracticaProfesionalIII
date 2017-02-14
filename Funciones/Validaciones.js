@@ -279,6 +279,12 @@ function ValidaCampo(campo){
       }
       //*** Fin del Codigo para Validar que sea un campo Numerico
   
+      function CerrarSesion(e){
+          
+          session_destroy();
+          header("Location: http://localhost/PracticaProfesionalIII/index.php");
+          
+      }
 
   
       function ValidaCadena(e) {
@@ -303,5 +309,8 @@ function ValidaCampo(campo){
           alert("Correo invalido");
            return false;
           }
-  }
+          }
+      
+      
+  
   

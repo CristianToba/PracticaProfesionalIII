@@ -1,3 +1,10 @@
+<?php
+        session_start();
+       
+        if ($_SESSION['login_user'] == '') {
+            header("Location: http://localhost/PracticaProfesionalIII/index.php");
+        }
+        ?>
 <!DOCTYPE html>
 <html>
 <head>

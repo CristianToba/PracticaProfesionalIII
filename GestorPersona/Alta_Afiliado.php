@@ -23,8 +23,8 @@ if ($_SESSION['login_user'] == '') {
 <body text=#000000  link=#000000  vlink=#FF0000>
     <div class="panel panel-primary">
         <div class="panel-heading"> <b>DATOS PERSONALES</b> </div>
-        <FORM name ="formulario" METHOD="POST" action = "Registrar_Afiliado.php" class="form-inline">
-            <div class="panel-body">
+        <FORM name ="formulario" METHOD="POST" action = "../GestorPersona/AltModPersona.php?parametroAccion=0&parametroTipo=1" class="form-inline" >
+            <div class="panel-body" >
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="nombre" class="col-lg-2 control-label">Nombre: </label>
                     <INPUT TYPE ="text" NAME="txtNombre" class="form-control"  onKeyPress="return ValidaCadena(event)" SIZE="MAXLENGTH=30" ID="nombre" placeholder="Ingrese su nombre" required >
@@ -33,27 +33,44 @@ if ($_SESSION['login_user'] == '') {
                     <label for="apellido" class="col-lg-2 control-label">Apellido: </label>
                     <input type ="text" name="txtApellido" class="form-control" onKeyPress="return ValidaCadena(event)" size="MAXLENGTH=30" id="apellido" placeholder="Ingrese su apellido" required >
                 </div>
+                
+                <div class="col-md-6" style="margin-top: 10px;">
+                    <label for="clave" class="col-lg-2 control-label">Password: </label>
+                    <input type ="text" name="txtClave" class="form-control"  size="MAXLENGTH=30" id="clave" placeholder="Ingrese su clave" required >
+                </div>
+                
+               <div class="col-md-6" style="margin-top: 10px;">
+                    <label for="habilitado" class="col-lg-2 control-label">Estado:</label>
+                    <input checked name="habilitado" type="radio" value='true'>
+                    Habilitado
+                    <input name="habilitado" type="radio" value="false">
+                    Deshabilitado<br>
+                </div>
 
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Tipo" class="col-lg-2 control-label" >Tipo/Nro: </label>
                     <select Name=TipoDoc class="form-control">
-                        <option value='0' selected>Seleccione una opcion</option>
-                        <option value=4>C.I.</option>
-                        <option value=1>D.N.I.</option>
-                        <option value=3>L.C.</option>
-                        <option value=2>L.E.</option>
-                        <option value=5>Pasaporte</option>
+                        <option value='Ninguno' selected>Seleccione una opcion</option>
+                        <option value='C.I.'>C.I.</option>
+                        <option value='D.N.I.'>D.N.I.</option>
+                        <option value='L.C.'>L.C.</option>
+                        <option value='L.E.'>L.E.</option>
+                        <option value='Pasaporte'>Pasaporte</option>
                     </select>
                     <INPUT TYPE="text" NAME="NroDoc" MAXLENGTH="8" onKeyPress="return ValidaNumero(event)" SIZE=12 ID="nrodni" class="form-control" placeholder="Ingrese Nro DNI" required >
                 </div>
 
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Direccion" class="col-lg-2 control-label">Direccion: </label>
-                    <INPUT type="text" NAME="Direccion"  ID="direccion" Size=40 class="form-control" placeholder="Ingrese direccion" required >
+                    <INPUT type="text" NAME="txtDireccion"  ID="direccion" Size=40 class="form-control" placeholder="Ingrese direccion" required >
                 </div>
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Numero" class="col-lg-2 control-label">Numero: </label>
                     <INPUT type="text" NAME="NroDir" MAXLENGTH="5" onKeyPress="return ValidaNumero(event)" ID="nrocalle" class="form-control" placeholder="Ingrese Nro Dir." required >
+                </div>
+                <div class="col-md-6" style="margin-top: 10px;">
+                    <label for="dpto" class="col-lg-2 control-label">Dpto: </label>
+                    <INPUT type="text" NAME="dpto" MAXLENGTH="5" onKeyPress="return ValidaNumero(event)" ID="dpto" class="form-control" placeholder="Ingrese Nro dpto." required >
                 </div>
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Piso" class="col-lg-2 control-label">Piso: </label>
@@ -85,7 +102,7 @@ if ($_SESSION['login_user'] == '') {
                 </div>
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Email" class="col-lg-2 control-label">Email: </label>
-                    <INPUT type="text" NAME="email" Size=40 ONBLUR=" validarEmail(correo);" ID="email" class="form-control" placeholder="Ingrese email" required>
+                    <INPUT type="email" NAME="email" Size=40 ONBLUR=" validarEmail(correo);" ID="email" class="form-control" placeholder="Ingrese email" required>
                 </div>
 
                 <div class="col-md-6" style="margin-top: 10px;">
@@ -96,11 +113,11 @@ if ($_SESSION['login_user'] == '') {
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="Estado Civil" class="col-lg-2 control-label" style="margin-top: 10px;">Estado Civil: </label>
                     <select Name="EdoCivil" class="form-control" >
-                        <option value='0' selected>Seleccione una opcion</option>
-                        <option value=1>Soltero/a</option>
-                        <option value=2>Separado/a</option>
-                        <option value=3>Casado/a</option>
-                        <option value=4>Viudo/a</option>
+                        <option value='Ninguno' selected>Seleccione una opcion</option>
+                        <option value='Soltero'>Soltero/a</option>
+                        <option value='Separado/a'>Separado/a</option>
+                        <option value='Casado/a'>Casado/a</option>
+                        <option value='Viudo/a'>Viudo/a</option>
                     </select>
                 </div>
 
@@ -131,15 +148,15 @@ if ($_SESSION['login_user'] == '') {
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="GrupoSanguineo" class="col-lg-2 control-label" style="margin-top: 10px;">Grupo Sanguineo: </label>
                     <select Name="GrpSan" class="form-control" >
-                        <option value='0' selected>Seleccione una opcion</option>
-                        <option value=1>O+</option>
-                        <option value=2>O-</option>
-                        <option value=3>A-</option>
-                        <option value=4>A+</option>
-                        <option value=4>B-</option>
-                        <option value=4>B+</option>
-                        <option value=4>AB-</option>
-                        <option value=4>AB+</option>
+                        <option value='Ninguno' selected>Seleccione una opcion</option>
+                        <option value='O+'>O+</option>
+                        <option value='O-'>O-</option>
+                        <option value='A-'>A-</option>
+                        <option value='A+'>A+</option>
+                        <option value='B-'>B-</option>
+                        <option value='B+'>B+</option>
+                        <option value='AB-'>AB-</option>
+                        <option value='AB+'>AB+</option>
                     </select>
                 </div>
                 <div class="col-md-6" style="margin-top: 10px;">
@@ -162,15 +179,16 @@ if ($_SESSION['login_user'] == '') {
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="TipoAfiliado" class="col-lg-2 control-label" style="margin-top: 10px;">Tipo Afiliado: </label>
                     <select Name="TipoAfiliado" class="form-control" >
-                        <option value='0' selected>Seleccione una opcion</option>
-                        <option value=1>Titular</option>
-                        <option value=2>Adherente</option>
+                        <option value='Ninguno' selected>Seleccione una opcion</option>
+                        <option value='Titular'>Titular</option>
+                        <option value='Adherente'>Adherente</option>
                     </select>
                 </div>
 
                 <div class="col-md-10" style="margin-top: 10px;">
                     <input type="submit" class="btn btn-default" style="margin-top: 10px;">
-                    <input type="reset" value="Cancelar"  class="btn btn-danger" style="margin-top: 10px;">
+                    <input type="reset" value="Borrar" class="btn btn-danger" style="margin-top: 10px;">
+                     <input type="button" value="Salir" onclick = "location = '../Vista/AdministrarAfiliado.php'" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
                 </div>
         </FORM>
     </div>

@@ -9,32 +9,27 @@
         <script src="css/bootstrap.min.js"></script>
         <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
+
         <title>DAMSU</title>
     </head>
     <body>
-        <div class="panel panel-primary">
+        <div class="panel-primary" >
             <div class="panel-heading"> <b>Ingreso al Sistema</b> </div>
-=======
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">	
-<!--FUNCIONES!-->
-<!--VALIDA CAMPO CADENA!-->
->>>>>>> origin/master
 
             <FORM name ="formulario" METHOD="POST" action = "Funciones/Validausuario.php" class="form-inline">
                 <div class="panel-body">
-                    <a href="Vista/inicio_administrador.html"></a>
+
                     <div class="row-md-1" align="center" style="margin-top: 10px;">
                         <label for="usuario" class="row-lg-2 control-label">Usuario: </label>
-                        <INPUT TYPE ="text" NAME="txtUsuario" size="20" class="form-control" id="txtnombre" placeholder="Ingrese su usuario" required>
+                        <INPUT TYPE ="text" NAME="txtUsuario" size="20"  class="form-control" id="txtnombre" placeholder="Ingrese su usuario" required>
 
                     </div>
-                    <div class="row-md-2" align="center" style="margin-top: 10px;">
-                        <label for="clave" class="row-lg-2 control-label" >Clave: </label>
+                    <div class="row-md-1" align="center" style="margin-top: 10px;">
+                        <label for="clave" class="row-lg-2 control-label" >Clave:</label>
                         <input type ="password" name="txtclave" class="form-control" size="30" id="apellido" placeholder="Ingrese su clave" required >
                     </div>
 
-                    <div class="row-md-2" align="center" style="margin-top: 10px;">
+                    <div class="row-md-1" align="center" style="margin-top: 10px;">
                         <input type="submit" class="btn btn-default" style="margin-top: 10px;">
                         <input type="reset" value="Cancelar"  class="btn btn-danger" style="margin-top: 10px;">
                     </div>

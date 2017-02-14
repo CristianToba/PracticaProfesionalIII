@@ -1,4 +1,10 @@
+<?php
+session_start();
 
+if ($_SESSION['login_user'] == '') {
+    header("Location: http://localhost/PracticaProfesionalIII/index.php");
+}
+?>
 <html>
 
     <head>
@@ -9,7 +15,7 @@
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
-
+        
     </head>
     <body>
 
@@ -22,20 +28,7 @@
 
                         <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
 
-                        <b style="margin-left: 15px;">Criterio</b>
-                        <select Name=txtCriterio class="form-control">
-                            <option value='0' selected>Seleccione una opcion</option>
-                            <option value=4>Pais</option>
-                            <option value=1>Habilitado</option>
-                            <option value=3>etc</option>
-
-                        </select>
-
-
-                        <button class="btn btn-default" style="margin-left: 10px;"><a href="#"></a>
-                            <span></span> Buscar
-                        </button>
-
+                        
                     </div>
 
                     <div class="container">
@@ -46,11 +39,11 @@
                                         Paises 
                                     </h4>
                                 </div>
-                                <div class="col-sm-12">
-                                    <table id="tablaPais" table class="table table-fixed">
+                                <div class="col-sm-12" >
+                                    <table id="tablaPais" table class="table table-fixed" >
                                         <?php
                                         require_once('../Conexion/Conexion.php');
-                                        $sql = "SELECT * FROM Pais";
+                                        $sql = "SELECT * FROM Pais ORDER BY DESCRIPCIONPAIS ASC";
                                         $serverName = "(local)";
                                         $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
                                         $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -59,9 +52,9 @@
                                         echo "<tr>";
                                         echo "<th hidden=''> id </th>";
                                         echo "<th>Descripcion</th>";
+                                        echo "<th>Habilitado</th>";
                                         echo "<th>Eliminar</th>";
                                         echo "<th>Modificar</th>";
-                                        echo "<th>Ver</th>";
                                         echo "</tr>";
                                         echo "</thead>";
                                         echo "<tbody>";
@@ -69,15 +62,20 @@
                                             die(print_r(sqlsrv_errors(), true));
                                         }
                                         while ($row = sqlsrv_fetch_array($stmt)) {
-                                            
+
                                             echo "<tr>";
                                             echo "<td hidden=''>$row[0]</td>";
-                                        
+
                                             echo "<td>$row[1]</td>";
-                                            
-                                            echo "<td><a href='../Funciones/ValidarOpcion.php?parametro=2'><span class='glyphicon glyphicon-trash'></span></td>
-     <td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=$row[0]&txtPais=$row[1]'><span class='glyphicon glyphicon-pencil'></span></a></td>
-     <td><span>Consultar</span></td>";
+                                            if ($row[4]==0) {
+                                                $hab='No';
+                                            }  else {
+                                                $hab='Si';
+                                            }
+                                            echo "<td>$hab</td>";  
+                                            echo "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=$row[0]&txtPais=$row[1]'><span class='glyphicon glyphicon-trash'></span>
+                                                </td>
+     <td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=$row[0]&txtPais=$row[1]&estadoPais=$row[4]'><span class='glyphicon glyphicon-pencil'></span></a></td>";
                                             echo "</tr>";
 
 
@@ -93,7 +91,7 @@
 
                         <div class="row-md-2" align="center" style="margin-top: 10px;">
 
-                            <input type="button" value="Salir" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
+                            <input type="button" onclick = "location = 'Inicio_Administrador.php'" value="Salir" name="Salir"  class="btn btn-danger" style="margin-top: 10px;"> 
 
                         </div>
                     </div>
