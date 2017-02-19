@@ -18,7 +18,8 @@ if ($_SESSION['login_user'] == '') {
         <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
-        <?php include('../js/funciones.js');?>
+        <script src="../js/funciones.js" type="text/javascript"></script>
+        
 
         
 
@@ -36,19 +37,19 @@ if ($_SESSION['login_user'] == '') {
                         <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar</a></button>
 
                     </div>
-
-                    <div class="container">
-                        <div class="row" >
-                            <div class="panel panel-default" align="center" style="margin-top: 15px;">
-                                <div class="panel-heading">
+                    
+                            <div class="panel panel-default" align="center" style="overflow-x:auto;">
+                                <div class="panel-heading" >
                                     <h4>
                                         Afiliados 
                                     </h4>
                                 </div>
-                                <div>
+                                
 
-                                    <table id="tablaAfiliado" table class="table table-fixed" style="font-size: 12">
+                                    <table id="tablaAfiliado" class="table" table class="table table-fixed" style="font-size: 11" >
+                                       
                                         <!--
+
                                         <?php
                                         require_once('../Conexion/Conexion.php');
                                         $sql = "SELECT * FROM Persona";
@@ -114,9 +115,8 @@ if ($_SESSION['login_user'] == '') {
                                             echo "</tbody>";
                                         }
                                         ?>
-                                        -->
-
-                                        
+                                       -->
+                                       
                                         <thead>
                                             
                                                 <th>Afiliado</th>
@@ -137,15 +137,13 @@ if ($_SESSION['login_user'] == '') {
 
                                            
                                         </thead>
-                                        <tbody></tbody>
+                                        <tbody id="cuerpoTabla"></tbody>
 
                                     </table>
                                     
 
                                 </div>
-                            </div>
-
-                        </div>
+                           
                     </div>
                     
 

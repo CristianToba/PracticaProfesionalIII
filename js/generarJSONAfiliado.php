@@ -3,47 +3,41 @@
 require_once('../Conexion/Conexion.php');
 $sql = "SELECT * FROM Persona";
 $serverName = "(local)";
-echo hola;
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 $stmt = sqlsrv_query($conn, $sql);
+$persona = array(); //creamos un array
 
-$afiliado = array(); //creamos un array
-
-while ($row = mysqli_fetch_array($result)) {
-
+while ($row = sqlsrv_fetch_array($stmt)) {
+    
     $id = $row['nroPersona'];
     $Dni = $row['dni'];
     $Nombre = $row['nombre'];
     $Apellido = $row['apellido'];
     $Email = $row['mail'];
-    $FNac = $row['fechaNac'];
+    $FNac = $row['fechaNac']; 
+    
     $Nacionalidad = $row['nacionalidad'];
     $ECivil = $row['estadoCivil'];
-    $direccion = 'Calle';
+    $direccion = $row['idPersDirec'];
     $telurgencia = $row['telUrgencia'];
     $celular = $row['celular'];
-    $oSocial = $row['oSocial'];
-    $habilitado = $row['habilitado'];
+    $oSocial = $row['obraSocial'];
+    $habilitado = $row['Habilitado'];
 
-    $afiliado[] = array('id' => $id, 'dni' => $Dni,'nombre' => $nombre, 'apellido' => $Apellido,'mail' => $Email, 'FNac' => $FNac,'nacionalidad' => $Nacionalidad,
-                        'EstCivil' => $ECivil,'direccion' => $direccion,'telUrgencia' => $telurgencia,'celular' => $celular,'oSocial' => $oSocial,
-                        'habilitado' => $habilitado
-       );
+    $persona[] = array('id' => $id, 'dni' => $Dni,'nombre' => $Nombre, 'apellido' => $Apellido,'mail' => $Email, 'FNac' => $FNac,
+        'nacionalidad' => $Nacionalidad,'EstCivil' => $ECivil,'direccion' => $direccion,'telUrgencia' => $telurgencia,
+        'celular' => $celular,'obraSocial' => $oSocial,'Habilitado' => $habilitado
+        );
+        
 }
 
-//desconectamos la base de datos
-$close = mysqli_close($conexion)
-        or die("Ha sucedido un error inexperado en la desconexion de la base de datos");
-
-
 //Creamos el JSON
-$json_string = json_encode($afiliado);
+
+echo json_encode($persona,true);
+
+//desconectamos la base de datos
+sqlsrv_close($conn) or die("Ha sucedido un error inexperado en la desconexion de la base de datos");
 
 
-//Si queremos crear un archivo json, sería de esta forma:
-/*
-  $file = 'clientes . json';
-  file_put_contents($file, $json_string);
- */
 ?>
