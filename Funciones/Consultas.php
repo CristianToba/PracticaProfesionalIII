@@ -1,6 +1,19 @@
 
 <?php
 
+if (isset($POST['funcion']) && isset($POST['direccion'])) {
+    
+    $action = $_GET['funcion'];
+    $codDireccion = $_GET['direccion'];
+    if ($action == 'dir') {
+        $domicilio=ObtenerDireccion($codDireccion);
+        echo $domicilio;
+    } else {
+        echo"hola" + $action;
+        echo"entro" + $codDireccion;
+    }
+}
+
 function ListarPaises() {
     $sql = "SELECT * FROM Pais";
     $serverName = "(local)";
@@ -23,6 +36,7 @@ function ListarPaises() {
 function ObtenerDireccion($codDireccion) {
 
     $sql = "SELECT calle+' '+cast(numero as varchar(6)) as direccion FROM DIRECCION WHERE idDireccion='$codDireccion'";
+    
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -30,7 +44,8 @@ function ObtenerDireccion($codDireccion) {
     $row = sqlsrv_fetch_array($res_Consulta);
     $direccion = $row['direccion'];
     sqlsrv_close($conn);
-    return $direccion;
+    
+    echo $direccion;
 }
 
 function ObtenerTodosPaises() {
@@ -87,9 +102,9 @@ function ObtenerMaxPersona($tipoPerParametro) {
     } elseif ($parametro == 3) {
         $sqlFinal = $sql3;
     }
-    
+
     $res_Consulta = sqlsrv_query($conn, $sqlFinal);
-    
+
     $row = sqlsrv_fetch_array($res_Consulta);
     $MaximoCodigo = $row["codigo"];
     $MaximoCodigo++;
@@ -98,14 +113,14 @@ function ObtenerMaxPersona($tipoPerParametro) {
 }
 
 function ObtenerMaxDireccion() {
-    
+
     $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
-    
-    
+
+
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    
+
     $res_Consulta = sqlsrv_query($conn, $sqlFinal);
     $row = sqlsrv_fetch_array($res_Consulta);
     $MaximoCodigo = $row["codigo"];
@@ -115,14 +130,14 @@ function ObtenerMaxDireccion() {
 }
 
 function ObtenerUltDireccion() {
-    
+
     $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
-    
-    
+
+
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    
+
     $res_Consulta = sqlsrv_query($conn, $sqlFinal);
     $row = sqlsrv_fetch_array($res_Consulta);
     $MaximoCodigo = $row["codigo"];
@@ -393,15 +408,15 @@ function mostrarSexo($sexo) {
 function mostrarHab($hab) {
     $tipo = $hab;
 
-    if ($tipo == 0) {
+    if ($tipo == 1) {
         $mostrar = "<input  name='habilitado' type='radio' value='True'> Habilitado
                   <input checked name='habilitado' type='radio' value='False'> Deshabilitado";
     }
-    if ($tipo == 1) {
+    if ($tipo == 0) {
         $mostrar = "<input checked name='habilitado' type='radio' value='True'> Habilitado
                   <input  name='habilitado' type='radio' value='False'> Deshabilitado";
     }
-    
+
     return $mostrar;
 }
 

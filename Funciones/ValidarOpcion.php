@@ -71,7 +71,7 @@ if ($parametro == 7) {
     include("../Funciones/Consultas.php");
     
     $tipo='Afiliado';
-    $sqlEliminar="UPDATE PERSONA SET HABILITADO='FALSE',BAJA='$baja' WHERE DNI='$dni'";
+    $sqlEliminar="UPDATE PERSONA SET HABILITADO='TRUE',BAJA='$baja' WHERE DNI='$dni'";
     EliminarDato($sqlEliminar,$tipo);
 }
 

@@ -44,13 +44,59 @@ if ($_SESSION['login_user'] == '') {
                                         Afiliados 
                                     </h4>
                                 </div>
-                                
+                               
 
-                                    <table id="tablaAfiliado" class="table" table class="table table-fixed" style="font-size: 11" >
+                                    <table id="tablaAfiliado" class="table" table class="table table-fixed" style="font-size: 11">
                                        
-                                        <!--
+                                        <thead>
+                                            
+                                                <th>Afiliado</th>
+                                                <th>DNI</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Email</th>
+                                                <th>Fecha Nac.</th>
+                                                <th>Nacionalidad</th>
+                                                <th>Est. Civil</th>
+                                                <th>Direccion</th>
+                                                <th>Tel.Urgencia</th>
+                                                <th>Celular</th>
+                                                <th>O.Social</th>
+                                                <th>Habilitado</th>
+                                                <th>Eliminar</th>
+                                                <th>Modificar</th>
 
-                                        <?php
+                                           
+                                        </thead>
+                                        
+                                        <tbody id="cuerpoTabla"></tbody>
+
+                                    </table>
+                                    
+
+                                </div>
+                           
+                    </div>
+                    
+
+                    <div class="row-md-2" align="center" style="margin-top: 10px;">
+
+                        <input type="button" onclick = "location = 'Inicio_Administrador.php'" value="Salir" name="Salir"  class="btn btn-danger" style="margin-top: 10px;"> 
+
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="panel-footer">
+                <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
+            </div>
+
+    </body>
+</html>
+
+
+<!--
                                         require_once('../Conexion/Conexion.php');
                                         $sql = "SELECT * FROM Persona";
                                         $serverName = "(local)";
@@ -114,51 +160,6 @@ if ($_SESSION['login_user'] == '') {
 
                                             echo "</tbody>";
                                         }
-                                        ?>
-                                       -->
+-->
+                                        
                                        
-                                        <thead>
-                                            
-                                                <th>Afiliado</th>
-                                                <th>DNI</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Email</th>
-                                                <th>Fecha Nac.</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Est. Civil</th>
-                                                <th>Direccion</th>
-                                                <th>Tel.Urgencia</th>
-                                                <th>Celular</th>
-                                                <th>O.Social</th>
-                                                <th>Habilitado</th>
-                                                <th>Eliminar</th>
-                                                <th>Modificar</th>
-
-                                           
-                                        </thead>
-                                        <tbody id="cuerpoTabla"></tbody>
-
-                                    </table>
-                                    
-
-                                </div>
-                           
-                    </div>
-                    
-
-                    <div class="row-md-2" align="center" style="margin-top: 10px;">
-
-                        <input type="button" onclick = "location = 'Inicio_Administrador.php'" value="Salir" name="Salir"  class="btn btn-danger" style="margin-top: 10px;"> 
-
-                    </div>
-                </div>
-            </form>
-
-
-            <div class="panel-footer">
-                <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
-            </div>
-
-    </body>
-</html>
