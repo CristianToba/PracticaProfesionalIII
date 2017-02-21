@@ -28,8 +28,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
 
     $persona[] = array('id' => $id, 'dni' => $Dni,'nombre' => $Nombre, 'apellido' => $Apellido,'mail' => $Email, 'fechaNac' => $FNac,
         'nacionalidad' => $Nacionalidad,'EstCivil' => $ECivil,'direccion' => $direccion,'telUrgencia' => $telurgencia,
-        'celular' => $celular,'obraSocial' => $oSocial,'Habilitado' => $habilitado
-        );
+        'celular' => $celular,'obraSocial' => $oSocial,'Habilitado' => $habilitado);
         
 }
 

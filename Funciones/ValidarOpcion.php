@@ -45,7 +45,7 @@ if ($parametro == 3) {
 if ($parametro == 4) {
     include("../Funciones/Consultas.php");
     $tipo='horarios';
-    $sqlEliminar="UPDATE HORARIOS SET HABILITADO='FALSE',BAJA='$baja' WHERE idhorarios='$horarioModificar'";
+    $sqlEliminar="UPDATE HORARIOS SET HABILITADO='TRUE',BAJA='$baja' WHERE idhorarios='$horarioModificar'";
     EliminarDato($sqlEliminar,$tipo);
 }
 

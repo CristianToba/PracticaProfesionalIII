@@ -1,7 +1,5 @@
 
 <?php
-
-
 include("../Conexion/Conexion.php");
 $conectar = new Conexion();
 $link = $conectar->Conectarse();
@@ -68,10 +66,7 @@ if ($parametro == 1) {
     }
     
 }
-//Eliminar un registro
-if ($parametro == 2) {
-    
-}
+
 
 
 sqlsrv_close($link);

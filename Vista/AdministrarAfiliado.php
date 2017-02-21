@@ -19,9 +19,9 @@ if ($_SESSION['login_user'] == '') {
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
         <script src="../js/funciones.js" type="text/javascript"></script>
-        
 
-        
+
+
 
 
     </head>
@@ -30,69 +30,67 @@ if ($_SESSION['login_user'] == '') {
         <div class="panel panel-primary">
             <div class="panel-heading"> <b>Administrar Afiliado</b> </div>
 
-            <FORM class="form-inline" accept-charset="UTF-8">
+            <form class="form-inline" accept-charset="UTF-8">
                 <div class="panel-body">
-                    <div class="row-md-1" align="center" style="margin-top: 10px;">
 
-                        <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar</a></button>
+                    <div class="panel panel-default" align="center" style="overflow-x:auto;">
+                        <div class="panel-heading" >
+                            <h4>
+                                Afiliados 
+                            </h4>
+                        </div>
+                        
+                        <div id="divAfiliado"> </div>
 
-                    </div>
-                    
-                            <div class="panel panel-default" align="center" style="overflow-x:auto;">
-                                <div class="panel-heading" >
-                                    <h4>
-                                        Afiliados 
-                                    </h4>
-                                </div>
-                               
 
-                                    <table id="tablaAfiliado" class="table" table class="table table-fixed" style="font-size: 11">
-                                       
-                                        <thead>
-                                            
-                                                <th>Afiliado</th>
-                                                <th>DNI</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Email</th>
-                                                <th>Fecha Nac.</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Est. Civil</th>
-                                                <th>Direccion</th>
-                                                <th>Tel.Urgencia</th>
-                                                <th>Celular</th>
-                                                <th>O.Social</th>
-                                                <th>Habilitado</th>
-                                                <th>Eliminar</th>
-                                                <th>Modificar</th>
+                        <table id="tbAfiliado" class="table" table class="table table-fixed" style="font-size: 11">
 
-                                           
-                                        </thead>
-                                        
-                                        <tbody id="cuerpoTabla"></tbody>
+                            <thead>
 
-                                    </table>
-                                    
+                            <th>Afiliado</th>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Fecha Nac.</th>
+                            <th>Nacionalidad</th>
+                            <th>Est. Civil</th>
+                            <th>Direccion</th>
+                            <th>Tel.Urgencia</th>
+                            <th>Celular</th>
+                            <th>O.Social</th>
+                            <th>Habilitado</th>
+                            <th>Eliminar</th>
+                            <th>Modificar</th>
 
-                                </div>
-                           
-                    </div>
-                    
 
-                    <div class="row-md-2" align="center" style="margin-top: 10px;">
+                            </thead>
 
-                        <input type="button" onclick = "location = 'Inicio_Administrador.php'" value="Salir" name="Salir"  class="btn btn-danger" style="margin-top: 10px;"> 
+                            <tbody id="tbcuerpoAfiliado"></tbody>
+
+                        </table>
+
 
                     </div>
+
                 </div>
-            </form>
+
+                <div class="row-md-1" align="center" style="margin-top: 10px;">
+
+                    <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar Afiliado</a></button>
+                    <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
+                </div>
 
 
-            <div class="panel-footer">
-                <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
-            </div>
+        </div>
+    </form>
 
-    </body>
+
+    <div class="panel-footer">
+        <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
+    </div>
+
+</body>
 </html>
 
 
@@ -161,5 +159,4 @@ if ($_SESSION['login_user'] == '') {
                                             echo "</tbody>";
                                         }
 -->
-                                        
-                                       
+

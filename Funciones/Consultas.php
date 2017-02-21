@@ -409,12 +409,12 @@ function mostrarHab($hab) {
     $tipo = $hab;
 
     if ($tipo == 1) {
-        $mostrar = "<input  name='habilitado' type='radio' value='True'> Habilitado
-                  <input checked name='habilitado' type='radio' value='False'> Deshabilitado";
+        $mostrar = "<input  name='habilitado' type='radio' value='False'> Habilitado
+                  <input checked name='habilitado' type='radio' value='True'> Deshabilitado";
     }
     if ($tipo == 0) {
-        $mostrar = "<input checked name='habilitado' type='radio' value='True'> Habilitado
-                  <input  name='habilitado' type='radio' value='False'> Deshabilitado";
+        $mostrar = "<input checked name='habilitado' type='radio' value='False'> Habilitado
+                  <input  name='habilitado' type='radio' value='True'> Deshabilitado";
     }
 
     return $mostrar;

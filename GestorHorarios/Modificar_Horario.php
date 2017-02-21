@@ -25,7 +25,7 @@ if ($_SESSION['login_user'] == '') {
         ?>
         <div class="panel panel-primary">
             <div class="panel-heading"> <b>Modificar Pais</b> </div>
-            <FORM name ="formulario" method="POST" action = "../GestorHorarios/AltModHorario.php?valor=1" class="form-inline">
+            <FORM name ="formulario" method="POST" action = "../GestorHorarios/AltModHorario.php?valor=1&accion=1" class="form-inline">
                 <div class="panel-body">
                     
                         <div>
@@ -47,7 +47,7 @@ if ($_SESSION['login_user'] == '') {
 
                             <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
 
-                            <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/AdministrarPais.php'" class="btn btn-danger" style="margin-top: 10px;"> 
+                            <button class="btn btn-danger" style="margin-left: 10px;"><a href="../Vista/AdministrarHorarios.php">Volver Menu</a></button>
 
                         </div>
                     </div>

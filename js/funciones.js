@@ -6,6 +6,7 @@ $(document).ready((function () {
 
         app.init = function () {
             app.buscarAfiliados();
+            app.buscarHorarios();
             app.bindings();
         };
 
@@ -21,7 +22,7 @@ $(document).ready((function () {
         app.buscarAfiliados = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAfiliado.php";
-            var consola = $('#divAfiliado');
+            var consola = $('#divHorario');
             $.ajax({
                 url: url,
                 type: "POST",
@@ -32,7 +33,7 @@ $(document).ready((function () {
                 success: function (datosRecibidos) {
                     consola.html('');
 
-                    app.rellenarTabla(datosRecibidos);
+                    app.rellenarTablaAfiliado(datosRecibidos);
                 },
                 error: function () {
 
@@ -41,23 +42,23 @@ $(document).ready((function () {
             });
         };
 
-        app.rellenarTabla = function (datosRecibidos) {
+        app.rellenarTablaAfiliado = function (datosRecibidos) {
 
             var cuerpo = "";
             $nroPers = 0;
-            var tbAfiliado = $('#cuerpoTabla');
+            var tbAfiliado = $('#tbcuerpoAfiliado');
             tbAfiliado.html('');
 
             for (var i = 0; i < datosRecibidos.length; i++) {
                 $nroPers = datosRecibidos[i].dni;
                 //$fecha = datosRecibidos[i].FNac.valueOf().date.toString().substring(0, 10).replace("-", "/");
-                
-                if(datosRecibidos[i].Habilitado==1){
-                    $estadoPers='NO';
-                    
-                }else{
-                    
-                    $estadoPers='SI';
+
+                if (datosRecibidos[i].Habilitado == 1) {
+                    $estadoPers = 'NO';
+
+                } else {
+
+                    $estadoPers = 'SI';
                 }
                 // app.ObtenerDireccion(datosRecibidos[i].direccion, function (direccion) {
                 //   domicilio = direccion;
@@ -91,6 +92,54 @@ $(document).ready((function () {
 //            });
 //
 //        };
+
+        app.buscarHorarios = function () {
+
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorarios.php";
+            var consola = $('#divHorario');
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+                    consola.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    consola.html('');
+
+                    app.rellenarTablaHorario(datosRecibidos);
+                },
+                error: function () {
+
+                    alert('Ha surgido un error');
+                }
+            });
+
+
+        };
+
+        app.rellenarTablaHorario = function (datosRecibidos) {
+
+            var cuerpo = "";
+            var tbHorario = $('#tbcuerpoHorario');
+            tbHorario.html('');
+            
+            for (var i = 0; i < datosRecibidos.length; i++) {
+                
+                if (datosRecibidos[i].Habilitado == 1) {
+                    $estadoHorario = 'NO';
+
+                } else {
+
+                    $estadoHorario = 'SI';
+                }
+               
+                cuerpo += "<tr><td hidden=''>" + datosRecibidos[i].id + "</td><td>" + datosRecibidos[i].descripcion + "</td><td>" + datosRecibidos[i].HorarioInicio + "</td><td>" + datosRecibidos[i].HorarioFin + "</td><td>" + $estadoHorario + "<td><a href='../Funciones/ValidarOpcion.php?parametro=4&codHorario=" + datosRecibidos[i].id + "&txtDescripcion="+datosRecibidos[i].descripcion+"'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=5&codHorario="+datosRecibidos[i].id+"&txtDescripcion="+datosRecibidos[i].descripcion+"&estadoHorario=" + datosRecibidos[i].Habilitado + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+            }
+
+            tbHorario.append(cuerpo);
+
+        };
 
         app.limpiarModal = function () {//funcion para limpiar el modal de profesores
             $("#id").val(0);
