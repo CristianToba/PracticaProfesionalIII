@@ -15,7 +15,7 @@ if ($_SESSION['login_user'] == '') {
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
-        
+
     </head>
     <body>
 
@@ -24,13 +24,6 @@ if ($_SESSION['login_user'] == '') {
 
             <FORM name ="formulario" class="form-inline" accept-charset="UTF-8">
                 <div class="panel-body">
-                    <div class="row-md-1" align="center" style="margin-top: 10px;">
-
-                        <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
-
-                        
-                    </div>
-
                     <div class="container">
                         <div class="row">
                             <div class="panel panel-default" align="center" style="margin-top: 10px;">
@@ -39,7 +32,7 @@ if ($_SESSION['login_user'] == '') {
                                         Paises 
                                     </h4>
                                 </div>
-                                <div class="col-sm-12" >
+                                <div class="col-sm-12" style="width:auto scroll; height:390px; overflow: scroll;">
                                     <table id="tablaPais" table class="table table-fixed" >
                                         <?php
                                         require_once('../Conexion/Conexion.php');
@@ -67,12 +60,12 @@ if ($_SESSION['login_user'] == '') {
                                             echo "<td hidden=''>$row[0]</td>";
 
                                             echo "<td>$row[1]</td>";
-                                            if ($row[4]==0) {
-                                                $hab='No';
-                                            }  else {
-                                                $hab='Si';
+                                            if ($row[4] == 0) {
+                                                $hab = 'No';
+                                            } else {
+                                                $hab = 'Si';
                                             }
-                                            echo "<td>$hab</td>";  
+                                            echo "<td>$hab</td>";
                                             echo "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=$row[0]&txtPais=$row[1]'><span class='glyphicon glyphicon-trash'></span>
                                                 </td>
      <td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=$row[0]&txtPais=$row[1]&estadoPais=$row[4]'><span class='glyphicon glyphicon-pencil'></span></a></td>";
@@ -91,14 +84,17 @@ if ($_SESSION['login_user'] == '') {
 
                         <div class="row-md-2" align="center" style="margin-top: 10px;">
 
-                            <input type="button" onclick = "location = 'Inicio_Administrador.php'" value="Salir" name="Salir"  class="btn btn-danger" style="margin-top: 10px;"> 
+                            <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
+
+                            <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
 
                         </div>
                     </div>
+                    
+
             </form>
 
-
-            <div class="panel-footer">
+            <div class="footer-content">
                 <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
             </div>
     </body>
