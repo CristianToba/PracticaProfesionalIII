@@ -15,7 +15,7 @@
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <script src="css/jquery.min.js"></script>
 <script src="css/bootstrap.min.js"></script>
-<title>DAMSU</title>
+<title>RESERVA YA</title>
 </head>
 <body>
 <nav class="navbar navbar-default">

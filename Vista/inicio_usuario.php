@@ -15,12 +15,12 @@ if ($_SESSION['login_user'] == '') {
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Funciones.php"></script>
 
-        <title>DAMSU</title>
+        <title>RESERVA YA</title>
     </head>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-header"> <a class="navbar-brand" href="#">DAMSU</a> </div>
+                <div class="navbar-header"> <a class="navbar-brand" href="#">RESERVA YA</a> </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">AFILIADO</a></li>
                     <li class="dropdown">

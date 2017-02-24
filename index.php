@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="css/demo.css">
 	<link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
 
-        <title>DAMSU</title>
+        <title>RESERVA YA</title>
     </head>
     <body>
         <div class="panel-primary" >
@@ -48,7 +48,7 @@
 
 			<div class="footer-left">
 
-				<h3>Company<span>logo</span></h3>
+                            <h3> <img src="Imagenes/reserva_ya.JPG" width="100px"> </h3>
 
 				<p class="footer-links">
 					<a href="">Home</a>
