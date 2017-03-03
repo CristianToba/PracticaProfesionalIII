@@ -15,6 +15,8 @@ if ($_SESSION['login_user'] == '') {
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
+        <link rel="stylesheet" href="../css/demo.css">
+        <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
 
     </head>
     <body>
@@ -32,70 +34,106 @@ if ($_SESSION['login_user'] == '') {
                                         Paises 
                                     </h4>
                                 </div>
-                                <div class="col-sm-12" style="width:auto scroll; height:390px; overflow: scroll;">
-                                    <table id="tablaPais" table class="table table-fixed" >
-                                        <?php
-                                        require_once('../Conexion/Conexion.php');
-                                        $sql = "SELECT * FROM Pais ORDER BY DESCRIPCIONPAIS ASC";
-                                        $serverName = "(local)";
-                                        $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-                                        $conn = sqlsrv_connect($serverName, $connectionInfo);
-                                        $stmt = sqlsrv_query($conn, $sql);
-                                        echo "<thead>";
-                                        echo "<tr>";
-                                        echo "<th hidden=''> id </th>";
-                                        echo "<th>Descripcion</th>";
-                                        echo "<th>Habilitado</th>";
-                                        echo "<th>Eliminar</th>";
-                                        echo "<th>Modificar</th>";
-                                        echo "</tr>";
-                                        echo "</thead>";
-                                        echo "<tbody>";
-                                        if ($stmt === false) {
-                                            die(print_r(sqlsrv_errors(), true));
-                                        }
-                                        while ($row = sqlsrv_fetch_array($stmt)) {
+                                <div id="divPais"></div>
+                                
+                                    <table id="tbPais" class="table" table class="table table-fixed" style="font-size: 11">
+                                        <thead>
+                                            <tr>
+                                                <th hidden=''> id </th>
+                                                <th>Descripcion</th>
+                                                <th>Habilitado</th>
+                                                <th>Eliminar</th>
+                                                <th>Modificar</th>
+                                            </tr>
 
-                                            echo "<tr>";
-                                            echo "<td hidden=''>$row[0]</td>";
+                                        </thead>
 
-                                            echo "<td>$row[1]</td>";
-                                            if ($row[4] == 0) {
-                                                $hab = 'No';
-                                            } else {
-                                                $hab = 'Si';
-                                            }
-                                            echo "<td>$hab</td>";
-                                            echo "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=$row[0]&txtPais=$row[1]'><span class='glyphicon glyphicon-trash'></span>
-                                                </td>
-     <td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=$row[0]&txtPais=$row[1]&estadoPais=$row[4]'><span class='glyphicon glyphicon-pencil'></span></a></td>";
-                                            echo "</tr>";
-
-
-                                            echo "</tbody>";
-                                        }
-                                        ?>
+                                        <tbody id="tbcuerpoPais"></tbody>
+                                        
                                     </table>
 
-                                </div>
+                                
                             </div>
 
                         </div>
-
-                        <div class="row-md-2" align="center" style="margin-top: 10px;">
-
-                            <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
-
-                            <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
-
-                        </div>
                     </div>
-                    
-
+                </div>
             </form>
 
-            <div class="footer-content">
-                <footer> @ 2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
+            <div class="row-md-2" align="center" style="margin-top: 10px;">
+
+                <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
+                <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
+
+
             </div>
+
+
+
+            <footer class="footer-distributed">
+
+                <div class="footer-left">
+
+                    <h3> <img src="../Imagenes/reserva_ya.JPG" width="100px"> </h3>
+
+                    <p class="footer-links">
+                        <a href="">Home</a>
+                        ·
+                        <a href="index.php">Personal</a>					
+                        ·
+                        <a href="#">About</a>
+                        ·
+                        <a href="#">Faq</a>
+                        ·
+                        <a href="#">Contact</a>
+                    </p>
+
+                    <p class="footer-company-name">RESERVAYA Todos los derechos reservados. Tèrminos y condiciones @ 2016</p>
+                </div>
+
+                <div class="footer-center">
+
+                    <div>
+                        <i class="fa fa-map-marker"></i>
+                        <p><span>Sin numero</span> Mendoza, Argentina</p>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-phone"></i>
+                        <p>0261-156406854</p>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-envelope"></i>
+                        <p><a href="mailto:tobares.cristian@gmail.com">tobares.cristian@gmail.com</a></p>
+                    </div>
+
+                </div>
+
+                <div class="footer-right">
+
+                    <p class="footer-company-about">
+                        <span>About the company</span>
+                        Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                    </p>
+
+                    <div class="footer-icons">
+
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-github"></i></a>
+
+                    </div>
+
+                </div>
+
+            </footer>
+
+
+        </div>
+
     </body>
 </html>
+
+

@@ -30,14 +30,14 @@ if ($_SESSION['login_user'] == '') {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administracion Personal<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="bg-success"> <a>Afiliados</a>
+                            <li class="bg-info"> <a>Afiliados</a>
                             <li><a href="../Vista/AdministrarAfiliado.php"> Administrar Afiliado</a></li>
 
                             <li class="divider"></li>
-                            <li class="bg-success"> <a>Medicos</a>
+                            <li class="bg-info"> <a>Medicos</a>
                             <li><a href="#"> Administrar Medico</a></li>
                             <li class="divider" ></li>
-                            <li class="bg-success"> <a>Empleados</a>
+                            <li class="bg-info"> <a>Empleados</a>
                             <li><a href="#"> Administrar Empleados</a></li>
                         </ul>
                     </li>
@@ -76,10 +76,10 @@ if ($_SESSION['login_user'] == '') {
                     -->
                     <ul class="dropdown-menu">
                         <li class="divider"></li>
-                        <li class="bg-success"><a href="#">Horarios</a></li>
+                        <li class="bg-info"><a href="#">Horarios</a></li>
                         <li><a href="../Vista/AdministrarHorarios.php"> Administracion Horarios</a></li>
                         <li class="divider"></li>
-                        <li class="bg-success"><a href="#">Pais</a></li>
+                        <li class="bg-info"><a href="#">Pais</a></li>
                         <li><a href="../Vista/AdministrarPais.php"> Administracion Pais</a></li>
                     </ul>
                 <li class="active"><a href="../Funciones/cerrarSession.php">Cerrar Sesion</a></li>
