@@ -24,9 +24,9 @@ if ($_SESSION['login_user'] == '') {
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-header"> <a class="navbar-brand"><img src="../Imagenes/reserva_ya.JPG" width="50px" height="40px"></a> </div>
+                <div class="navbar-header"> <a class="navbar-brand"><img src="..//Imagenes/reserva_ya.JPG" width="50px" height="40px"></a> </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">ADMINISTRADOR</a></li>
+                    <li class="active"><a>ADMINISTRADOR</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administracion Personal<span class="caret"></span></a>
                         <ul class="dropdown-menu">
