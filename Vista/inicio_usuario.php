@@ -28,7 +28,7 @@ if ($_SESSION['login_user'] == '') {
                         <ul class="dropdown-menu">
                             <li class="bg-success"> <a>Turno</a>
                             <li class="divider"></li>
-                            <li><a href="../GestorTurno/Solicitar_Turno.html"> Solicitar Turno</a></li>
+                            <li><a href="../Vista/AdministrarTurno.html"> Solicitar Turno</a></li>
                             <li><a href="../GestorTurno/Baja_Turno.html"> Baja de Turno</a></li>
                         </ul>
                     </li>
@@ -43,14 +43,10 @@ if ($_SESSION['login_user'] == '') {
                                 <li><a href="#">Listar Clinicas</a></li>
                                 <li><a href="#">Listar Medicos</a></li>-->
 
-                    </li> 
-                    </li>
                 </ul>
                 <li class="active"><a href="../Funciones/cerrarSession.php">Cerrar Sesion</a></li>
 
                 </ul>
-
-                </ul>    
 
             </div>
         </nav>

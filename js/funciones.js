@@ -179,7 +179,47 @@ $(document).ready((function () {
             $("#apellido").val('');
 
         };
+        
+        app.comboProfesional = function (){
+            
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php";
+            var consola = '';
+            consola= $('#divprofesional');
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+                    consola.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    consola.html('');
 
+                    app.rellenarComboProf(datosRecibidos);
+                },
+                error: function () {
+
+                    alert('Ha surgiASDdo un errore');
+                }
+            });
+        };
+
+        app.rellenarComboProf = function(datosRecibidos){
+            var cuerpo = "";
+
+            var comboProfesional = $('#cmbProfesional');
+            comboProfesional.html('');
+cuerpo="asdasd";
+            for (var i = 0; i < datosRecibidos.length; i++) {
+
+cuerpo="hola";
+                //cuerpo += "<option>" + datosRecibidos[i].id + "</option>";
+            }
+
+            comboProfesional.append(cuerpo);
+
+            
+        };
         app.init();
 
     })(PracticaProfIII);
