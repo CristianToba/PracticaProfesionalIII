@@ -1,6 +1,6 @@
 <?php
 require_once('../Conexion/Conexion.php');
-$sql = "select nombre,apellido from persona where tipoPers=2 and Habilitado=0 and idEspecialidad= 1 order by apellido, nombre asc";
+$sql = "select matricula, nombre,apellido from persona where tipoPers=2 and Habilitado=0 and idEspecialidad= 1 order by apellido, nombre asc";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -9,10 +9,10 @@ $listadoProf = array(); //creamos un array
 
 while ($row = sqlsrv_fetch_array($stmt)) {
     
+    $MatriculaProf = $row['matricula'];
     $NombreProf = $row['nombre'];
     $ApellidoProf = $row['apellido'];
-    
-    $listadoProf[] = array('Nombre' => $NombreProf, 'Apellido' => $ApellidoProf);
+    $listadoProf[] = array('Matricula' => $MatriculaProf,'Nombre' => $NombreProf, 'Apellido' => $ApellidoProf);
         
 }
 

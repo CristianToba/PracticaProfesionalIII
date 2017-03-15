@@ -8,13 +8,15 @@ if ($_SESSION['login_user'] == '') {
 <html>
 
     <head>
-        <!--Cabecera-->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <script src="../css/jquery.min.js"></script>
         <script src="../css/bootstrap.min.js"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>    
+        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script src="../Funciones/Validaciones.js"></script>
         <script src="../Funciones/Funciones.php"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
 

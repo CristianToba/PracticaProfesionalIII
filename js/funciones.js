@@ -7,23 +7,16 @@ $(document).ready((function () {
         app.init = function () {
             app.ListarAfiliados();
             app.ListarHorarios();
+            app.comboProfesional();
             app.ListarPais();
-            app.bindings();
-        };
-
-
-        app.bindings = function () {
-            $("#agregarPersona").on('click', function (event) {
-                $("#id").val(0);
-                $("#tituloModal").html("Nueva Persona");
-                $("#modalPersona").modal({show: true});
-            });
+            
+            
         };
 
         app.ListarAfiliados = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAfiliado.php";
-            var consola = $('#divHorario');
+            var consola = $('#divAfiliado');
             $.ajax({
                 url: url,
                 type: "POST",
@@ -38,7 +31,7 @@ $(document).ready((function () {
                 },
                 error: function () {
 
-                    alert('Ha surgido un error');
+                    alert('Ha surgido un error Afiliado');
                 }
             });
         };
@@ -68,7 +61,7 @@ $(document).ready((function () {
             tbAfiliado.append(cuerpo);
 
         };
-//        
+        
         app.ListarHorarios = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorarios.php";
@@ -87,7 +80,7 @@ $(document).ready((function () {
                 },
                 error: function () {
 
-                    alert('Ha surgido un error');
+                    alert('Ha surgido un error Horario');
                 }
             });
 
@@ -117,6 +110,46 @@ $(document).ready((function () {
 
         };
 
+        
+        app.comboProfesional = function (){
+            
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php";
+            
+            divProf= $('#divprofesional select');
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON", 
+                 beforeSend: function () {
+                    
+                    divProf.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    divProf.html('');
+                    app.rellenarComboProf(datosRecibidos);
+                },
+                error: function () {
+
+                    alert('Ha surgido un error Profesional');
+                }
+            });
+        };
+
+        app.rellenarComboProf = function(datosRecibidos){
+            var cuerpo="";
+        
+            var comboProfesional = $('#cmbProfesional');
+            
+            for (var i = 0; i < datosRecibidos.length; i++) {
+                $matriProfesional=datosRecibidos[i].matricula;
+               cuerpo += "<option value="+$matriProfesional+">" + datosRecibidos[i].Nombre + ', '+ datosRecibidos[i].Apellido + "</option>";
+            
+            }
+            
+            comboProfesional.append(cuerpo);
+            
+        };
+        
         app.ListarPais = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONPais.php";
@@ -127,22 +160,16 @@ $(document).ready((function () {
                 type: "POST",
                 dataType: "JSON",
                 beforeSend: function () {
-                    
                     consola.html('Espere por favor...');
                 },
                 success: function (datosRecibidos) {
                     consola.html('');
-                    
+
                     app.rellenarTablaPais(datosRecibidos);
                 },
-                error: function (e) {
-                    console.log(e);
-      
-      
-                    alert('Ha surgisdo un error');
-                    
+                error: function () {
 
-
+                    alert('Ha surgido un error Pais');
                 }
             });
 
@@ -172,54 +199,8 @@ $(document).ready((function () {
             tbListadoPais.append(cuerpo);
 
         };
-
-        app.limpiarModal = function () {//funcion para limpiar el modal de profesores
-            $("#id").val(0);
-            $("#nombre").val('');
-            $("#apellido").val('');
-
-        };
         
-        app.comboProfesional = function (){
-            
-            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php";
-            var consola = '';
-            consola= $('#divprofesional');
-            $.ajax({
-                url: url,
-                type: "POST",
-                dataType: "JSON",
-                beforeSend: function () {
-                    consola.html('Espere por favor...');
-                },
-                success: function (datosRecibidos) {
-                    consola.html('');
-
-                    app.rellenarComboProf(datosRecibidos);
-                },
-                error: function () {
-
-                    alert('Ha surgiASDdo un errore');
-                }
-            });
-        };
-
-        app.rellenarComboProf = function(datosRecibidos){
-            var cuerpo = "";
-
-            var comboProfesional = $('#cmbProfesional');
-            comboProfesional.html('');
-cuerpo="asdasd";
-            for (var i = 0; i < datosRecibidos.length; i++) {
-
-cuerpo="hola";
-                //cuerpo += "<option>" + datosRecibidos[i].id + "</option>";
-            }
-
-            comboProfesional.append(cuerpo);
-
-            
-        };
+        
         app.init();
 
     })(PracticaProfIII);
