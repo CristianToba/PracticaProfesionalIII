@@ -1,20 +1,22 @@
 <?php
+
 require_once('../Conexion/Conexion.php');
-$sql = "select * from pais order by descripcionPais asc";
+$sql = "select codigoPais,descripcionPais,Habilitado from pais order by descripcionPais asc";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 $stmt = sqlsrv_query($conn, $sql);
 $listadoPais = array(); //creamos un array
 
+
 while ($row = sqlsrv_fetch_array($stmt)) {
     
-    $codigo = $row['codigoPais'];
-    $descripcion = $row['descripcionPais'];
-    $estado = $row['Habilitado'];
+    $codigoPais = $row['codigoPais'];
+    $descripcionPais = $row['descripcionPais'];
+    $estadoPais = $row['Habilitado'];
    
 
-    $listadoPais[] = array('id' => $codigo, 'descripcion' => $descripcion,'estado' => $estado);
+    $listadoPais[] = array('Codigo' => $codigoPais, 'Descripcion' => $descripcionPais,'Estado' => $estadoPais);
         
 }
 

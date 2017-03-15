@@ -193,7 +193,7 @@ $(document).ready((function () {
                     $estadoPais = 'SI';
                 }
 
-                cuerpo += "<tr><td>" + datosRecibidos[i].id + "</td><td>" + datosRecibidos[i].descripcionPais + "</td><td>" + $estadoPais + "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "&estadoPais=" + $estadoPais + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+                cuerpo += "<tr><td  hidden=''>" + datosRecibidos[i].Codigo + "</td><td>" + datosRecibidos[i].Descripcion + "</td><td>" + $estadoPais + "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "&estadoPais=" + $estadoPais + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
             }
 
             tbListadoPais.append(cuerpo);
