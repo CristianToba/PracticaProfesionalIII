@@ -28,7 +28,7 @@ if ($_SESSION['login_user'] == '') {
                         <ul class="dropdown-menu">
                             <li class="bg-success"> <a>Turno</a>
                             <li class="divider"></li>
-                            <li><a href="../Vista/AdministrarTurno.html"> Solicitar Turno</a></li>
+                            <li><a href="../Vista/AdministrarTurno.php"> Solicitar Turno</a></li>
                             <li><a href="../GestorTurno/Baja_Turno.html"> Baja de Turno</a></li>
                         </ul>
                     </li>

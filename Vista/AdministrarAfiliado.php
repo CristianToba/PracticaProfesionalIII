@@ -44,7 +44,7 @@ if ($_SESSION['login_user'] == '') {
                         <div id="divAfiliado"> </div>
 
 
-                        <table id="tbAfiliado" class="table" table class="table table-fixed" style="font-size: 11">
+                        <table id="tbAfiliado" class="table table-fixed" style="font-size: 11">
 
                             <thead>
 

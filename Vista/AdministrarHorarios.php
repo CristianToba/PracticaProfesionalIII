@@ -38,8 +38,8 @@ if ($_SESSION['login_user'] == '') {
                                 </div>
                                 <div id="divHorario"></div>
 
-                                 <table id="tbHorario" class="table" table class="table table-fixed" style="font-size: 11">
-                                    
+                                <table id="tbHorario" class="table table-fixed" style="font-size: 11">
+
                                     <thead>
                                         <tr>
                                             <th hidden=''> id </th>
@@ -70,6 +70,7 @@ if ($_SESSION['login_user'] == '') {
 
                         </div>
                     </div>
+                </div>
             </form>
 
 
