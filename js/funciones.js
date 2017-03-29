@@ -11,10 +11,38 @@ $(document).ready((function () {
             app.ListarHorarios();
             app.comboProfesional();
             app.ListarPais();
+            app.MostrarAgenda();
+            
             
             
         };
 
+        $("#MostrarAgenda").click(function(){
+            var idProf=$('#cmbProfesional').val(); ;
+            
+            
+            
+         var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
+            
+          //  $.ajax({
+          //      url: url,
+          //      type: "POST",
+          //      dataType: "JSON",
+          //      beforeSend: function () {
+          //          consola.html('Espere por favor...');
+          //      },
+          //      success: function (datosRecibidos) {
+          //          consola.html('');
+//                      $('#acava').html(data); 
+          //          app.rellenarTablaAfiliado(datosRecibidos);
+          //      },
+          //      error: function () {
+//
+          //          alert('Ha surgido un error Afiliado');
+          //      }
+          //  });
+	});
+            
         app.ListarAfiliados = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAfiliado.php";
@@ -111,7 +139,6 @@ $(document).ready((function () {
             tbHorario.append(cuerpo);
 
         };
-
         
         app.comboProfesional = function (){
             
@@ -143,8 +170,8 @@ $(document).ready((function () {
             var comboProfesional = $('#cmbProfesional');
             
             for (var i = 0; i < datosRecibidos.length; i++) {
-                $matriProfesional=datosRecibidos[i].matricula;
-               cuerpo += "<option value="+$matriProfesional+">" + datosRecibidos[i].Nombre + ', '+ datosRecibidos[i].Apellido + "</option>";
+                
+               cuerpo += "<option value="+datosRecibidos[i].Matricula+">" + datosRecibidos[i].Nombre + ', '+ datosRecibidos[i].Apellido + "</option>";
             
             }
             
@@ -202,6 +229,10 @@ $(document).ready((function () {
 
         };
         
+        app.MostrarAgenda = function () {
+            
+          
+        };
         
         app.init();
 
