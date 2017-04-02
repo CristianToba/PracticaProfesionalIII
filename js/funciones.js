@@ -12,37 +12,60 @@ $(document).ready((function () {
             app.comboProfesional();
             app.ListarPais();
             app.MostrarAgenda();
-            
-            
-            
+
+
+
         };
 
-        $("#MostrarAgenda").click(function(){
-            var idProf=$('#cmbProfesional').val(); ;
-            
-            
-            
-         var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
-            
-          //  $.ajax({
-          //      url: url,
-          //      type: "POST",
-          //      dataType: "JSON",
-          //      beforeSend: function () {
-          //          consola.html('Espere por favor...');
-          //      },
-          //      success: function (datosRecibidos) {
-          //          consola.html('');
-//                      $('#acava').html(data); 
-          //          app.rellenarTablaAfiliado(datosRecibidos);
-          //      },
-          //      error: function () {
-//
-          //          alert('Ha surgido un error Afiliado');
-          //      }
-          //  });
-	});
-            
+        $("#MostrarAgenda").click(function () {
+
+            var consola = $('#agendaProf');
+            //+$('#cmbProfesional').val()+
+            var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+                    consola.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    consola.html('');
+                    app.rellenarTablaAgenda(datosRecibidos);
+                },
+                error: function () {
+                    alert('Ha surgido un error Agenda');
+                }
+            });
+        });
+
+        app.rellenarTablaAgenda = function (datosRecibidos) {
+
+            var cuerpo = "";
+            $nroPers = 0;
+            var tbAgenda = $('#tbcuerpoAgenda');
+            divAgendaProf.html('');
+
+            for (var i = 0; i < datosRecibidos.length; i++) {
+                $nroPers = datosRecibidos[i].dni;
+                //$fecha = datosRecibidos[i].FNac.valueOf().date.toString().substring(0, 10).replace("-", "/");
+
+                if (datosRecibidos[i].Habilitado == 1) {
+                    $estadoPers = 'NO';
+
+                } else {
+
+                    $estadoPers = 'SI';
+                }
+
+                cuerpo += "<tr><td>" + datosRecibidos[i].id + "</td><td>" + datosRecibidos[i].dni + "</td><td>" + datosRecibidos[i].nombre + "</td><td>" + datosRecibidos[i].apellido + "</td><td>" + datosRecibidos[i].mail + "</td><td>" + datosRecibidos[i].fechaNac + "</td><td>" + datosRecibidos[i].nacionalidad + "</td><td>" + datosRecibidos[i].EstCivil + "</td><td>" + datosRecibidos[i].direccion + "</td><td>" + datosRecibidos[i].telUrgencia + "</td><td>" + datosRecibidos[i].celular + "</td><td>" + datosRecibidos[i].obraSocial + "</td><td>" + $estadoPers + "<td><a href='../Funciones/ValidarOpcion.php?parametro=7&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=8&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+            }
+
+            tbAgenda.append(cuerpo);
+
+        };
+
         app.ListarAfiliados = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAfiliado.php";
@@ -91,7 +114,7 @@ $(document).ready((function () {
             tbAfiliado.append(cuerpo);
 
         };
-        
+
         app.ListarHorarios = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorarios.php";
@@ -139,18 +162,18 @@ $(document).ready((function () {
             tbHorario.append(cuerpo);
 
         };
-        
-        app.comboProfesional = function (){
-            
+
+        app.comboProfesional = function () {
+
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php";
-            
-            divProf= $('#divprofesional select');
+
+            divProf = $('#divprofesional select');
             $.ajax({
                 url: url,
                 type: "POST",
-                dataType: "JSON", 
-                 beforeSend: function () {
-                    
+                dataType: "JSON",
+                beforeSend: function () {
+
                     divProf.html('Espere por favor...');
                 },
                 success: function (datosRecibidos) {
@@ -164,26 +187,26 @@ $(document).ready((function () {
             });
         };
 
-        app.rellenarComboProf = function(datosRecibidos){
-            var cuerpo="";
-        
+        app.rellenarComboProf = function (datosRecibidos) {
+            var cuerpo = "";
+
             var comboProfesional = $('#cmbProfesional');
-            
+
             for (var i = 0; i < datosRecibidos.length; i++) {
-                
-               cuerpo += "<option value="+datosRecibidos[i].Matricula+">" + datosRecibidos[i].Nombre + ', '+ datosRecibidos[i].Apellido + "</option>";
-            
+
+                cuerpo += "<option value=" + datosRecibidos[i].Matricula + ">" + datosRecibidos[i].Nombre + ', ' + datosRecibidos[i].Apellido + "</option>";
+
             }
-            
+
             comboProfesional.append(cuerpo);
-            
+
         };
-        
+
         app.ListarPais = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONPais.php";
             var consola = $('#divPais');
-            
+
             $.ajax({
                 url: url,
                 type: "POST",
@@ -228,12 +251,12 @@ $(document).ready((function () {
             tbListadoPais.append(cuerpo);
 
         };
-        
+
         app.MostrarAgenda = function () {
-            
-          
+
+
         };
-        
+
         app.init();
 
     })(PracticaProfIII);

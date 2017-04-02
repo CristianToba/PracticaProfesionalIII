@@ -2,7 +2,7 @@
 
 require_once('../Conexion/Conexion.php');
 $valorIdProf=$_GET['idProf'];
-$sql = "SELECT * from persona where matricula=$valorIdProf";
+$sql = "SELECT * from turno where idMedico=$valorIdProf";
 echo ($sql);
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
