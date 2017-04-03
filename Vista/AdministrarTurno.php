@@ -64,7 +64,7 @@ if ($_SESSION['login_user'] == '') {
                                 
                                 <tbody id="tbcuerpoAgenda">
                                     
-                                    <tr><td> 09:00 - 09:30 </td></tr><tr><td> 09:30 - 10:00 </td></tr><tr><td> 10:30 - 11:00 </td></tr><tr><td> 11:30 - 12:00 </td></tr><tr><td> 12:30 - 13:00 </td></tr><tr><td> 13:30 - 14:00 </td></tr><tr><td> 14:30 - 15:00 </td></tr><tr><td> 15:30 - 16:00 </td></tr><tr><td> 16:30 - 17:00 </td></tr><tr><td> 17:30 - 18:00 </td></tr><tr><td> 18:30 - 19:00 </td></tr>
+                                    <!--<tr><td> 09:00 - 09:30 </td></tr><tr><td> 09:30 - 10:00 </td></tr><tr><td> 10:30 - 11:00 </td></tr><tr><td> 11:30 - 12:00 </td></tr><tr><td> 12:30 - 13:00 </td></tr><tr><td> 13:30 - 14:00 </td></tr><tr><td> 14:30 - 15:00 </td></tr><tr><td> 15:30 - 16:00 </td></tr><tr><td> 16:30 - 17:00 </td></tr><tr><td> 17:30 - 18:00 </td></tr><tr><td> 18:30 - 19:00 </td></tr>-->
                                     
                                 </tbody>
 

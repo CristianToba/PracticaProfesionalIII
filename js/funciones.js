@@ -13,56 +13,79 @@ $(document).ready((function () {
             app.ListarPais();
             app.MostrarAgenda();
 
-
-
         };
 
         $("#MostrarAgenda").click(function () {
 
-            var consola = $('#agendaProf');
-            //+$('#cmbProfesional').val()+
             var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
-
+            var consola = $('#divAgendaProf');
             $.ajax({
                 url: url,
                 type: "POST",
                 dataType: "JSON",
                 beforeSend: function () {
                     consola.html('Espere por favor...');
+
                 },
                 success: function (datosRecibidos) {
                     consola.html('');
+
                     app.rellenarTablaAgenda(datosRecibidos);
                 },
-                error: function () {
-                    alert('Ha surgido un error Agenda');
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status === 0) {
+
+                        alert('Not connect: Verify Network.');
+
+                    } else if (jqXHR.status == 404) {
+
+                        alert('Requested page not found [404]');
+
+                    } else if (jqXHR.status == 500) {
+
+                        alert('Internal Server Error [500].');
+
+                    } else if (textStatus === 'parsererror') {
+
+                        alert('Requested JSON parse failed.');
+
+                    } else if (textStatus === 'timeout') {
+
+                        alert('Time out error.');
+
+                    } else if (textStatus === 'abort') {
+
+                        alert('Ajax request aborted.');
+
+                    } else {
+
+                        alert('Uncaught Error: ' + jqXHR.responseText);
+
+                    }
                 }
             });
         });
 
         app.rellenarTablaAgenda = function (datosRecibidos) {
 
-            var cuerpo = "";
-            $nroPers = 0;
+            var cuerpoAgenda = "";
+            $estadoTurno = false;
             var tbAgenda = $('#tbcuerpoAgenda');
-            divAgendaProf.html('');
 
             for (var i = 0; i < datosRecibidos.length; i++) {
-                $nroPers = datosRecibidos[i].dni;
-                //$fecha = datosRecibidos[i].FNac.valueOf().date.toString().substring(0, 10).replace("-", "/");
 
-                if (datosRecibidos[i].Habilitado == 1) {
-                    $estadoPers = 'NO';
+                if (datosRecibidos[i].estadoTurno == 1) {
+                    $estadoTurno = 'NO';
 
                 } else {
 
-                    $estadoPers = 'SI';
+                    $estadoTurno = 'SI';
                 }
 
-                cuerpo += "<tr><td>" + datosRecibidos[i].id + "</td><td>" + datosRecibidos[i].dni + "</td><td>" + datosRecibidos[i].nombre + "</td><td>" + datosRecibidos[i].apellido + "</td><td>" + datosRecibidos[i].mail + "</td><td>" + datosRecibidos[i].fechaNac + "</td><td>" + datosRecibidos[i].nacionalidad + "</td><td>" + datosRecibidos[i].EstCivil + "</td><td>" + datosRecibidos[i].direccion + "</td><td>" + datosRecibidos[i].telUrgencia + "</td><td>" + datosRecibidos[i].celular + "</td><td>" + datosRecibidos[i].obraSocial + "</td><td>" + $estadoPers + "<td><a href='../Funciones/ValidarOpcion.php?parametro=7&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=8&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+                cuerpoAgenda += "<tr><td>" + datosRecibidos[i].nombrePaciente + "</td></tr>";
             }
 
-            tbAgenda.append(cuerpo);
+            tbAgenda.append(cuerpoAgenda);
 
         };
 
