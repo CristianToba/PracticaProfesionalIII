@@ -26,7 +26,7 @@ if ($_SESSION['login_user'] == '') {
         <div class="panel panel-primary">
             <div class="panel-heading"> <b>Administrar Pais</b> </div>
 
-            <FORM name ="formulario" class="form-inline" accept-charset="UTF-8>
+            <FORM name ="formulario" class="form-inline" accept-charset="UTF-8">
                 <div class="panel-body">
                     <div class="container">
                         <div class="row">

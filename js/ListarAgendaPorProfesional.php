@@ -2,7 +2,8 @@
 
 require_once('../Conexion/Conexion.php');
 $valorIdProf=$_GET['idProf'];
-$sql = "SELECT T.idTurno, CONVERT(VARCHAR(12),day(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),MONTH(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),YEAR(T.fechaTurno)) as fechaTurno,
+$sql = "SELECT T.idTurno, 
+    CONVERT(VARCHAR(12),day(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),MONTH(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),YEAR(T.fechaTurno)) as fechaTurno,
     T.nroTurno, C.nombreconsultorio, CL.nombre as nombreClinica,CL.direccion as direccionClinica, C.idMedico, CONVERT(VARCHAR(12),datepart(HOUR,H.HorarioInicio))+':'+CONVERT(VARCHAR(12),datepart(MINUTE,H.HorarioInicio)) as HorarioInicio,
     CONVERT(VARCHAR(12),datepart(HOUR,H.HorarioFin))+':'+CONVERT(VARCHAR(12),datepart(MINUTE,H.HorarioFin)) as HorarioFin,
     T.baja,T.Habilitado, P.nombre as nombreMedico, P.apellido as apellidoMedico,E.especialidad,PE.nombre as nombrePaciente,PE.apellido as apellidoPaciente
@@ -16,7 +17,7 @@ T.idHorario= H.idhorarios
 INNER JOIN Persona AS PE ON
 T.idPersona=PE.nroPersona
  WHERE T.idMedico=$valorIdProf";
-echo ($sql);
+
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -50,7 +51,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
 
 //Creamos el JSON
 
-echo json_encode($agendaMedico,true);
+echo json_encode($agendaMedico);
 
 //desconectamos la base de datos
 sqlsrv_close($conn) or die("Ha sucedido un error inexperado en la desconexion de la base de datos");

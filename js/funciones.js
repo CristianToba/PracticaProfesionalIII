@@ -22,17 +22,18 @@ $(document).ready((function () {
             $.ajax({
                 url: url,
                 type: "POST",
-                dataType: "JSON",
+                dataType: "JSON",              
                 beforeSend: function () {
-                    consola.html('Espere por favor...');
-
+                    consola.html('Espere por favor...');                    
                 },
                 success: function (datosRecibidos) {
                     consola.html('');
-
+                    console.log(datosRecibidos);                    
                     app.rellenarTablaAgenda(datosRecibidos);
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
+                
+                error: function (jqXHR, textStatus,datosRecibidos) {
+                    console.log(datosRecibidos);
                     if (jqXHR.status === 0) {
 
                         alert('Not connect: Verify Network.');
@@ -62,6 +63,7 @@ $(document).ready((function () {
                         alert('Uncaught Error: ' + jqXHR.responseText);
 
                     }
+                    
                 }
             });
         });
@@ -260,15 +262,15 @@ $(document).ready((function () {
 
             for (var i = 0; i < datosRecibidos.length; i++) {
 
-                if (datosRecibidos[i].Habilitado == 1) {
+               if (datosRecibidos[i].Habilitado == 1) {
                     $estadoPais = 'NO';
 
                 } else {
 
                     $estadoPais = 'SI';
                 }
-
-                cuerpo += "<tr><td  hidden=''>" + datosRecibidos[i].Codigo + "</td><td>" + datosRecibidos[i].Descripcion + "</td><td>" + $estadoPais + "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=" + datosRecibidos[i].codigoPais + "&txtPais=" + datosRecibidos[i].descripcionPais + "&estadoPais=" + $estadoPais + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+                
+                cuerpo += "<tr><td  hidden=''>" + datosRecibidos[i].Codigo + "</td><td>" + datosRecibidos[i].Descripcion + "</td><td>" + $estadoPais + "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=" + datosRecibidos[i].Codigo + "&txtPais=" + datosRecibidos[i].Descripcion + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=" + datosRecibidos[i].Codigo + "&txtPais=" + datosRecibidos[i].Descripcion + "&estadoPais=" + $estadoPais + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
             }
 
             tbListadoPais.append(cuerpo);

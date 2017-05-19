@@ -16,7 +16,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $estadoPais = $row['Habilitado'];
    
 
-    $listadoPais[] = array('Codigo' => $codigoPais, 'Descripcion' => $descripcionPais,'Estado' => $estadoPais);
+    $listadoPais[] = array('Codigo' => $codigoPais, 'Descripcion' => $descripcionPais,'Habilitado' => $estadoPais);
         
 }
 

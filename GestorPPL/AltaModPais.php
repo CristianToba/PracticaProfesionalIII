@@ -39,15 +39,16 @@ if ($parametro == 0) {
 }
 //Modificar Registro    
 if ($parametro == 1) {
-    $codigoPais= $_POST['codPais'];
+    $codigoPais= $_POST['CodPais'];
 
 
      try {
          
          include_once("../Funciones/Consultas.php");
         ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
-        $sql_Consulta = "UPDATE PAIS SET descripcionPais='$pais',habilitado='$estadoPais' where codigoPais='$codigoPais'";
-      
+        $sql_Consulta = "UPDATE PAIS SET descripcionPais='$pais',Habilitado='$estadoPais' where codigoPais='$codigoPais'";
+       
+       
         $stmt = sqlsrv_query($link, $sql_Consulta);
         if ($stmt === false) {
 
@@ -56,7 +57,7 @@ if ($parametro == 1) {
            
         } else {
             print "<script>alert('Se registro modificacion de pais')</script>";
-
+      
             print("<script>window.location.replace('../Vista/AdministrarPais.php');</script>");
         }
     } catch (Exception $exc) {

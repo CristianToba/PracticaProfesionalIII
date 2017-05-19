@@ -32,7 +32,7 @@ include_once("../Funciones/Consultas.php");
                 <div class="panel-body">
                     <div class="row-md-1" align="center" style="margin-top: 10px;">
                         <div>
-                            <label for="CodHorario">Codigo del Pais: </label><input NAME="codPais" class="form-control"  ID="CodPais" value="<?php echo $CodPais?>" readonly="true" value="<?php echo $CodPais ?>">    
+                            <label for="CodHorario">Codigo del Pais: </label><input NAME="CodPais" class="form-control"  ID="CodPais" value="<?php echo $CodPais?>" readonly="true" value="<?php echo $CodPais ?>">    
                         <div>
                             <label for="CodHorario">Nombre del Pais: </label><input TYPE ="text" NAME="txtPais" class="form-control"  onKeyPress="return ValidaCadena(event)" ID="Pais" value="<?php echo $nombre?>">    
                         <div>

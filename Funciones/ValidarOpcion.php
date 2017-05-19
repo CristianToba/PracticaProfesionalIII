@@ -10,6 +10,12 @@ if($parametro<=2){
 $datoPais = $_GET['codPais'];
 $nombrePaisModificar = $_GET['txtPais'];
 $estado=$_GET['estadoPais'];
+if($estado=='SI'){
+    $estado=0;
+      
+    
+}else
+{$estado=1;}
 //ALTA DE PAIS
 if ($parametro == 0) {
 
@@ -23,7 +29,7 @@ if ($parametro == 1) {
 //ELIMINAR PAIS
 if ($parametro == 2) {
     include("../Funciones/Consultas.php");
-    $sqlEliminar="UPDATE PAIS SET HABILITADO='FALSE', BAJA='$baja' WHERE codigoPais='$datoPais'";
+    $sqlEliminar="UPDATE PAIS SET HABILITADO='TRUE', BAJA='$baja' WHERE codigoPais='$datoPais'";
     $tipo='pais';
     EliminarDato($sqlEliminar,$tipo);
 }

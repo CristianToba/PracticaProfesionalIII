@@ -10,18 +10,27 @@ if ($_SESSION['login_user'] == '') {
         <!--Cabecera-->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+
         <script src="../css/jquery.min.js"></script>
         <script src="../css/bootstrap.min.js"></script>
         <script src="../Funciones/Funciones.php"></script>
+        <script src="../Conexion/Conexion.php"></script>
+        <script src="../Funciones/Validaciones.js"></script>
+        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../css/demo.css">
+        <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
         <title>RESERVA YA</title>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header"> <a class="navbar-brand" href="#">RESERVA YA</a> </div>
+
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
+
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+                    <li><p class="navbar-text">ReserveYa!!</p></li>
                     <li class="active"><a href="#">AFILIADO</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reserva de Turno <span class="caret"></span></a>
@@ -37,114 +46,84 @@ if ($_SESSION['login_user'] == '') {
                         <ul class="dropdown-menu">
                             <li class="divider" ></li>
 
-                            <li><a href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
+
                             <li><a href="../pdf/ListarHorarios.php">Listar Horarios</a></li>
-                            <!--<li><a href="#">Listar Turnos Solicitados</a></li>
+                            <!--<li><a href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
+                            <li><a href="#">Listar Turnos Solicitados</a></li>
                                 <li><a href="#">Listar Clinicas</a></li>
                                 <li><a href="#">Listar Medicos</a></li>-->
 
-                </ul>
-                <li class="active"><a href="../Funciones/cerrarSession.php">Cerrar Sesion</a></li>
+                        </ul>
+                        </li>
+                    <li class="active"><a href="../Funciones/cerrarSession.php">Cerrar Sesion</a></li>
 
                 </ul>
 
             </div>
         </nav>
 
-        <div class="container" id="marco">
-            <div class="row">
-                <div class="col-md-8" id="contenido">
-                    <p>
-                    </p>
+        <div class="content">
 
+        </div>
 
-                    <div class="row marginbottom20">
-                        <div class="col-md-6">
-                            <div class="post post-principal">
-                                <p class="post_imagen"><a href="http://www.damsu.uncuyo.edu.ar/los-ojos-en-verano-merecen-un-mayor-cuidado" title="Los ojos en verano merecen un mayor cuidado">
-                                        <img src="http://www.damsu.uncuyo.edu.ar/upload/indice.jpg" alt="Los ojos en verano merecen un mayor cuidado" class="img-responsive">
-                                    </a></p>
-                                <div class="post_textos">
-                                    <h5 class="post_subtitulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/categorias/index/noticias-saludables">
-                                            Noticias					</a>
-                                    </h5>
-                                    <h4 class="post_titulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/los-ojos-en-verano-merecen-un-mayor-cuidado" title="Los ojos en verano merecen un mayor cuidado">
-                                            Los ojos en verano merecen un mayor cuidado		            </a>
-                                    </h4>
-                                    <h6 class="post_fecha">21 DIC 2016</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post post-principal">
-                                <p class="post_imagen"><a href="http://www.damsu.uncuyo.edu.ar/las-claves-para-cuidar-a-las-mascotas-en-las-fiestas" title="Las claves para cuidar a las mascotas en las fiestas">
-                                        <img src="http://www.damsu.uncuyo.edu.ar/cache/553e4b4cc2a93324x215_200_360_c.jpg" alt="Las claves para cuidar a las mascotas en las fiestas" class="img-responsive">
-                                    </a></p>
-                                <div class="post_textos">
-                                    <h5 class="post_subtitulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/categorias/index/noticias-saludables">
-                                            Noticias					</a>
-                                    </h5>
-                                    <h4 class="post_titulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/las-claves-para-cuidar-a-las-mascotas-en-las-fiestas" title="Las claves para cuidar a las mascotas en las fiestas">
-                                            Las claves para cuidar a las mascotas en las fiestas		            </a>
-                                    </h4>
-                                    <h6 class="post_fecha">19 DIC 2016</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row marginbottom20">
-                        <div class="col-md-6">
-                            <div class="post post-principal">
-                                <p class="post_imagen"><a href="http://www.damsu.uncuyo.edu.ar/efectos-del-aire-acondicionado-sobre-la-salud" title="EFECTOS DEL AIRE ACONDICIONADO SOBRE LA SALUD">
-                                        <img src="http://www.damsu.uncuyo.edu.ar/cache/527a402a853af645x429_200_360_c.jpg" alt="EFECTOS DEL AIRE ACONDICIONADO SOBRE LA SALUD" class="img-responsive">
-                                    </a></p>
-                                <div class="post_textos">
-                                    <h5 class="post_subtitulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/categorias/index/noticias-saludables">
-                                            Noticias					</a>
-                                    </h5>
-                                    <h4 class="post_titulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/efectos-del-aire-acondicionado-sobre-la-salud" title="EFECTOS DEL AIRE ACONDICIONADO SOBRE LA SALUD">
-                                            EFECTOS DEL AIRE ACONDICIONADO SOBRE LA SALUD		            </a>
-                                    </h4>
-                                    <h6 class="post_fecha">14 DIC 2016</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post post-principal">
-                                <p class="post_imagen"><a href="http://www.damsu.uncuyo.edu.ar/el-vih-en-mendoza" title="El VIH en Mendoza">
-                                        <img src="http://www.damsu.uncuyo.edu.ar/upload/descarga2.jpg" alt="El VIH en Mendoza" class="img-responsive">
-                                    </a></p>
-                                <div class="post_textos">
-                                    <h5 class="post_subtitulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/categorias/index/noticias-saludables">
-                                            Noticias					</a>
-                                    </h5>
-                                    <h4 class="post_titulo">
-                                        <a href="http://www.damsu.uncuyo.edu.ar/el-vih-en-mendoza" title="El VIH en Mendoza">
-                                            El VIH en Mendoza		            </a>
-                                    </h4>
-                                    <h6 class="post_fecha">05 DIC 2016</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+
+                <h3> <img src="../Imagenes/reserva_ya.JPG" width="100px"> </h3>
+
+                <p class="footer-links">
+                    <a href="">Home</a>
+                    ·
+                    <a href="index.php">Personal</a>					
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Faq</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+
+                <p class="footer-company-name">RESERVAYA Todos los derechos reservados. Tèrminos y condiciones @ 2016</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>Sin numero</span> Mendoza, Argentina</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>0261-156406854</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="mailto:tobares.cristian@gmail.com">tobares.cristian@gmail.com</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
 
                 </div>
+
             </div>
-        </div>
 
-
-
-        
-        <div class="panel-footer">
-            <footer> © 2016 Todos los derechos reservados. Términos y condiciones </footer>
-            
-        </div>
+        </footer>
     </body>
 </html>

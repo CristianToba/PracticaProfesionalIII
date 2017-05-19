@@ -17,6 +17,7 @@ if ($_SESSION['login_user'] == '') {
         <script src="../Funciones/Validaciones.js"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 
         <title>RESERVA YA</title>
@@ -30,7 +31,7 @@ if ($_SESSION['login_user'] == '') {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administracion Personal<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="label">Afiliados</a></li>
+                            <li class="bg-info"> <a>Administrador</a>
                             <li><a href="../Vista/AdministrarAfiliado.php"> Administrar Afiliado</a></li>
 
                             <li class="divider"></li>
@@ -44,6 +45,7 @@ if ($_SESSION['login_user'] == '') {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Informes<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li class="bg-info"> <a>Listados</a>
                             <li class="divider" ></li>
 
                             <li><a href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
@@ -75,7 +77,7 @@ if ($_SESSION['login_user'] == '') {
                     <li><a href="#"> Administrar Clinica</a></li>
                     -->
                     <ul class="dropdown-menu">
-                        <li class="divider"></li>
+                        
                         <li class="bg-info"><a href="#">Horarios</a></li>
                         <li><a href="../Vista/AdministrarHorarios.php"> Administracion Horarios</a></li>
                         <li class="divider"></li>

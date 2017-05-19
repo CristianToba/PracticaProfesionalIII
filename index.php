@@ -11,7 +11,7 @@
         <script src="js/funciones.js" type="text/javascript"></script>
         <link rel="stylesheet" href="css/demo.css">
         <link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
-
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <title>RESERVA YA</title>
     </head>
     <!-- <body>
@@ -43,7 +43,7 @@
              
          </div>
      </body>-->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
     <body>
         
             <nav class="navbar navbar-default navbar-inverse" role="navigation">
