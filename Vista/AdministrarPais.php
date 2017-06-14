@@ -18,7 +18,8 @@ if ($_SESSION['login_user'] == '') {
         <script src="../Funciones/Funciones.php"></script>
         <script src="../js/funciones.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../css/demo.css">
-        <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
+        <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">      
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     </head>
     <body>
