@@ -2,19 +2,27 @@
 
 $(document).ready((function () {
     var PracticaProfIII = {};
-
+$("#calendar").fullCalendar({
+        // Las opciones van aquí
+    });
 
     (function (app) {
 
         app.init = function () {
             app.ListarAfiliados();
+            app.ListarMedicos();
             app.ListarHorarios();
             app.comboProfesional();
             app.ListarPais();
-            app.MostrarAgenda();
+            //app.MostrarAgenda();
 
         };
 
+      
+
+
+        
+        
         $("#MostrarAgenda").click(function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
@@ -140,6 +148,57 @@ $(document).ready((function () {
 
         };
 
+         app.ListarMedicos = function () {
+
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONMedico.php";
+            var consola = $('#divMedico');
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+                    consola.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    consola.html('');
+
+                    app.rellenarTablaMedico(datosRecibidos);
+                },
+                error: function () {
+
+                    alert('Ha surgido un error Medico');
+                }
+            });
+        };
+
+        app.rellenarTablaMedico = function (datosRecibidos) {
+
+            var cuerpo = "";
+            $nroPers = 0;
+            var tbMedico = $('#tbcuerpoMedico');
+            tbMedico.html('');
+
+            for (var i = 0; i < datosRecibidos.length; i++) {
+                $nroPers = datosRecibidos[i].dni;
+                //$fecha = datosRecibidos[i].FNac.valueOf().date.toString().substring(0, 10).replace("-", "/");
+
+                if (datosRecibidos[i].Habilitado == 1) {
+                    $estadoPers = 'NO';
+
+                } else {
+
+                    $estadoPers = 'SI';
+                }
+
+                cuerpo += "<tr><td>" + datosRecibidos[i].id  +  "</td><td>" + datosRecibidos[i].matricula+ "</td><td>" + datosRecibidos[i].dni  + "</td><td>" + datosRecibidos[i].nombre + "</td><td>" + datosRecibidos[i].apellido + "</td><td>" + datosRecibidos[i].mail + "</td><td>" + datosRecibidos[i].fechaNac + "</td><td>" + datosRecibidos[i].nacionalidad + "</td><td>" + datosRecibidos[i].EstCivil + "</td><td>" + datosRecibidos[i].direccion + "</td><td>"  + datosRecibidos[i].localidad + "</td><td>" + datosRecibidos[i].provincia + "</td><td>" + datosRecibidos[i].telUrgencia + "</td><td>" + datosRecibidos[i].celular + "</td><td>" + datosRecibidos[i].especialidad +"</td><td>" + datosRecibidos[i].orientacion + "</td><td>" + $estadoPers + "<td><a href='../Funciones/ValidarOpcion.php?parametro=7&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=8&dniAfiliado=" + $nroPers + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+            }
+
+            tbMedico.append(cuerpo);
+
+        };
+
+        
+        
         app.ListarHorarios = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorarios.php";
@@ -285,6 +344,7 @@ $(document).ready((function () {
         app.init();
 
     })(PracticaProfIII);
+
 
 
 }));

@@ -6,6 +6,7 @@ if ($_SESSION['login_user'] == '') {
 }
 ?>
 
+
 <html>
 
     <head>
@@ -16,95 +17,77 @@ if ($_SESSION['login_user'] == '') {
         <script src="../js/funciones.js" type="text/javascript"></script>    
         <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script src="../Funciones/Validaciones.js"></script>
-        <script src="../js/libs/j"></script>
+        <script src="../Funciones/Funciones.php"></script>
         <script src="../js/funciones.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
-       <link rel='stylesheet' type='text/css' href='fullcalendar.css' />
-        <script type='text/javascript' src='jquery.js'></script>
-        <script type='text/javascript' src='fullcalendar.js'></script>
-     
+
+
+
+
     </head>
     <body>
 
         <div class="panel panel-primary">
-            <div class="panel-heading"> <b>Gestion de Turno</b> </div>
+            <div class="panel-heading"> <b>Administrar Medico</b> </div>
 
             <form class="form-inline" accept-charset="UTF-8">
                 <div class="panel-body">
 
                     <div class="panel panel-default" align="center" style="overflow-x:auto;">
-
-
-                        <div class="panel-heading">
-                            <h3>Busqueda por Profesional</h3>
+                        <div class="panel-heading" >
+                            <h4>
+                                Medicos 
+                            </h4>
                         </div>
 
-                        <div id="divprofesional">
-                            Seleccione profesional:
-                            <select id="cmbProfesional"></select>
+                        <div id="divAfiliado"> </div>
 
-                            <input type="button" name="btnMostrarAgenda" id="MostrarAgenda" class="btn btn-default" style="margin-left: 09px;" value="Mostrar Agenda">
 
-                        </div>
+                        <table id="tbMedico" class="table table-fixed" style="font-size: 11">
 
-                        <div class="panel-heading">
-                            <h3>Agenda</h3>
-                        </div>
+                            <thead>
 
-                        <div id="divAgendaProf">
-                            <table id="tbAgenda" class="table table-fixed" style="font-size: 11">
+                            <th>Medico</th>
+                            <th>Matricula</th>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Fecha Nac.</th>
+                            <th>Nacionalidad</th>
+                            <th>Est. Civil</th>
+                            <th>Direccion</th>
+                            <th>Localidad</th>
+                            <th>Provincia</th>
+                            <th>Tel.Urgencia</th>
+                            <th>Celular</th>
+                            <th>Especialidad</th>
+                            <th>Orientacion</th>
+                            <th>Habilitado</th>
+                            <th>Eliminar</th>
+                            <th>Modificar</th>
 
-                                <thead>
-                                <th>Horario   /   Dia</th>
-                                <th>Lunes</th>
-                                <th>Martes</th>
-                                <th>Miercoles</th>
-                                <th>Jueves</th>
-                                <th>Viernes</th>
-                                
 
-                                </thead>
-                                
-                                <div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-       
-    </div>
-</div>
-                                <div id='calendar'></div>
-                                <tbody id="tbcuerpoAgenda">
-                                    
-                                    <!--<tr><td> 09:00 - 09:30 </td></tr><tr><td> 09:30 - 10:00 </td></tr><tr><td> 10:30 - 11:00 </td></tr><tr><td> 11:30 - 12:00 </td></tr><tr><td> 12:30 - 13:00 </td></tr><tr><td> 13:30 - 14:00 </td></tr><tr><td> 14:30 - 15:00 </td></tr><tr><td> 15:30 - 16:00 </td></tr><tr><td> 16:30 - 17:00 </td></tr><tr><td> 17:30 - 18:00 </td></tr><tr><td> 18:30 - 19:00 </td></tr>-->
-                                    
-                                    
-                                </tbody>
+                            </thead>
 
-                            </table>
-                        </div>
+                            <tbody id="tbcuerpoMedico"></tbody>
+
+                        </table>
+
 
                     </div>
+
                 </div>
             </form>
             <div class="row-md-1" align="center" style="margin-top: 10px;">
 
-                <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar Turno</a></button>
 
-                <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_usuario.php">Volver Menu</a></button>
+                <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=9">Agregar Medico</a></button>
+
+                <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
             </div>
+
 
             <footer class="footer-distributed">
 
@@ -169,4 +152,3 @@ if ($_SESSION['login_user'] == '') {
 
     </body>
 </html>
-

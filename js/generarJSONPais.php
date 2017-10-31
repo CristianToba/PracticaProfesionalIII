@@ -1,7 +1,7 @@
 <?php
 
 require_once('../Conexion/Conexion.php');
-$sql = "select codigoPais,descripcionPais,Habilitado from pais where Habilitado= 0 order by descripcionPais asc";
+$sql = "select codigoPais,descripcionPais,Habilitado from pais  order by descripcionPais asc";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);

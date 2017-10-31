@@ -89,4 +89,31 @@ if ($parametro == 8) {
 }
 }
 
+//ADMINISTRAR MEDICO
+if ($parametro>=9 && $parametro<=11){
+    //VARIABLES PARA ABM MEDICO
+    $dni= $_GET['dniMedico'];
+
+//ALTA DE AFILIADO
+if ($parametro == 9) {
+    print("<script>window.location.replace('../GestorPersona/Alta_Medico.php');</script>");
+}
+
+//ELIMINAR MEDICO
+if ($parametro == 10) {
+    include("../Funciones/Consultas.php");
+    
+    $tipo='Medico';
+    $sqlEliminar="UPDATE PERSONA SET HABILITADO='TRUE',BAJA='$baja' WHERE DNI='$dni'";
+    EliminarDato($sqlEliminar,$tipo);
+}
+
+//MODIFICACION DE MEDICO
+if ($parametro == 11) {
+    $dni= $_GET['dniMedico'];
+    print("<script>window.location.replace('../GestorPersona/Modificar_Persona.php?dniPersona=$dni');</script>");
+    
+}
+}
+
 ?>

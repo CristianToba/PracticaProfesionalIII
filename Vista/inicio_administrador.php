@@ -36,7 +36,7 @@ if ($_SESSION['login_user'] == '') {
 
                             <li class="divider"></li>
                             <li class="bg-info"> <a>Medicos</a>
-                            <li><a href="#"> Administrar Medico</a></li>
+                            <li><a href="../Vista/AdministrarMedico.php"> Administrar Medico</a></li>
                             <li class="divider" ></li>
                             <li class="bg-info"> <a>Empleados</a>
                             <li><a href="#"> Administrar Empleados</a></li>

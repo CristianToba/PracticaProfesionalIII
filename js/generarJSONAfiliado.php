@@ -3,7 +3,7 @@
 require_once('../Conexion/Conexion.php');
 $sql = "SELECT nroPersona , dni ,nombre , apellido ,mail , CONVERT(VARCHAR(12),day(fechaNac))+'/'+CONVERT(VARCHAR(12),MONTH(fechaNac))+'/'+CONVERT(VARCHAR(12),YEAR(fechaNac)) as fechaNac , nacionalidad ,estadoCivil ,
 B.calle+' '+CONVERT(VARCHAR(12),B.numero) as direccion,telUrgencia , celular ,obraSocial ,Habilitado  FROM PERSONA AS A INNER JOIN Direccion AS B ON
-A.idPersDirec=B.idDireccion";
+A.idPersDirec=B.idDireccion and A.tipoPers<>2";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);

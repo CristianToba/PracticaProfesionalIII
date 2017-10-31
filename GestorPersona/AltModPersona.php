@@ -63,30 +63,29 @@ if ($tipo == 1) {
             $insert = ObtenerMaxDireccion();
             $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion',$numero,$dpto,$piso,$cP,10)";
             $stmtdir = sqlsrv_query($link, $sql_Consulta_Dir);
-            
+
             if ($stmtdir === false) {
-                
+
                 die(print_r(sqlsrv_errors(), true));
-            
             }
             $numerodir = ObtenerUltDireccion();
-            
-        ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
-        $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
+
+            ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
+            $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
         , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, cantHijos, ocupacion, religion, hobbie
         , telUrgencia, obraSocial, tipoPers, tipoSangre) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'',$cantHijo,'$ocupacionAfiliado','$religionAfiliado','$hobbieAfiliado','$Urgencia','$oSocAfiliado',1,'$sangre')";
 
-        $stmt = sqlsrv_query($link, $sql_Consulta);
-        if ($stmt === false) {
+            $stmt = sqlsrv_query($link, $sql_Consulta);
+            if ($stmt === false) {
 
-            print "<script>alert('Registro ya existente ')</script>";
-            die(print_r(sqlsrv_errors(), true));
-            //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
-        } else {
-            print "<script>alert('Se registro un afiliado nuevo')</script>";
+                print "<script>alert('Registro ya existente ')</script>";
+                die(print_r(sqlsrv_errors(), true));
+                //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+            } else {
+                print "<script>alert('Se registro un afiliado nuevo')</script>";
 
-            print("<script>window.location.replace('Alta_Afiliado.php');</script>");
-        }
+                print("<script>window.location.replace('Alta_Afiliado.php');</script>");
+            }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -118,9 +117,94 @@ if ($tipo == 1) {
     if ($accion == 2) {
         
     }
+} else
+
+
+//Alta Modificacion de Medico
+if ($tipo == 2) {
+
+    $religionMedico = $_POST['Religion'];
+    $hobbieMedico = $_POST['Hobbie'];
+    $ocupacionMedico = $_POST['Ocupacion'];
+    $oSocMedico = $_POST['ObraSocial'];
+
+
+    if ($accion == 0) {
+        $codFijo = $_POST['CodAreaFijo'];
+        $Fijo = $codFijo . '-' . $telFijo;
+        $codTelMovil = $_POST['CodAreaMovil'];
+        $Movil = $codTelMovil . '-' . $telMovil;
+        $codTelUrg = $_POST['CodAreaUrg'];
+        $Urgencia = $codTelUrg . '-' . $telUrg;
+
+
+        try {
+
+            include("../Funciones/Consultas.php");
+            ## Consulta para consultar el ultimo registro
+
+            $numero = ObtenerMaxPersona($tipo);
+            $insert = ObtenerMaxDireccion();
+            $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion',$numero,$dpto,$piso,$cP,10)";
+            $stmtdir = sqlsrv_query($link, $sql_Consulta_Dir);
+
+            if ($stmtdir === false) {
+
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $numerodir = ObtenerUltDireccion();
+
+            ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
+            $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
+        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, cantHijos, ocupacion, religion, hobbie
+        , telUrgencia, obraSocial, tipoPers, tipoSangre) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'',$cantHijo,'$ocupacionMedico','$religionMedico','$hobbieMedico','$Urgencia','$oSocMedico',2,'$sangre')";
+
+            $stmt = sqlsrv_query($link, $sql_Consulta);
+            print "<script>alert('" *+$sql_Consulta+"')</script>";
+            if ($stmt === false) {
+
+                print "<script>alert('Registro ya existente ')</script>";
+                die(print_r(sqlsrv_errors(), true));
+                //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
+            } else {
+                print "<script>alert('Se registro un afiliado nuevo')</script>";
+
+                print("<script>window.location.replace('Alta_Afiliado.php');</script>");
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+//Modificar Registro    
+    if ($accion == 1) {
+
+        try {
+
+            include("../Funciones/Consultas.php");
+            ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
+            $sql_Consulta = "UPDATE PERSONA SET dni='$nroDoc',nombre='$nombre',apellido='$apellido',mail='$email',fechaNac='$fNac',sexo='$sexo',nacionalidad='$nacionalidad',estadoCivil='$estCivil',clave='$clave',habilitado='$habilitado',cantHijos='$cantHijo',ocupacion='$ocupacionMedico',religion='$religionMedico', hobbie='$hobbieMedico',tipoDni='$tipoDoc',telFijo='$telFijo',telUrgencia='$telUrg',celular='$telMovil',obraSocial='$oSocMedico',tipoSangre='$sangre' where dni='$nroDoc'";
+
+            $stmt = sqlsrv_query($link, $sql_Consulta);
+            if ($stmt === false) {
+
+                print "<script>alert('Registro no modificado')</script>";
+                die(print_r(sqlsrv_errors(), true));
+            } else {
+                print "<script>alert('Se registro modificacion de persona')</script>";
+
+                print("<script>window.location.replace('../Vista/AdministrarAfiliado.php');</script>");
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+//Eliminar un registro
+    if ($accion == 2) {
+        
+    }
 }
 
-//Alta Modificacion Medico
+
 
 sqlsrv_close($link);
 ?>
