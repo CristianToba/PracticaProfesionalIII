@@ -10,24 +10,60 @@ if ($_SESSION['login_user'] == '') {
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <!-- bootstrp -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <script src="../css/jquery.min.js"></script>
         <script src="../css/bootstrap.min.js"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>    
-        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
-        <script src="../Funciones/Validaciones.js"></script>
-        <script src="../js/libs/j"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- custom scripts --> 
+        <script type="text/javascript" src="js/script.js"></script> 
+
+        <!-- bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" >
+
+        <!-- fullcalendar -->
+        <link href="../js/libs/fullcalendar/fullcalendar.css" rel="stylesheet" />
+        <link href="../js/libs/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+        <script src="../js/libs/fullcalendar/lib/moment.min.js"></script>
+        <script src="fullcalendar.js"></script>
+        <!-- jquery -->
+        <script src="../css/jquery.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
-       <link rel='stylesheet' type='text/css' href='fullcalendar.css' />
-        <script type='text/javascript' src='jquery.js'></script>
-        <script type='text/javascript' src='fullcalendar.js'></script>
-     
+        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
+
+        <!-- funciones -->
+        <script src="../Funciones/Validaciones.js"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
+
+        <!-- moment -->
+        <script src="../js/libs/moment.js"></script>
+
+        <!-- style -->
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <!-- fullcalendar -->
+        <link rel='stylesheet' href='../js/libs/fullcalendar/fullcalendar.css' />    
+        <script src='../js/libs/fullcalendar/fullcalendar.js'></script>
+        <script src='../js/libs/fullcalendar/locale-all.js'></script>
+
+        <!-- scheduler -->
+        <link href='.scheduler.css' rel='stylesheet' />
+
+        <!-- script-->
+        <script src='moment.js'></script>
+        <script src='jquery.js'></script>   
+        <script src='fullcalendar.js'></script>
+        <script src='scheduler.js'></script>
+
+
     </head>
     <body>
 
@@ -41,17 +77,24 @@ if ($_SESSION['login_user'] == '') {
 
 
                         <div class="panel-heading">
-                            <h3>Busqueda por Profesional</h3>
+                            <h3>Solicitud de Turno</h3>
                         </div>
 
-                        <div id="divprofesional">
-                            Seleccione profesional:
-                            <select id="cmbProfesional"></select>
+                        <div>
+                            <div id="divespecialidad">
+                                Especialidad:
+                                <select id="cmbEspecialidad"></select>
+                                
+                            </div>
+                            <div id="divprofesional">
+                                Profesional:
+                                <select id="cmbProfesional"></select>
 
+                            </div>
+                            
                             <input type="button" name="btnMostrarAgenda" id="MostrarAgenda" class="btn btn-default" style="margin-left: 09px;" value="Mostrar Agenda">
 
                         </div>
-
                         <div class="panel-heading">
                             <h3>Agenda</h3>
                         </div>
@@ -59,38 +102,12 @@ if ($_SESSION['login_user'] == '') {
                         <div id="divAgendaProf">
                             <table id="tbAgenda" class="table table-fixed" style="font-size: 11">
 
-                                <thead>
-                                <th>Horario   /   Dia</th>
-                                <th>Lunes</th>
-                                <th>Martes</th>
-                                <th>Miercoles</th>
-                                <th>Jueves</th>
-                                <th>Viernes</th>
-                                
+                                <div class="container"></div>
 
-                                </thead>
-                                
-                                <div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-       
-    </div>
-</div>
-                                <div id='calendar'></div>
                                 <tbody id="tbcuerpoAgenda">
-                                    
-                                    <!--<tr><td> 09:00 - 09:30 </td></tr><tr><td> 09:30 - 10:00 </td></tr><tr><td> 10:30 - 11:00 </td></tr><tr><td> 11:30 - 12:00 </td></tr><tr><td> 12:30 - 13:00 </td></tr><tr><td> 13:30 - 14:00 </td></tr><tr><td> 14:30 - 15:00 </td></tr><tr><td> 15:30 - 16:00 </td></tr><tr><td> 16:30 - 17:00 </td></tr><tr><td> 17:30 - 18:00 </td></tr><tr><td> 18:30 - 19:00 </td></tr>-->
-                                    
-                                    
+
+                                <div id='calendar'></div> 
+
                                 </tbody>
 
                             </table>
@@ -99,6 +116,7 @@ if ($_SESSION['login_user'] == '') {
                     </div>
                 </div>
             </form>
+
             <div class="row-md-1" align="center" style="margin-top: 10px;">
 
                 <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar Turno</a></button>
@@ -165,7 +183,6 @@ if ($_SESSION['login_user'] == '') {
                 </div>
 
             </footer>
-        </div>
 
     </body>
 </html>

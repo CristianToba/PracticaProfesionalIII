@@ -1,6 +1,7 @@
 <?php
 require_once('../Conexion/Conexion.php');
-$sql = "select matricula, nombre,apellido from persona where tipoPers=2 and Habilitado=0 and idEspecialidad= 1 order by apellido, nombre asc";
+$seleccion = $_GET['parametro'];
+$sql = "select matricula, nombre,apellido from persona where tipoPers=2 and Habilitado=0 and idEspecialidad='$seleccion' order by apellido, nombre asc";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
