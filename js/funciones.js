@@ -316,7 +316,6 @@ $(document).ready((function () {
 
         };
 
-
         app.ListarPais = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONPais.php";
@@ -368,7 +367,7 @@ $(document).ready((function () {
         };
 
         app.MostrarAgenda = function () {
-
+            
 
         };
 

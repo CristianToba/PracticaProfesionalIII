@@ -2,6 +2,7 @@
 
 require_once('../Conexion/Conexion.php');
 $valorIdProf=$_GET['idProf'];
+/*
 $sql = "SELECT T.idTurno, 
     CONVERT(VARCHAR(12),day(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),MONTH(T.fechaTurno))+'/'+CONVERT(VARCHAR(12),YEAR(T.fechaTurno)) as fechaTurno,
     T.nroTurno, C.nombreconsultorio, CL.nombre as nombreClinica,CL.direccion as direccionClinica, C.idMedico, CONVERT(VARCHAR(12),datepart(HOUR,H.HorarioInicio))+':'+CONVERT(VARCHAR(12),datepart(MINUTE,H.HorarioInicio)) as HorarioInicio,
@@ -48,6 +49,12 @@ while ($row = sqlsrv_fetch_array($stmt)) {
         'especialidadMed' => $especialidadMed, 'nombrePaciente' => $nombrePaciente, 'apellidoPaciente' => $apellidoPaciente);
         
 }
+*/
+
+
+
+
+
 
 //Creamos el JSON
 
