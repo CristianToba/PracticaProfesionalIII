@@ -20,14 +20,20 @@ if ($_SESSION['login_user'] == '') {
         <!-- custom scripts --> 
         <script type="text/javascript" src="js/script.js"></script> 
 
+
+
+
+
         <!-- bootstrap -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
         <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" >
 
         <!-- fullcalendar -->
         <link href="../js/libs/fullcalendar/fullcalendar.css" rel="stylesheet" />
+        <script src="../js/libs/fullcalendar/lib/jquery-ui.min.js"></script> 
         <link href="../js/libs/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
         <script src="../js/libs/fullcalendar/lib/moment.min.js"></script>
+        <script type="text/javascript" src="../js/libs/fullcalendar/fullcalendar.min.js"> </script>
         <script src="fullcalendar.js"></script>
         <!-- jquery -->
         <script src="../css/jquery.min.js"></script>
@@ -79,6 +85,7 @@ if ($_SESSION['login_user'] == '') {
                             <h3>Solicitud de Turno</h3>
                         </div>
 
+                        
                         <div align="left" style="margin-top: 10px;">
                             <div id="divespecialidad" style="margin-top: 10px;">
                                 <h4>Especialidad: </h4>
@@ -91,12 +98,9 @@ if ($_SESSION['login_user'] == '') {
 
                             </div>
 
-                            <div id="divFechaRango" style="margin-top: 10px;">
-                                <h4>Fecha Desde: </h4> <input  type="date" id ="fechaDesde">
-                                <h4>Fecha Hasta: </h4> <input  type="date" id ="fechaHasta">
+                           
 
-                            </div>
-
+                            
                             <div align="left" style="margin-top: 10px;">
                                 <input type="button" name="btnMostrarTurnosLibres" id="MostrarTurnosLibres" class="btn btn-default" style="margin-left: 09px;" value="Aceptar ">
                             </div>
@@ -107,26 +111,28 @@ if ($_SESSION['login_user'] == '') {
                             </h4>
                         </div>
                         <div id="divAgenda"></div>
-
-                        <table id="tbAgenda" class="table" table class="table table-fixed" style="font-size: 11">
-                            <thead>
-                                <tr>
-                                    <th hidden=''> idAgenda </th>
-                                    <th>Descripcion</th>
-                                    <th>Horario Turno</th>
-                                    <th>DNI Afiliado</th>
-                                    <th>Nombre Afiliado</th>
-                                    <th>Apellido Afiliado</th>
-                                    <th>Estado</th>
-                                    <th>Seleccionar</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="tbcuerpoTurno"></tbody>
-
-                        </table>
+                        <!--
+                                                <table id="tbAgenda" class="table" table class="table table-fixed" style="font-size: 11">
+                                                    <thead>
+                                                        <tr>
+                                                            <th hidden=''> idAgenda </th>
+                                                            <th>Descripcion</th>
+                                                            <th>Horario Turno</th>
+                                                            <th>Fecha Turno</th>                                    
+                                                            <th hidden=''>DNI Afiliado</th>
+                                                            <th hidden=''>Nombre Afiliado</th>
+                                                            <th hidden="">Apellido Afiliado</th>
+                                                            <th>Estado</th>
+                                                            <th>Seleccionar</th>
+                        
+                                                        </tr>
+                        
+                                                    </thead>
+                        
+                                                    <tbody id="tbcuerpoTurno"></tbody>
+                        
+                                                </table>
+                        -->
 
 
                     </div>

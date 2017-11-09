@@ -278,8 +278,8 @@ $(document).ready((function () {
         };
 
         $("#cmbEspecialidad").change(function () {
-                                                
-            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php?parametro="+$("#cmbEspecialidad").val();
+            $('#divAgenda').fullCalendar('removeEvents');
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONProfesional.php?parametro=" + $("#cmbEspecialidad").val();
 
             divProf = $('#divprofesional select');
             $.ajax({
@@ -293,6 +293,9 @@ $(document).ready((function () {
                 success: function (datosRecibidos) {
                     divProf.html('');
                     app.rellenarComboProf(datosRecibidos);
+
+
+
                 },
                 error: function () {
 
@@ -301,10 +304,123 @@ $(document).ready((function () {
             });
         });
 
+        $("#cmbProfesional").change(function () {
+            var divFecha = $('#divFechaRango');
+            var cuerpoFecha;
+            cuerpoFecha = "<h4>Fecha Desde: </h4> <input  type='date' id ='fechaDesde'>";
+            cuerpoFecha += "<h4>Fecha Desde: </h4> <input  type='date' id ='fechahasta'>";
+            divFecha.append(cuerpoFecha);
+
+        });
+
+        $("#MostrarTurnosLibres").click(function () {
+            $('#divAgenda').fullCalendar("refetchEvents");
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            var esp = $('#cmbEspecialidad').val();
+            var prof = $('#cmbProfesional').val();
+
+            var calendar = $('#divAgenda').fullCalendar({
+                //configure options for the calendar 
+
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                eventRender: function(event, element) {
+            element.attr('title', event.tip);
+        },
+                dayClick: function (date, jsEvent, view) {
+
+                    alert('Clicked on: ' + date.format());
+
+                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+                    alert('Current view: ' + view.name);
+
+                    // change the day's background color just for fun
+                    $(this).add("asdasd");
+
+                },
+                    
+                events: {
+                    url: "http://localhost/PracticaProfesionalIII/js/reservas.php?esp=" + esp + " & prof=" + prof + "",
+                    allDay: false
+
+
+
+                },
+                buttonText: {
+                    today: 'Hoy',
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Dia'
+                },
+                editable: false,
+                defaultView: 'month',
+                allDaySlot: false,
+                titleFormat: 'MMMM',
+                timeFormat: 'HH:mm.a',
+                slotDuration: '00:30:00',
+                slotEventOverlap: false,
+                hiddenDays: [0, 6],
+                views: {
+                    month: {
+                        // Monday, Wednesday, etc 
+
+                        week: 'ddd D',
+                        day: 'dddd D' // Monday 9/7 
+
+
+                    }
+
+                },
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sbado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+                minTime: "08:00",
+                maxTime: '20:00',
+                contentHeight: 525
+
+            });
+
+        });
+
+
+        app.rellenarTablaTurnos = function (datosRecibidos) {
+
+            var cuerpo = "";
+
+            var tbListadoTurno = $('#tbcuerpoTurno');
+            tbListadoTurno.html('');
+
+            for (var i = 0; i < datosRecibidos.length; i++) {
+
+                if (datosRecibidos[i].Habilitado == 1) {
+                    $estadoTurno = 'false';
+
+                } else {
+
+                    $estadoTurno = 'true';
+                }
+
+                cuerpo += "<tr><td  hidden=''>" + datosRecibidos[i].idAgenda + "</td><td>" + datosRecibidos[i].Descripcion + "</td><td>" + datosRecibidos[i].horarioI + "</td><td>" + datosRecibidos[i].dniPaciente + "</td><td>" + datosRecibidos[i].nombrePaciente + "</td><td>" + $estadoPais + "<td><a href='../Funciones/ValidarOpcion.php?parametro=2&codPais=" + datosRecibidos[i].Codigo + "&txtPais=" + datosRecibidos[i].Descripcion + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=1&codPais=" + datosRecibidos[i].Codigo + "&txtPais=" + datosRecibidos[i].Descripcion + "&estadoPais=" + $estadoPais + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
+            }
+
+            tbListadoTurno.append(cuerpo);
+
+        };
+
         app.rellenarComboProf = function (datosRecibidos) {
             var cuerpo = "<option value=0 > Seleccione una valor </option>";
-            
+
             var comboProfesional = $('#cmbProfesional');
+
+
 
             for (var i = 0; i < datosRecibidos.length; i++) {
 
@@ -312,7 +428,9 @@ $(document).ready((function () {
 
             }
 
+
             comboProfesional.append(cuerpo);
+
 
         };
 
@@ -366,10 +484,9 @@ $(document).ready((function () {
 
         };
 
-        app.MostrarAgenda = function () {
-            
 
-        };
+
+
 
         app.init();
 

@@ -1,9 +1,8 @@
 <?php
 
 require_once('../Conexion/Conexion.php');
-$sql = "SELECT idhorarios, descripcion, CONVERT(VARCHAR(12),datepart(hour,HorarioInicio))+':'+CONVERT(VARCHAR(12),
-datepart(minute,HorarioInicio))+' HS' as HorarioI,CONVERT(VARCHAR(12),datepart(hour,HorarioFin))+':'+
-CONVERT(VARCHAR(12),datepart(minute,HorarioFin))+' HS' as HorarioF, Habilitado FROM Horarios ";
+$sql = "SELECT idhorarios, descripcion, CONVERT(char(19),start,108) as HorarioI, CONVERT(char(19),[end],108) as HorarioF, Habilitado FROM Horarios 
+";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
