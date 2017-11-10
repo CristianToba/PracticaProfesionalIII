@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
+
 ?>
 
 <html>
@@ -19,10 +20,6 @@ if ($_SESSION['login_user'] == '') {
 
         <!-- custom scripts --> 
         <script type="text/javascript" src="js/script.js"></script> 
-
-
-
-
 
         <!-- bootstrap -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
@@ -98,9 +95,6 @@ if ($_SESSION['login_user'] == '') {
 
                             </div>
 
-                           
-
-                            
                             <div align="left" style="margin-top: 10px;">
                                 <input type="button" name="btnMostrarTurnosLibres" id="MostrarTurnosLibres" class="btn btn-default" style="margin-left: 09px;" value="Aceptar ">
                             </div>

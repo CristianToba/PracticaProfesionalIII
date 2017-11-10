@@ -12,6 +12,7 @@ $(document).ready((function () {
             app.comboEspecialidad();
             app.comboProfesional();
             app.ListarPais();
+            
             //app.MostrarAgenda();
 
         };
@@ -294,8 +295,6 @@ $(document).ready((function () {
                     divProf.html('');
                     app.rellenarComboProf(datosRecibidos);
 
-
-
                 },
                 error: function () {
 
@@ -322,7 +321,7 @@ $(document).ready((function () {
             var esp = $('#cmbEspecialidad').val();
             var prof = $('#cmbProfesional').val();
 
-            var calendar = $('#divAgenda').fullCalendar({
+            $('#divAgenda').fullCalendar({
                 //configure options for the calendar 
 
                 header: {
@@ -330,36 +329,50 @@ $(document).ready((function () {
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                eventRender: function(event, element) {
-            element.attr('title', event.tip);
-        },
-                dayClick: function (date, jsEvent, view) {
-
-                    alert('Clicked on: ' + date.format());
-
-                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-                    alert('Current view: ' + view.name);
-
-                    // change the day's background color just for fun
-                    $(this).add("asdasd");
-
-                },
-                    
                 events: {
                     url: "http://localhost/PracticaProfesionalIII/js/reservas.php?esp=" + esp + " & prof=" + prof + "",
                     allDay: false
 
+                },
+                dayClick: function (date, allDay, jsEvent, view) {
+                    var fecha = new Date();
+                    var esp = $('#cmbEspecialidad').val();
+                    var prof = $('#cmbProfesional').val();
+                    if (date < fecha) {
+                        //TRUE Clicked date smaller than today + daysToadd
+                        alert("No se puede seleccionar un dia pasado");
+                    }
+                    else
+                    {
+                        //FLASE Clicked date larger than today + daysToadd
+                        alert(date.format());
+                        document.location.href = "http://localhost/PracticaProfesionalIII/GestorEventos/addEvent.php?fecha=" + date.format() + " & esp=" + esp + " & prof=" + prof + "";
+                    }
 
 
                 },
+                /*       dayClick: function (date, view) {
+                 
+                 alert('Current view: ');
+                 alert('Clicked on: ' + date.format());
+                 alert('Persona: ' + date.format());
+                 alert('Profesional: ' + date.format());
+                 alert('Current view: ' + view.name);
+                 
+                 // change the day's background color just for fun
+                 
+                 url: "http://localhost/PracticaProfesionalIII/js/reservas.php",
+                 window.open(event.url);
+                 return false;
+                 
+                 },*/
                 buttonText: {
                     today: 'Hoy',
                     month: 'Mes',
                     week: 'Semana',
                     day: 'Dia'
                 },
-                editable: false,
+                editable: true,
                 defaultView: 'month',
                 allDaySlot: false,
                 titleFormat: 'MMMM',
