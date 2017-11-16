@@ -2,7 +2,7 @@
 
 $(document).ready((function () {
     var PracticaProfIII = {};
-
+var seleccion = new Date();
     (function (app) {
 
         app.init = function () {
@@ -17,7 +17,7 @@ $(document).ready((function () {
 
         };
 
-        $("#MostrarAgenda").click(function () {
+      /**  $("#MostrarAgenda").click(function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
             var consola = $('#divAgendaProf');
@@ -67,8 +67,8 @@ $(document).ready((function () {
 
                 }
             });
-        });
-
+        }); */
+        
         app.rellenarTablaAgenda = function (datosRecibidos) {
 
             var cuerpoAgenda = "";
@@ -338,34 +338,23 @@ $(document).ready((function () {
                     var fecha = new Date();
                     var esp = $('#cmbEspecialidad').val();
                     var prof = $('#cmbProfesional').val();
+                    
+                    seleccion = date.format("DD/MM/YYYY");
+                    
                     if (date < fecha) {
                         //TRUE Clicked date smaller than today + daysToadd
                         alert("No se puede seleccionar un dia pasado");
                     }
                     else
                     {
-                        //FLASE Clicked date larger than today + daysToadd
-                        alert(date.format());
-                        document.location.href = "http://localhost/PracticaProfesionalIII/GestorEventos/addEvent.php?fecha=" + date.format() + " & esp=" + esp + " & prof=" + prof + "";
+                        //FLASE Clicked date larger than today + daysToadd          
+                        
+                        document.location.href = "http://localhost/PracticaProfesionalIII/GestorEventos/addEvent.php?afiliado="+1+"& fecha=" + seleccion+ " & esp=" + esp + " & prof=" + prof +"";
+                         
                     }
 
-
                 },
-                /*       dayClick: function (date, view) {
-                 
-                 alert('Current view: ');
-                 alert('Clicked on: ' + date.format());
-                 alert('Persona: ' + date.format());
-                 alert('Profesional: ' + date.format());
-                 alert('Current view: ' + view.name);
-                 
-                 // change the day's background color just for fun
-                 
-                 url: "http://localhost/PracticaProfesionalIII/js/reservas.php",
-                 window.open(event.url);
-                 return false;
-                 
-                 },*/
+             
                 buttonText: {
                     today: 'Hoy',
                     month: 'Mes',
@@ -403,6 +392,34 @@ $(document).ready((function () {
 
         });
 
+        $("#MostrarHorariosLibres").click(function () {
+            var parametroF= $("#fecha").val();
+            alert("asd"+parametroF);
+            
+             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?parametroF=" + parametroF;
+
+            divparametroH = $('#divHorario');
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+
+                    divparametroH.html('Espere por favor...');
+                },
+                success: function (datosRecibidos) {
+                    divparametroH.html("");
+                    app.rellenarComboHorario(datosRecibidos);
+
+                },
+                error: function () {
+
+                    alert('Ha surgido un error Horarios');
+                }
+            });
+            
+        });
+
 
         app.rellenarTablaTurnos = function (datosRecibidos) {
 
@@ -433,8 +450,6 @@ $(document).ready((function () {
 
             var comboProfesional = $('#cmbProfesional');
 
-
-
             for (var i = 0; i < datosRecibidos.length; i++) {
 
                 cuerpo += "<option value=" + datosRecibidos[i].Matricula + ">" + datosRecibidos[i].Nombre + ', ' + datosRecibidos[i].Apellido + "</option>";
@@ -447,6 +462,46 @@ $(document).ready((function () {
 
         };
 
+         app.ListarHorario = function (fecha) {
+
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?fecha="+fecha+"";
+            
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                beforeSend: function () {
+                    
+                },
+                success: function (datosRecibidos) {
+                    
+                    app.rellenarComboHorario(datosRecibidos);
+                },
+                error: function () {
+
+                    alert('Ha surgido un error Horarios');
+                }
+            });
+
+
+        };
+
+         app.rellenarComboHorario = function (datosRecibidos) {
+             
+            var cuerpo = "<select id='cmbHorario'><option value=0> Seleccione una valor </option>";
+            var comboHorario = $('#divHorario');
+            
+            for (var i = 0; i < datosRecibidos.length; i++) {
+
+                cuerpo +="<option value=" + datosRecibidos[i].id + ">" + datosRecibidos[i].hora +"</option>";
+                
+            }
+            cuerpo+="</select>";
+            
+            comboHorario.append(cuerpo);
+            
+        };
+        
         app.ListarPais = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONPais.php";
@@ -497,14 +552,34 @@ $(document).ready((function () {
 
         };
 
+        $("#generarTurno").click(function () {
+               
+             var parametroNA=  $('#txtNombreAfiliado').val();         
+             var parametroAA=  $('#txtApellidoAfiliado').val();         
+             var parametroNP=  $('#profesional').val();         
+             var parametroAP=  $('#txtApellidoProfesional').val();         
+             var parametroE=  $('#especialidad').val();         
+             var parametroF=  $('#fecha').val();      
+             var parametroMP = $("#matricula").val();
+             var parametroH=  $("#cmbHorario").val();   
 
+             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAltaTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
+                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "";
 
-
-
+            $.ajax({
+                url: url,
+                
+                type: "POST",
+                dataType: "JSON"              
+               
+                
+            });
+             document.location.href = "http://localhost/PracticaProfesionalIII/pdf/generarTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
+                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "";
+        });
+        
         app.init();
 
     })(PracticaProfIII);
-
-
 
 }));

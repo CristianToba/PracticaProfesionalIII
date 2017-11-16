@@ -6,10 +6,6 @@ $conectar = new Conexion();
 $link = $conectar->Conectarse();
 $parametro = $_GET['valor'];
 
-
-$alta = "2016-12-06 00:00:00";
-
-
 //Consulta si el registro se desea , Insertar(0), Modificar(1)o Eliminar(2)
 //Insertar Registro
 if ($parametro == 0) {
@@ -23,7 +19,7 @@ if ($parametro == 0) {
         $numero = ObtenerMaxHorario();
 
         ## Consulta para insertar el nuevo registro con el ultimo codigo de horario mas uno
-        $sql_Consulta = "INSERT INTO Horarios(HorarioInicio, HorarioFin, alta, baja, Habilitado, usuarioAuditoria, descripcion) VALUES ('$horaInicio','$horaFin','$alta','',0,'','$descNuevoHorario')";
+        $sql_Consulta = "INSERT INTO Horarios(start, [end], alta, baja, Habilitado, usuarioAuditoria, descripcion) VALUES ('$horaInicio','$horaFin',GETDATE() ,'',0,'','$descNuevoHorario')";
 
         $stmt = sqlsrv_query($link, $sql_Consulta);
         if ($stmt === false) {

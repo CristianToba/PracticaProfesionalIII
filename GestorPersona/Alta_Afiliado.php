@@ -33,13 +33,13 @@ if ($_SESSION['login_user'] == '') {
                     <label for="apellido" class="col-lg-2 control-label">Apellido: </label>
                     <input type ="text" name="txtApellido" class="form-control" onKeyPress="return ValidaCadena(event)" size="MAXLENGTH=30" id="apellido" placeholder="Ingrese su apellido" required >
                 </div>
-                
+
                 <div class="col-md-6" style="margin-top: 10px;">
                     <label for="clave" class="col-lg-2 control-label">Password: </label>
                     <input type ="text" name="txtClave" class="form-control"  size="MAXLENGTH=30" id="clave" placeholder="Ingrese su clave" required >
                 </div>
-                
-               <div class="col-md-6" style="margin-top: 10px;">
+
+                <div class="col-md-6" style="margin-top: 10px;">
                     <label for="habilitado" class="col-lg-2 control-label">Estado:</label>
                     <input checked name="habilitado" type="radio" value='true'>
                     Habilitado
@@ -188,7 +188,7 @@ if ($_SESSION['login_user'] == '') {
                 <div class="col-md-10" style="margin-top: 10px;">
                     <input type="submit" class="btn btn-default" value= "Registrar" style="margin-top: 10px;">
                     <input type="reset" value="Borrar" class="btn btn-danger" style="margin-top: 10px;">
-                     <input type="button" value="Salir" onclick = "location = '../Vista/AdministrarAfiliado.php'" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
+                    <input type="button" value="Salir" onclick = "location = '../Vista/AdministrarAfiliado.php'" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
                 </div>
         </FORM>
     </div>
@@ -198,3 +198,7 @@ if ($_SESSION['login_user'] == '') {
 </div>
 </body>
 </html>
+
+
+
+

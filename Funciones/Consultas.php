@@ -2,11 +2,11 @@
 <?php
 
 if (isset($POST['funcion']) && isset($POST['direccion'])) {
-    
+
     $action = $_GET['funcion'];
     $codDireccion = $_GET['direccion'];
     if ($action == 'dir') {
-        $domicilio=ObtenerDireccion($codDireccion);
+        $domicilio = ObtenerDireccion($codDireccion);
         echo $domicilio;
     } else {
         echo"hola" + $action;
@@ -36,7 +36,7 @@ function ListarPaises() {
 function ObtenerDireccion($codDireccion) {
 
     $sql = "SELECT calle+' '+cast(numero as varchar(6)) as direccion FROM DIRECCION WHERE idDireccion='$codDireccion'";
-    
+
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -44,7 +44,7 @@ function ObtenerDireccion($codDireccion) {
     $row = sqlsrv_fetch_array($res_Consulta);
     $direccion = $row['direccion'];
     sqlsrv_close($conn);
-    
+
     echo $direccion;
 }
 
@@ -418,6 +418,61 @@ function mostrarHab($hab) {
     }
 
     return $mostrar;
+}
+
+function BuscarDatosParaTurno($afiliado, $especialidad, $profesional) {
+    require_once('../Conexion/Conexion.php');
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $sqlA = "SELECT A.NOMBRE as nombre,A.APELLIDO as apellido,A.DNI as dni FROM Persona AS A WHERE A.nroPersona= '$afiliado'";
+    $sqlP = "SELECT P.nombre as nombreP, P.apellido as apellidoP, E.especialidad FROM Persona AS P INNER JOIN Especialidad AS E ON 
+E.idEspecialidad=P.idEspecialidad  WHERE P.matricula= '$profesional' AND E.idEspecialidad= '$especialidad' ";
+    
+
+    $stmtA = sqlsrv_query($conn, $sqlA);
+    $stmtP = sqlsrv_query($conn, $sqlP);
+    
+    $arr = array();
+    
+    while ($row = sqlsrv_fetch_array($stmtA)) {
+
+        $nombreA = $row['nombre'];
+        $apellidoA = $row['apellido'];
+        $dniA = $row['dni'];
+        
+        while ($rowP = sqlsrv_fetch_array($stmtP)) {
+            $nombreP = $rowP['nombreP'];
+            $apellidoP = $rowP['apellidoP'];
+            $especialidad = $rowP['especialidad'];
+            
+                
+                $arr[] = array('nombreA' => $nombreA, 'apellidoA' => $apellidoA, 'dniA' => $dniA, 'nombreP' => $nombreP, 'apellidoP' => $apellidoP, 'especialidad' => $especialidad);
+            
+        }
+        
+    }
+    return $arr;
+}
+
+function mostrarFechasDisponibles($fecha) {
+    require_once('../Conexion/Conexion.php');
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    $sqlF = "SELECT H.idhorarios as id, CONVERT(char(19), H.start,108) as start FROM Horarios AS H WHERE not exists (SELECT * FROM Turno AS T WHERE T.idHorario=H.idhorarios AND CONVERT(char(17),T.start,103)='$fecha')";
+    $stmtF = sqlsrv_query($conn, $sqlF);
+    $arr = array();
+    $parametro = "<option value=0> Seleccione una valor </option>";
+   while( $row = sqlsrv_fetch_array( $stmtF, SQLSRV_FETCH_ASSOC) ) {
+       $parametro= "<option value=" + $row['id'] + ">" + $row['start'] +"</option>";
+       $arr[] = array('fecha'=>$parametro);
+}
+      echo var_dump($arr);
+ 
+    
+    return $cuerpo;
 }
 
 ?>
