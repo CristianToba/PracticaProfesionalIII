@@ -18,46 +18,44 @@ if ($_SESSION['login_user'] == '') {
     <body>
         <?php
         $nroDoc = $_GET['dniPersona'];
-
         include_once("../Funciones/Consultas.php");
         //$afiliado = ObtenerPersona($nroDoc);
         require_once('../Conexion/Conexion.php');
-        $sql = "SELECT * FROM PERSONA AS A INNER JOIN DIRECCION AS B ON A.IDPERSDIREC=B.IDDIRECCION INNER JOIN LOCALIDAD AS C ON B.IDLOCALIDAD=C.CODIGOlOCALIDAD INNER JOIN PROVINCIA AS D ON C.idProvincia=D.codigoProvincia where dni='$nroDoc' ";
+        $sql = "SELECT CONVERT(VARCHAR(12),day(fechaNac))+'/'+CONVERT(VARCHAR(12),MONTH(fechaNac))+'/'+CONVERT(VARCHAR(12),YEAR(fechaNac)) as fechaNac,* FROM PERSONA AS A INNER JOIN DIRECCION AS B ON A.IDPERSDIREC=B.IDDIRECCION INNER JOIN LOCALIDAD AS C ON B.IDLOCALIDAD=C.CODIGOlOCALIDAD INNER JOIN PROVINCIA AS D ON C.idProvincia=D.codigoProvincia where dni='$nroDoc' ";
         $serverName = "(local)";
         $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
         $stmt = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($stmt)) {
-            $nombre = $row[2];
-            $apellido = $row[3];
-            $email = $row[4];
-            $fNac = $row[5];
-            $sexo = $row[6];
-            $nacionalidad = $row[7];
-            $estCivil = $row[8];
-            $direccion = $row[31];
-            $numeroDirec = $row[32];
-            $departamente = $row[33];
-            $pisoDir = $row[34];
-            $codPostDir = $row[35];
-            $localidadDir = $row[38];
-            $provinciaDir = $row[45];
-            $cantHijo = $row[15];
-            $ocupacionAfiliado = $row[16];
-            $religionAfiliado = $row[17];
-            $hobbieAfiliado = $row[18];
-            $tipoAfiliado = $row[23];
-            $tipoDoc = $row[24];
-            $Fijo = $row[25];
-            $Urgencia = $row[26];
-            $Movil = $row[27];
-            $oSocAfiliado = $row[28];
-            $sangre = $row[29];
-            $fechamod = date("Ymd H:i", time() - 14400);
-            $clave = $row[10];
-            $habilitado = $row[13];
+            $nombre = $row[3];
+            $apellido = $row[4];
+            $email = $row[5];
+            $fNac = $row[0];
+            $sexo = $row[7];
+            $nacionalidad = $row[8];
+            $estCivil = $row[9];
+            $direccion = $row[32];
+            $numeroDirec = $row[33];
+            $departamente = $row[34];
+            $pisoDir = $row[35];
+            $codPostDir = $row[36];
+            $localidadDir = $row[39];
+            $provinciaDir = $row[46];
+            $cantHijo = $row[16];
+            $ocupacionAfiliado = $row[17];
+            $dni = $row[2];
+            $hobbieAfiliado = $row[19];
+            $tipoAfiliado = $row[24];
+            $tipoDoc = $row[25];
+            $Fijo = $row[26];
+            $Urgencia = $row[27];
+            $Movil = $row[28];
+            $oSocAfiliado = $row[29];
+            $sangre = $row[30];
             
-            
+//$fechamod = date("Ymd H:i", time() - 14400);
+            $clave = $row[11];
+            $habilitado = $row[14];
             
         }
         
@@ -76,6 +74,7 @@ if ($_SESSION['login_user'] == '') {
                         <input type ="text" name="txtApellido" class="form-control" onKeyPress="return ValidaCadena(event)" size="MAXLENGTH=30" id="apellido" value="<?php echo $apellido; ?>" placeholder="Ingrese su apellido" required >
                     </div>
 
+                    
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="Tipo" class="col-lg-2 control-label" >Tipo/Nro: </label>
                         <select Name=TipoDoc  class="form-control">
@@ -164,25 +163,18 @@ if ($_SESSION['login_user'] == '') {
 
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="Fecha de Nacimiento" class="col-lg-2 control-label" style="margin-top: 10px;">Fecha Nac.: </label>
-                        <INPUT TYPE="date" NAME="fechaNac" value="<?php fechaNac ?>" class="form-control" ID="fechaNacimiento" required >
-
-
+                        <INPUT TYPE="date" NAME="fechaNac" value="<?php echo date('Y-d-m',strtotime($fNac )); ?>" class="form-control" ID="fechaNacimiento" required >
                     </div>
-
 
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="GrupoSanguineo" class="col-lg-2 control-label" style="margin-top: 10px;">Grupo Sanguineo: </label>
                         <select Name="GrpSan" class="form-control" >
-                            <?php echo $GSangre = mostrarGSan($sangre);
-                            ?>
+                            <?php echo $GSangre = mostrarGSan($sangre); ?>
 
                         </select>
 
                     </div>
-                    <div class="col-md-6" style="margin-top: 10px;">
-                        <label for="Religion" class="col-lg-2 control-label">Religion: </label>
-                        <INPUT type="text" NAME="Religion"  ID="Religion" Size=40 value="<?php echo $religionAfiliado; ?>"class="form-control" placeholder="Ingrese religion" required >
-                    </div>
+                    
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="Hobbie" class="col-lg-2 control-label">Hobbie: </label>
                         <INPUT type="text" NAME="Hobbie"  ID="Hobbie" value="<?php echo $hobbieAfiliado; ?>" Size=40 class="form-control" placeholder="Ingrese Hobbie" required >

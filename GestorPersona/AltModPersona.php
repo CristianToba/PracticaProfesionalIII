@@ -33,13 +33,13 @@ $grpSan = $_POST['GrpSan'];
 $fechamod = date("Ymd H:i", time() - 14400);
 $clave = $_POST['txtClave'];
 $habilitado = $_POST['habilitado'];
-$dpto = $_POST['dpto'];
+
 
 
 //Alta Modificacion Afiliado
 if ($tipo == 1) {
-
-    $religionAfiliado = $_POST['Religion'];
+    //$dpto = $_POST['dpto']; 
+    //$religionAfiliado = $_POST['Religion'];
     $hobbieAfiliado = $_POST['Hobbie'];
     $ocupacionAfiliado = $_POST['Ocupacion'];
     $oSocAfiliado = $_POST['ObraSocial'];
@@ -97,7 +97,7 @@ if ($tipo == 1) {
 
             include("../Funciones/Consultas.php");
             ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
-            $sql_Consulta = "UPDATE PERSONA SET dni='$nroDoc',nombre='$nombre',apellido='$apellido',mail='$email',fechaNac='$fNac',sexo='$sexo',nacionalidad='$nacionalidad',estadoCivil='$estCivil',clave='$clave',habilitado='$habilitado',cantHijos='$cantHijo',ocupacion='$ocupacionAfiliado',religion='$religionAfiliado', hobbie='$hobbieAfiliado',tipoDni='$tipoDoc',telFijo='$telFijo',telUrgencia='$telUrg',celular='$telMovil',obraSocial='$oSocAfiliado',tipoSangre='$sangre' where dni='$nroDoc'";
+            $sql_Consulta = "UPDATE PERSONA SET dni='$nroDoc',nombre='$nombre',apellido='$apellido',mail='$email',fechaNac='$fNac',sexo='$sexo',nacionalidad='$nacionalidad',estadoCivil='$estCivil',clave='$clave',habilitado='$habilitado',cantHijos='$cantHijo',ocupacion='$ocupacionAfiliado', hobbie='$hobbieAfiliado',tipoDni='$tipoDoc',telFijo='$telFijo',telUrgencia='$telUrg',celular='$telMovil',obraSocial='$oSocAfiliado',tipoSangre='$sangre' where dni='$nroDoc'";
 
             $stmt = sqlsrv_query($link, $sql_Consulta);
             if ($stmt === false) {

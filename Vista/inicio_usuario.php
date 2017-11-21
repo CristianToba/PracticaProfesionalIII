@@ -47,7 +47,7 @@ if ($_SESSION['login_user'] == '') {
                             <li class="divider" ></li>
 
 
-                            <li><a href="../pdf/ListarHorarios.php">Listar Horarios</a></li>
+                            <li><a target="_blank" href="../pdf/ListarHorarios.php">Listar Horarios</a></li>
                             <!--<li><a href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
                             <li><a href="#">Listar Turnos Solicitados</a></li>
                                 <li><a href="#">Listar Clinicas</a></li>

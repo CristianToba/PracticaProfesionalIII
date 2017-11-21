@@ -3,7 +3,7 @@ require_once('../Conexion/Conexion.php');
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-
+    
     $nombreA = $_GET['parametroNA'];
     $apellidoA = $_GET['parametroAA'];
     $nombreP = $_GET['parametroNP'];
@@ -13,6 +13,7 @@ require_once('../Conexion/Conexion.php');
     $horario = $_GET['parametroH'];
     $matricula = $_GET['parametroMP'];
     $title = $apellidoP.', '.$nombreP;
+     
     
      try {
 

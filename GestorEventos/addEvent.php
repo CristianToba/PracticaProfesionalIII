@@ -92,15 +92,18 @@ foreach ($lista as $valor) {
                     <div class='panel-body' >
                         <div class='form-group' >
                             <label class='col-lg-1 control-label' name='nombre'>Afiliado: </label>
+                            <div>   
+                                <INPUT TYPE ='text' NAME='txtIdAfiliado' class='form-control'  onKeyPress='return ValidaCadena(event)' SIZE='MAXLENGTH=30' ID='txtIdAfiliado'  style='display:none''; disabled value =";
+                                       echo $parametroA;  echo ">
+                            </div> 
                             <div class='col-lg-4'>                                              
                                 <INPUT TYPE ='text' NAME='txtNombreAfiliado' class='form-control'  onKeyPress='return ValidaCadena(event)' SIZE='MAXLENGTH=30' ID='txtNombreAfiliado' disabled value =";
-                                       echo $valor['nombreA'];
+                                       echo $valor['apellidoA'];
                                        echo " > 
                             </div>
                             <div class='col-lg-4'>   
                                 <INPUT TYPE ='text' NAME='txtApellidoAfiliado' class='form-control'  onKeyPress='return ValidaCadena(event)' SIZE='MAXLENGTH=30' ID='txtApellidoAfiliado' disabled value =";
-                                       echo $valor['apellidoA'];
-
+                                       echo $valor['nombreA'];
                                        echo ">
                             </div>
                         </div>

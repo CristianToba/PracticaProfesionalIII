@@ -553,7 +553,7 @@ var seleccion = new Date();
         };
 
         $("#generarTurno").click(function () {
-               
+             var parametroIA=  $("#txtIdAfiliado").val();    
              var parametroNA=  $('#txtNombreAfiliado').val();         
              var parametroAA=  $('#txtApellidoAfiliado').val();         
              var parametroNP=  $('#profesional').val();         
@@ -574,11 +574,18 @@ var seleccion = new Date();
                
                 
             });
-             document.location.href = "http://localhost/PracticaProfesionalIII/pdf/generarTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
-                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "";
+            finestraSecundaria("http://localhost/PracticaProfesionalIII/pdf/generarTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
+                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "& parametroIA = " + parametroIA+"");
+          document.location.href = "http://localhost/PracticaProfesionalIII/Vista/AdministrarTurno.php";
         });
         
+        
+        function finestraSecundaria (url){
+                window.open(url, "Turno Generado", "width=300, height=200");
+}
         app.init();
+        
+        
 
     })(PracticaProfIII);
 
