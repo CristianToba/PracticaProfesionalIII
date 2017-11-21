@@ -15,6 +15,7 @@ if ($_SESSION['login_user'] == '') {
         <script src="../Funciones/Funciones.php"></script>
         <script src="../Conexion/Conexion.php"></script>
         <script src="../Funciones/Validaciones.js"></script>
+	<script src="../Funciones/Session.php"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
