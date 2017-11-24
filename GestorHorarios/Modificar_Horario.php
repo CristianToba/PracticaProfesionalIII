@@ -1,10 +1,14 @@
 
 <?php
 session_start();
-
+include_once("../Funciones/Consultas.php");
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
+
+        $CodHorario = $_GET['codigoHorario'];
+        $DescHorario = $_GET['DescHorario'];
+        $estadoHorario = $_GET['estado'];
 ?>
 <html>
     <head>
@@ -17,15 +21,10 @@ if ($_SESSION['login_user'] == '') {
 
     </head>
     <body>
-        <?php
-        include_once("../Funciones/Consultas.php");
-        $CodHorario = $_GET['codigoHorario'];
-        $DescHorario = $_GET['DescHorario'];
-        $estadoHorario = $_GET['estado'];
-        ?>
+    
         <div class="panel panel-primary">
             <div class="panel-heading"> <b>Modificar Pais</b> </div>
-            <FORM name ="formulario" method="POST" action = "../GestorHorarios/AltModHorario.php?valor=1&accion=1" class="form-inline">
+            <form name ="formulario" method="POST" action = "../GestorHorarios/AltModHorario.php?valor=1" class="form-inline"
                 <div class="panel-body">
                     
                         <div>
@@ -42,16 +41,17 @@ if ($_SESSION['login_user'] == '') {
 
 
                         </div>
+                    </div>
 
                         <div class="row-md-2" align="center" style="margin-top: 10px;">
 
                             <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
+<input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/AdministrarHorarios.php" class="btn btn-danger" style="margin-top: 10px;"> 
 
-                            <button class="btn btn-danger" style="margin-left: 10px;"><a href="../Vista/AdministrarHorarios.php">Volver Menu</a></button>
 
                         </div>
-                    </div>
-            </form>
+</form>                                                
+            
 
         </div>
 

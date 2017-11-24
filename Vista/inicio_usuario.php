@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
+
+
 ?>
 <html>
     <head>
@@ -33,12 +35,12 @@ if ($_SESSION['login_user'] == '') {
                     <li><p class="navbar-text">ReserveYa!!</p></li>
                     <li class="active"><a href="#">AFILIADO</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reserva de Turno <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrar Turno <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="bg-success"> <a>Turno</a>
                             <li class="divider"></li>
                             <li><a href="../Vista/AdministrarTurno.php"> Solicitar Turno</a></li>
-                            <li><a href="../GestorTurno/Baja_Turno.html"> Baja de Turno</a></li>
+                            <li><a href="../GestorTurno/BajaTurno.php"> Baja de Turno</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

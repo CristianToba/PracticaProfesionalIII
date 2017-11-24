@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
+echo $_SESSION['login_user'];
 ?>
 <html>
     <head>
@@ -49,8 +50,8 @@ if ($_SESSION['login_user'] == '') {
                             <li class="bg-info"> <a>Listados</a>
                             <li class="divider" ></li>
 
-                            <li><a href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
-                            <li><a href="../pdf/ListarHorarios.php">Listar Horarios</a></li>
+                            <li><a target="_blank"  href="../pdf/ListadoAfiliados.php">Listar Afiliados</a></li>
+                            <li><a target="_blank" href="../pdf/ListarHorarios.php">Listar Horarios</a></li>
                             <!--<li><a href="#">Listar Turnos</a></li>
                             <li><a href="#">Listar Clinicas</a></li>
                             <li><a href="#">Listar Empleados</a></li>
@@ -61,22 +62,6 @@ if ($_SESSION['login_user'] == '') {
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Parametros<span class="caret"></span></a>
 
-                    <!--
-                    <li class="dropdown">
-                    <li class="bg-success"><a href="#">Turnos</a></li>
-                    <li><a href="#"> Administracion Turno</a></li>
-                    <li class="divider"></li>
-                    <li class="bg-success"><a href="#">Clinicas</a></li>
-                    <li class="divider" ></li>
-                    <li><a href="#"> Alta Clinicas</a></li>
-                    <li><a href="#"> Modificacion Clinicas</a></li>
-                    <li><a href="#"> Baja Clinicas</a></li>
-                    
-                    
-                    <li class="divider"></li>
-                    <li class="bg-success"><a href="#">Clinica</a></li>
-                    <li><a href="#"> Administrar Clinica</a></li>
-                    -->
                     <ul class="dropdown-menu">
                         
                         <li class="bg-info"><a href="#">Horarios</a></li>

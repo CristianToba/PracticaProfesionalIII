@@ -18,9 +18,9 @@ $titulo = 'LISTADO DE HORARIOS';
 while ($row = sqlsrv_fetch_array($resSql)) {
     
     if ($row[3]==1) {
-        $hab='Si';
-    }  else {
         $hab='No';
+    }  else {
+        $hab='Si';
     }
     $data[] = array('descripcion' => $row[0], 'start' => $row[1], 'end' => $row[2], 'Habilitado' => $hab);
     

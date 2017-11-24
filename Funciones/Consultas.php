@@ -198,6 +198,9 @@ function EliminarDato($param, $tipo) {
         } elseif ($datoElim == 'Afiliado') {
 
             print("<script>window.location.replace('../Vista/AdministrarAfiliado.php');</script>");
+        } elseif ($datoElim == 'turno') {
+
+            print("<script>window.location.replace('../GestorTurno/BajaTurno.php');</script>");
         }
     }
     sqlsrv_close($conn);

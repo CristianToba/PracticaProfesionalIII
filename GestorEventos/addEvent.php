@@ -6,6 +6,7 @@ if ($_SESSION['login_user'] == '') {
     header('Location: http://localhost/PracticaProfesionalIII/index.php');
 }
 include_once("../Funciones/Consultas.php");
+
 $parametroA = $_GET['afiliado'];
 $parametroF = $_GET['fecha'];
 $parametroE = $_GET['esp'];

@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
+echo $_SESSION['login_user'] ;
 
 ?>
 
@@ -105,30 +106,7 @@ if ($_SESSION['login_user'] == '') {
                             </h4>
                         </div>
                         <div id="divAgenda"></div>
-                        <!--
-                                                <table id="tbAgenda" class="table" table class="table table-fixed" style="font-size: 11">
-                                                    <thead>
-                                                        <tr>
-                                                            <th hidden=''> idAgenda </th>
-                                                            <th>Descripcion</th>
-                                                            <th>Horario Turno</th>
-                                                            <th>Fecha Turno</th>                                    
-                                                            <th hidden=''>DNI Afiliado</th>
-                                                            <th hidden=''>Nombre Afiliado</th>
-                                                            <th hidden="">Apellido Afiliado</th>
-                                                            <th>Estado</th>
-                                                            <th>Seleccionar</th>
-                        
-                                                        </tr>
-                        
-                                                    </thead>
-                        
-                                                    <tbody id="tbcuerpoTurno"></tbody>
-                        
-                                                </table>
-                        -->
-
-
+                      
                     </div>
 
                 </div>
@@ -139,7 +117,7 @@ if ($_SESSION['login_user'] == '') {
 <div class="row-md-2" align="center" style="margin-top: 10px;">
 
     <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=0">Agregar</a></button>
-    <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_usuario.php">Volver Menu</a></button>
+    <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/inicio_usuario.php'" class="btn btn-danger" style="margin-top: 10px;"> 
 
 
 </div>

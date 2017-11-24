@@ -35,6 +35,7 @@ if (isset($_POST['txtUsuario'])) {
                         $_SESSION['login_user'] = $usr;
                         $tipo = $row['tipo'];
 
+                        echo $_SESSION['login_user'];
                         ##Si el tipo de permisos no es administrador le dirige a la pagina correspondiente para un usuario comun
                         header('Location: /PracticaProfesionalIII/Vista/inicio_usuario.php');
                     }

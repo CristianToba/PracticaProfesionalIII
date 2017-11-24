@@ -1,8 +1,8 @@
 
-
 $(document).ready((function () {
+    
     var PracticaProfIII = {};
-var seleccion = new Date();
+    var seleccion = new Date();
     (function (app) {
 
         app.init = function () {
@@ -10,65 +10,15 @@ var seleccion = new Date();
             app.ListarMedicos();
             app.ListarHorarios();
             app.comboEspecialidad();
-            app.comboProfesional();
+
             app.ListarPais();
-            
+            app.ListarTurnosAsignados();
+
             //app.MostrarAgenda();
 
         };
 
-      /**  $("#MostrarAgenda").click(function () {
 
-            var url = "http://localhost/PracticaProfesionalIII/js/ListarAgendaPorProfesional.php?idProf=22334455";
-            var consola = $('#divAgendaProf');
-            $.ajax({
-                url: url,
-                type: "POST",
-                dataType: "JSON",
-                beforeSend: function () {
-                    consola.html('Espere por favor...');
-                },
-                success: function (datosRecibidos) {
-                    consola.html('');
-                    console.log(datosRecibidos);
-                    app.rellenarTablaAgenda(datosRecibidos);
-                },
-                error: function (jqXHR, textStatus, datosRecibidos) {
-                    console.log(datosRecibidos);
-                    if (jqXHR.status === 0) {
-
-                        alert('Not connect: Verify Network.');
-
-                    } else if (jqXHR.status == 404) {
-
-                        alert('Requested page not found [404]');
-
-                    } else if (jqXHR.status == 500) {
-
-                        alert('Internal Server Error [500].');
-
-                    } else if (textStatus === 'parsererror') {
-
-                        alert('Requested JSON parse failed.');
-
-                    } else if (textStatus === 'timeout') {
-
-                        alert('Time out error.');
-
-                    } else if (textStatus === 'abort') {
-
-                        alert('Ajax request aborted.');
-
-                    } else {
-
-                        alert('Uncaught Error: ' + jqXHR.responseText);
-
-                    }
-
-                }
-            });
-        }); */
-        
         app.rellenarTablaAgenda = function (datosRecibidos) {
 
             var cuerpoAgenda = "";
@@ -224,11 +174,11 @@ var seleccion = new Date();
             for (var i = 0; i < datosRecibidos.length; i++) {
 
                 if (datosRecibidos[i].Habilitado == 1) {
-                    $estadoHorario = 'NO';
+                    $estadoHorario = 'No';
 
                 } else {
 
-                    $estadoHorario = 'SI';
+                    $estadoHorario = 'Si';
                 }
 
                 cuerpo += "<tr><td hidden=''>" + datosRecibidos[i].id + "</td><td>" + datosRecibidos[i].descripcion + "</td><td>" + datosRecibidos[i].HorarioInicio + "</td><td>" + datosRecibidos[i].HorarioFin + "</td><td>" + $estadoHorario + "<td><a href='../Funciones/ValidarOpcion.php?parametro=4&codHorario=" + datosRecibidos[i].id + "&txtDescripcion=" + datosRecibidos[i].descripcion + "'><span class='glyphicon glyphicon-trash'></span></td><td><a href='../Funciones/ValidarOpcion.php?parametro=5&codHorario=" + datosRecibidos[i].id + "&txtDescripcion=" + datosRecibidos[i].descripcion + "&estadoHorario=" + datosRecibidos[i].Habilitado + "'><span class='glyphicon glyphicon-pencil'></span></a></td></tr>";
@@ -338,9 +288,9 @@ var seleccion = new Date();
                     var fecha = new Date();
                     var esp = $('#cmbEspecialidad').val();
                     var prof = $('#cmbProfesional').val();
-                    
+
                     seleccion = date.format("DD/MM/YYYY");
-                    
+
                     if (date < fecha) {
                         //TRUE Clicked date smaller than today + daysToadd
                         alert("No se puede seleccionar un dia pasado");
@@ -348,13 +298,12 @@ var seleccion = new Date();
                     else
                     {
                         //FLASE Clicked date larger than today + daysToadd          
-                        
-                        document.location.href = "http://localhost/PracticaProfesionalIII/GestorEventos/addEvent.php?afiliado="+1+"& fecha=" + seleccion+ " & esp=" + esp + " & prof=" + prof +"";
-                         
+
+                        document.location.href = "http://localhost/PracticaProfesionalIII/GestorEventos/addEvent.php?afiliado=" + 1 + "& fecha=" + seleccion + " & esp=" + esp + " & prof=" + prof + "";
+
                     }
 
                 },
-             
                 buttonText: {
                     today: 'Hoy',
                     month: 'Mes',
@@ -393,10 +342,10 @@ var seleccion = new Date();
         });
 
         $("#MostrarHorariosLibres").click(function () {
-            var parametroF= $("#fecha").val();
-            alert("asd"+parametroF);
-            
-             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?parametroF=" + parametroF;
+            var parametroF = $("#fecha").val();
+            alert("asd" + parametroF);
+
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?parametroF=" + parametroF;
 
             divparametroH = $('#divHorario');
             $.ajax({
@@ -417,7 +366,7 @@ var seleccion = new Date();
                     alert('Ha surgido un error Horarios');
                 }
             });
-            
+
         });
 
 
@@ -462,19 +411,19 @@ var seleccion = new Date();
 
         };
 
-         app.ListarHorario = function (fecha) {
+        app.ListarHorario = function (fecha) {
 
-            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?fecha="+fecha+"";
-            
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONHorariosTurno.php?fecha=" + fecha + "";
+
             $.ajax({
                 url: url,
                 type: "POST",
                 dataType: "JSON",
                 beforeSend: function () {
-                    
+
                 },
                 success: function (datosRecibidos) {
-                    
+
                     app.rellenarComboHorario(datosRecibidos);
                 },
                 error: function () {
@@ -486,22 +435,22 @@ var seleccion = new Date();
 
         };
 
-         app.rellenarComboHorario = function (datosRecibidos) {
-             
+        app.rellenarComboHorario = function (datosRecibidos) {
+
             var cuerpo = "<select id='cmbHorario'><option value=0> Seleccione una valor </option>";
             var comboHorario = $('#divHorario');
-            
+
             for (var i = 0; i < datosRecibidos.length; i++) {
 
-                cuerpo +="<option value=" + datosRecibidos[i].id + ">" + datosRecibidos[i].hora +"</option>";
-                
+                cuerpo += "<option value=" + datosRecibidos[i].id + ">" + datosRecibidos[i].hora + "</option>";
+
             }
-            cuerpo+="</select>";
-            
+            cuerpo += "</select>";
+
             comboHorario.append(cuerpo);
-            
+
         };
-        
+
         app.ListarPais = function () {
 
             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONPais.php";
@@ -553,39 +502,103 @@ var seleccion = new Date();
         };
 
         $("#generarTurno").click(function () {
-             var parametroIA=  $("#txtIdAfiliado").val();    
-             var parametroNA=  $('#txtNombreAfiliado').val();         
-             var parametroAA=  $('#txtApellidoAfiliado').val();         
-             var parametroNP=  $('#profesional').val();         
-             var parametroAP=  $('#txtApellidoProfesional').val();         
-             var parametroE=  $('#especialidad').val();         
-             var parametroF=  $('#fecha').val();      
-             var parametroMP = $("#matricula").val();
-             var parametroH=  $("#cmbHorario").val();   
+            var parametroIA = $("#txtIdAfiliado").val();
+            var parametroNA = $('#txtNombreAfiliado').val();
+            var parametroAA = $('#txtApellidoAfiliado').val();
+            var parametroNP = $('#profesional').val();
+            var parametroAP = $('#txtApellidoProfesional').val();
+            var parametroE = $('#especialidad').val();
+            var parametroF = $('#fecha').val();
+            var parametroMP = $("#matricula").val();
+            var parametroH = $("#cmbHorario").val();
 
-             var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAltaTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
-                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "";
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONAltaTurno.php?parametroNA=" + parametroNA + "& parametroAA=" + parametroAA + " & parametroNP=" + parametroNP +
+                    " & parametroAP=" + parametroAP + " & parametroE=" + parametroE + " & parametroF=" + parametroF + " & parametroH=" + parametroH + " & parametroMP= " + parametroMP + "";
 
             $.ajax({
                 url: url,
-                
                 type: "POST",
-                dataType: "JSON"              
-               
-                
+                dataType: "JSON"
+
+
             });
-            finestraSecundaria("http://localhost/PracticaProfesionalIII/pdf/generarTurno.php?parametroNA="+parametroNA+"& parametroAA=" + parametroAA+ " & parametroNP=" + parametroNP +
-                     " & parametroAP=" + parametroAP+" & parametroE=" +parametroE+" & parametroF="+ parametroF+" & parametroH=" + parametroH+" & parametroMP= " + parametroMP + "& parametroIA = " + parametroIA+"");
-          document.location.href = "http://localhost/PracticaProfesionalIII/Vista/AdministrarTurno.php";
+            finestraSecundaria("http://localhost/PracticaProfesionalIII/pdf/generarTurno.php?parametroNA=" + parametroNA + "& parametroAA=" + parametroAA + " & parametroNP=" + parametroNP +
+                    " & parametroAP=" + parametroAP + " & parametroE=" + parametroE + " & parametroF=" + parametroF + " & parametroH=" + parametroH + " & parametroMP= " + parametroMP + "& parametroIA = " + parametroIA + "");
+            document.location.href = "http://localhost/PracticaProfesionalIII/Vista/AdministrarTurno.php";
         });
-        
-        
-        function finestraSecundaria (url){
-                window.open(url, "Turno Generado", "width=300, height=200");
-}
+
+        app.ListarTurnosAsignados = function () {
+
+            var url = "http://localhost/PracticaProfesionalIII/js/generarJSONturnosAsignados.php?afiliado=1";
+            var consola = $('#divturnosAsignado');
+           
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        dataType: "JSON",
+                        beforeSend: function () {
+                            consola.html('Espere por favor...');
+                        },
+                        success: function (datosRecibidos) {
+                            consola.html('');
+
+                            app.rellenarTablaTurnosAsignados(datosRecibidos);
+                        },
+                        error: function () {
+
+                            alert('Ha surgido un error Turnos Asignados');
+                        }
+                    });
+
+
+        };
+
+        app.rellenarTablaTurnosAsignados = function (datosRecibidos) {
+
+            var cuerpo = "";
+            var tbcuerpoturnosAsignados = $('#tbcuerpoturnosAsignados');
+            tbcuerpoturnosAsignados.html('');
+
+            for (var i = 0; i < datosRecibidos.length; i++) {
+                if (datosRecibidos[i].habilitado == 1) {
+                    $estadoTurno = 'No Vigente';
+
+                } else {
+
+                    $estadoTurno = 'Vigente';
+                }
+                cuerpo += "<tr><td>" + datosRecibidos[i].nroTurno + "</td><td>" + datosRecibidos[i].nombreA + "</td><td>" +
+                        datosRecibidos[i].apellidoA + "</td><td>" + datosRecibidos[i].especialidad + "</td><td>" + datosRecibidos[i].nombreM + "</td><td>" +
+                        datosRecibidos[i].apellidoM + "</td><td>" + datosRecibidos[i].start + "</td><td>" + $estadoTurno +  "</td><td><a href='../Funciones/ValidarOpcion.php?parametro=12&codTurno=" + datosRecibidos[i].nroTurno + "'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
+            }
+            
+            tbcuerpoturnosAsignados.append(cuerpo);
+
+        };
+
+        function finestraSecundaria(url) {
+            window.open(url, "Turno Generado", "width=300, height=200");
+        }
         app.init();
-        
-        
+
+//MODIFICAR HORARIOS
+         $("#ModificarHorarios").click(function () {
+            var parametroCHorario = $("#fecha");
+            var parametroNHorario = $("#fecha").val();
+            var parametroCHorario = $("#fecha").val();
+            
+             
+
+
+
+      
+
+            divparametroH = $('#divModHorario');
+           
+
+        });
+
+
 
     })(PracticaProfIII);
 

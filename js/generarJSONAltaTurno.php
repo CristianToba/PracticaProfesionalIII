@@ -18,7 +18,7 @@ require_once('../Conexion/Conexion.php');
      try {
 
         ## Consulta para insertar el nuevo turno con el ultimo codigo de horario mas uno
-        $sql = " insert into Turno(nroturno,start,idMedico,idHorario, idPersona,title, habilitado) values ((select MAX(t.nroTurno)+1 from Turno as t), ('$fecha'+' '+(select substring(CONVERT(char(19),h.start,114),1,5)  from horarios as h where h.idhorarios='$horario')),(select nroPersona from persona where matricula='$matricula'), '$horario',1, '$title', 1)";
+        $sql = " insert into Turno(nroturno,start,idMedico,idHorario, idPersona,title, habilitado) values ((select MAX(t.nroTurno)+1 from Turno as t), ('$fecha'+' '+(select substring(CONVERT(char(19),h.start,114),1,5)  from horarios as h where h.idhorarios='$horario')),(select nroPersona from persona where matricula='$matricula'), '$horario',1, '$title', 0)";
             
           $stmt = sqlsrv_query($conn, $sql);
         if ($stmt === false) {

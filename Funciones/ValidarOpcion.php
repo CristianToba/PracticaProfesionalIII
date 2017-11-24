@@ -116,4 +116,21 @@ if ($parametro == 11) {
 }
 }
 
+//ADMINISTRAR TURNO
+if ($parametro>=12 && $parametro<=15){
+    //VARIABLES PARA ABM HORARIO
+$turnoModificar= $_GET['codTurno'];
+$tipo='turno';
+//ADMINISTRACION DE TURNOS
+
+//ELIMINAR HORARIO
+if ($parametro == 12) {
+    include("../Funciones/Consultas.php");
+    
+    $sqlEliminar="UPDATE TURNO SET HABILITADO='TRUE',BAJA='$baja' WHERE nroTurno='$turnoModificar'";
+    EliminarDato($sqlEliminar,$tipo);
+}
+
+}
+
 ?>

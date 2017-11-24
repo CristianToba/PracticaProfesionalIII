@@ -193,7 +193,7 @@ if ($_SESSION['login_user'] == '') {
 
                         <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
 
-                        <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/AdministrarAfiliado.php'" class="btn btn-danger" style="margin-top: 10px;"> 
+                        <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/AdministrarMedico.php'" class="btn btn-danger" style="margin-top: 10px;"> 
 
                     </div>
                 </div>
