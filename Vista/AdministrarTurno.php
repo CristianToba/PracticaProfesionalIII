@@ -4,7 +4,7 @@ session_start();
 if ($_SESSION['login_user'] == '') {
     header("Location: http://localhost/PracticaProfesionalIII/index.php");
 }
-echo $_SESSION['login_user'] ;
+
 
 ?>
 

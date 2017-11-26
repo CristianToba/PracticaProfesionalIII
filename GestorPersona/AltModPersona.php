@@ -22,7 +22,7 @@ $fNac = $_POST['fechaNac'];
 $localidad = $_POST['Localidad'];
 $provincia = $_POST['Provincia'];
 $nacionalidad = $_POST['Nacionalidad'];
-$cantHijo = $_POST['CantHijo'];
+
 $estCivil = $_POST['EdoCivil'];
 $telFijo = $_POST['TelFijo'];
 $telMovil = $_POST['TelMovil'];
@@ -30,6 +30,7 @@ $telMovil = $_POST['TelMovil'];
 $telUrg = $_POST['TelUrgencia'];
 $sangre = $_POST['GrpSan'];
 $grpSan = $_POST['GrpSan'];
+
 $fechamod = date("Ymd H:i", time() - 14400);
 $clave = $_POST['txtClave'];
 $habilitado = $_POST['habilitado'];
@@ -40,6 +41,7 @@ $habilitado = $_POST['habilitado'];
 if ($tipo == 1) {
     //$dpto = $_POST['dpto']; 
     //$religionAfiliado = $_POST['Religion'];
+    $cantHijo = $_POST['CantHijo'];
     $hobbieAfiliado = $_POST['Hobbie'];
     $ocupacionAfiliado = $_POST['Ocupacion'];
     $oSocAfiliado = $_POST['ObraSocial'];
@@ -123,10 +125,7 @@ if ($tipo == 1) {
 //Alta Modificacion de Medico
 if ($tipo == 2) {
 
-    $religionMedico = $_POST['Religion'];
-    $hobbieMedico = $_POST['Hobbie'];
-    $ocupacionMedico = $_POST['Ocupacion'];
-    $oSocMedico = $_POST['ObraSocial'];
+
 
 
     if ($accion == 0) {
@@ -136,6 +135,7 @@ if ($tipo == 2) {
         $Movil = $codTelMovil . '-' . $telMovil;
         $codTelUrg = $_POST['CodAreaUrg'];
         $Urgencia = $codTelUrg . '-' . $telUrg;
+        $especialidad = $_POST['cmbEspecialidad'];
 
 
         try {
@@ -145,7 +145,8 @@ if ($tipo == 2) {
 
             $numero = ObtenerMaxPersona($tipo);
             $insert = ObtenerMaxDireccion();
-            $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion',$numero,$dpto,$piso,$cP,10)";
+            $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion','$numero','$dpto','$piso','$cP',10)";
+            print($sql_Consulta_Dir);
             $stmtdir = sqlsrv_query($link, $sql_Consulta_Dir);
 
             if ($stmtdir === false) {
@@ -156,9 +157,9 @@ if ($tipo == 2) {
 
             ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
             $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
-        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, cantHijos, ocupacion, religion, hobbie
-        , telUrgencia, obraSocial, tipoPers, tipoSangre) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'',$cantHijo,'$ocupacionMedico','$religionMedico','$hobbieMedico','$Urgencia','$oSocMedico',2,'$sangre')";
-
+        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, 
+        , telUrgencia,  tipoPers, tipoSangre, idpEspecialidad) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'','$Urgencia',2,'$sangre', '$especialidad')";
+print($sql_Consulta);
             $stmt = sqlsrv_query($link, $sql_Consulta);
             print "<script>alert('" *+$sql_Consulta+"')</script>";
             if ($stmt === false) {

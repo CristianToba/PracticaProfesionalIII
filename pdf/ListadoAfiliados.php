@@ -21,11 +21,15 @@ $titulo='LISTADO DE AFILIADOS';
 
 	}
         
-$pdf->ezText($titulo,16);
-$pdf->ezText("\n\n",10);
-$pdf->ezText('Fecha: '.date("d/m/y"),10);
-$pdf->ezText('Hora: '.date("H:i", time()-14400),10);
-$pdf->ezText("\n\n",10);
+$pdf->addJpegFromFile($img = '../Imagenes/reserva_ya.JPG',$x=30, $y= $pdf->y-80 ,$w=100,$h=0);
+$pdf->ezText("\n\n", 10);
+$pdf->ezText("\n\n", 10);
+$pdf->ezText("\n\n", 10);
+$pdf->ezText($titulo, 16);
+$pdf->ezText("\n\n", 10);
+$pdf->ezText('FECHA: ' . date("d/m/y"), 10);
+$pdf->ezText('HORA: ' . date("H:i", time() - 14400), 10);
+$pdf->ezText("\n\n", 10);
 $pdf->ezTable($data,$cabecera,'',$opcion);
 $pdf->ezStream();
 

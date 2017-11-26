@@ -73,7 +73,7 @@ if ($_SESSION['login_user'] == '') {
 
                         <div class="row-md-2" align="center" style="margin-top: 10px;">
 
-                            <button class="btn btn-danger" style="margin-left: 10px;"><a href="../Vista/inicio_usuario.php">Volver Menu</a></button>
+                            <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/inicio_usuario.php'" class="btn btn-danger" style="margin-top: 10px;"> 
 
                         </div>
                     </div>
