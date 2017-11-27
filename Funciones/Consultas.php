@@ -89,16 +89,16 @@ function ObtenerMaxHorario() {
 function ObtenerMaxPersona($tipoPerParametro) {
     $sql1 = "SELECT MAX(nroPersona) as codigo FROM Persona where tipoPers='1'";
     $sql2 = "SELECT MAX(nroPersona) as codigo FROM Persona where tipoPers='2'";
-    $sql3 = "SELECT MAX(nroPersona) as codigo FROM Persona where tipoPers='3'";
+    $sql3 = "SELECT MAX(nroPersona) as codigo FROM Persona";
     $sqlFinal = "";
     $parametro = $tipoPerParametro;
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     if ($parametro == 1) {
-        $sqlFinal = $sql1;
+        $sqlFinal = $sql3;
     } elseif ($parametro == 2) {
-        $sqlFinal = $sql2;
+        $sqlFinal = $sql3;
     } elseif ($parametro == 3) {
         $sqlFinal = $sql3;
     }

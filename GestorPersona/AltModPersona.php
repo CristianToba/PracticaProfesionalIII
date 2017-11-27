@@ -26,10 +26,11 @@ $nacionalidad = $_POST['Nacionalidad'];
 $estCivil = $_POST['EdoCivil'];
 $telFijo = $_POST['TelFijo'];
 $telMovil = $_POST['TelMovil'];
-
+$dpto = $_POST['dpto'];
 $telUrg = $_POST['TelUrgencia'];
 $sangre = $_POST['GrpSan'];
 $grpSan = $_POST['GrpSan'];
+
 
 $fechamod = date("Ymd H:i", time() - 14400);
 $clave = $_POST['txtClave'];
@@ -135,8 +136,8 @@ if ($tipo == 2) {
         $Movil = $codTelMovil . '-' . $telMovil;
         $codTelUrg = $_POST['CodAreaUrg'];
         $Urgencia = $codTelUrg . '-' . $telUrg;
-        $especialidad = $_POST['cmbEspecialidad'];
-
+        $especialidad = $_POST['especialidad'];
+        $matricula = $_POST['NroMat'];
 
         try {
 
@@ -146,7 +147,7 @@ if ($tipo == 2) {
             $numero = ObtenerMaxPersona($tipo);
             $insert = ObtenerMaxDireccion();
             $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion','$numero','$dpto','$piso','$cP',10)";
-            print($sql_Consulta_Dir);
+            
             $stmtdir = sqlsrv_query($link, $sql_Consulta_Dir);
 
             if ($stmtdir === false) {
@@ -157,20 +158,19 @@ if ($tipo == 2) {
 
             ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
             $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
-        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, 
-        , telUrgencia,  tipoPers, tipoSangre, idpEspecialidad) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'','$Urgencia',2,'$sangre', '$especialidad')";
-print($sql_Consulta);
+        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria , telUrgencia,  tipoPers, tipoSangre, idEspecialidad, matricula) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'','$Urgencia',2,'$sangre', '$especialidad', '$matricula')";
+
             $stmt = sqlsrv_query($link, $sql_Consulta);
-            print "<script>alert('" *+$sql_Consulta+"')</script>";
+            
             if ($stmt === false) {
 
                 print "<script>alert('Registro ya existente ')</script>";
                 die(print_r(sqlsrv_errors(), true));
                 //print("<script>window.location.replace('../Vista/AltaPais.html');</script>");
             } else {
-                print "<script>alert('Se registro un afiliado nuevo')</script>";
+                print "<script>alert('Se registro un Medico nuevo')</script>";
 
-                print("<script>window.location.replace('Alta_Afiliado.php');</script>");
+                print("<script>window.location.replace('../Vista/AdministrarMedico.php');</script>");
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

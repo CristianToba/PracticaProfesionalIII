@@ -11,7 +11,7 @@ $parametroF = $_GET['parametroF'];
 $parametroH = $_GET['parametroH'];
 $parametroMP = $_GET['parametroMP'];
 
-$sql = "SELECT  T.nroTurno, P.nombre, P.apellido, E.especialidad, PR.nombre as nombreM, PR.apellido as apellidoM, CONVERT(char(20),start,120)  AS START   FROM  TURNO AS T INNER JOIN PERSONA AS P ON T.idPersona= P.nroPersona INNER JOIN PERSONA AS PR ON PR.nroPersona=T.idMedico  INNER JOIN ESPECIALIDAD AS E ON PR.idEspecialidad = E.idEspecialidad WHERE idHorario= '$parametroH' AND idMedico = 3 AND idPersona = '$parametroIA' AND CONVERT(char(17),start,103) = '$parametroF' and T.habilitado= 0 ";
+$sql = "SELECT  T.nroTurno, P.nombre, P.apellido, E.especialidad, PR.nombre as nombreM, PR.apellido as apellidoM, CONVERT(char(20),start,120)  AS START   FROM  TURNO AS T INNER JOIN PERSONA AS P ON T.idPersona= P.nroPersona INNER JOIN PERSONA AS PR ON PR.nroPersona=T.idMedico  INNER JOIN ESPECIALIDAD AS E ON PR.idEspecialidad = E.idEspecialidad WHERE idHorario= '$parametroH' AND PR.matricula ='$parametroMP'  AND idPersona = '$parametroIA' AND CONVERT(char(17),start,103) = '$parametroF' and T.habilitado= 0 ";
 $serverName = "(local)";
 $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
 $conn = sqlsrv_connect($serverName, $connectionInfo);

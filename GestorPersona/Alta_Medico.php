@@ -49,7 +49,7 @@ if ($_SESSION['login_user'] == '') {
         <!-- moment -->
         <script src="../js/libs/moment.js"></script>
 
-        <title>ALTA AFILIADO</title>
+        <title>ALTA MEDICO</title>
     </head>
 
     <body text=#000000  link=#000000  vlink=#FF0000>
@@ -105,7 +105,7 @@ if ($_SESSION['login_user'] == '') {
                     </div>
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="dpto" class="col-lg-2 control-label">Dpto: </label>
-                        <INPUT type="text" NAME="dpto" MAXLENGTH="5" onKeyPress="return ValidaNumero(event)" ID="dpto" class="form-control" placeholder="Ingrese Nro dpto." required >
+                        <INPUT type="text" NAME="dpto" MAXLENGTH="6" onKeyPress="return ValidaNumero(event)" ID="dpto" class="form-control" placeholder="Ingrese Nro dpto." required >
                     </div>
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="Piso" class="col-lg-2 control-label">Piso: </label>
@@ -173,7 +173,7 @@ if ($_SESSION['login_user'] == '') {
                     
                         <div id="divespecialidad" style="margin-top: 10px;">
                             <label for="especialidad" class="col-lg-1.5 control-label">Especialidad: </label>
-                            <select id="cmbEspecialidad"></select>
+                            <select name=" especialidad" id="cmbEspecialidad"></select>
 
                         </div >
 
