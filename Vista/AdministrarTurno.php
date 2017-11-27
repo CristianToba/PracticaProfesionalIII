@@ -16,16 +16,16 @@ if ($_SESSION['login_user'] == '') {
         <!-- bootstrp -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <script src="../css/bootstrap.min.js"></script>
-        <!-- jQuery -->
+        <!-- jQuery -
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
+->
         <!-- custom scripts --> 
         <script type="text/javascript" src="js/script.js"></script> 
 
         <!-- bootstrap -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+       <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
         <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" >
-
+-->
         <!-- fullcalendar -->
         <link href="../js/libs/fullcalendar/fullcalendar.css" rel="stylesheet" />
         <script src="../js/libs/fullcalendar/lib/jquery-ui.min.js"></script> 
@@ -36,9 +36,9 @@ if ($_SESSION['login_user'] == '') {
         <!-- jquery -->
         <script src="../css/jquery.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
         <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>

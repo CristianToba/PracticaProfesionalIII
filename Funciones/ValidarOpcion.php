@@ -65,7 +65,7 @@ if ($parametro == 5) {
 //ADMINISTRAR AFILIADO
 if ($parametro>=6 && $parametro<=8){
     //VARIABLES PARA ABM AFILIADO
-    $dni= $_GET['dniAfiliado'];
+    
 
 //ALTA DE AFILIADO
 if ($parametro == 6) {
@@ -75,9 +75,9 @@ if ($parametro == 6) {
 //ELIMINAR AFILIADO
 if ($parametro == 7) {
     include("../Funciones/Consultas.php");
-    
+    $dni= $_GET['dniAfiliado'];
     $tipo='Afiliado';
-    $sqlEliminar="UPDATE PERSONA SET HABILITADO='TRUE',BAJA='$baja' WHERE DNI='$dni'";
+    $sqlEliminar="UPDATE PERSONA SET HABILITADO='True',BAJA='$baja' WHERE DNI='$dni'";
     EliminarDato($sqlEliminar,$tipo);
 }
 

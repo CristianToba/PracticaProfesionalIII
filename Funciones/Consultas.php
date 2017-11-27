@@ -431,29 +431,27 @@ function BuscarDatosParaTurno($afiliado, $especialidad, $profesional) {
     $sqlA = "SELECT A.NOMBRE as nombre,A.APELLIDO as apellido,A.DNI as dni FROM Persona AS A WHERE A.nroPersona= '$afiliado'";
     $sqlP = "SELECT P.nombre as nombreP, P.apellido as apellidoP, E.especialidad FROM Persona AS P INNER JOIN Especialidad AS E ON 
 E.idEspecialidad=P.idEspecialidad  WHERE P.matricula= '$profesional' AND E.idEspecialidad= '$especialidad' ";
-    
+
 
     $stmtA = sqlsrv_query($conn, $sqlA);
     $stmtP = sqlsrv_query($conn, $sqlP);
-    
+
     $arr = array();
-    
+
     while ($row = sqlsrv_fetch_array($stmtA)) {
 
         $nombreA = $row['nombre'];
         $apellidoA = $row['apellido'];
         $dniA = $row['dni'];
-        
+
         while ($rowP = sqlsrv_fetch_array($stmtP)) {
             $nombreP = $rowP['nombreP'];
             $apellidoP = $rowP['apellidoP'];
             $especialidad = $rowP['especialidad'];
-            
-                
-                $arr[] = array('nombreA' => $nombreA, 'apellidoA' => $apellidoA, 'dniA' => $dniA, 'nombreP' => $nombreP, 'apellidoP' => $apellidoP, 'especialidad' => $especialidad);
-            
+
+
+            $arr[] = array('nombreA' => $nombreA, 'apellidoA' => $apellidoA, 'dniA' => $dniA, 'nombreP' => $nombreP, 'apellidoP' => $apellidoP, 'especialidad' => $especialidad);
         }
-        
     }
     return $arr;
 }
@@ -468,14 +466,81 @@ function mostrarFechasDisponibles($fecha) {
     $stmtF = sqlsrv_query($conn, $sqlF);
     $arr = array();
     $parametro = "<option value=0> Seleccione una valor </option>";
-   while( $row = sqlsrv_fetch_array( $stmtF, SQLSRV_FETCH_ASSOC) ) {
-       $parametro= "<option value=" + $row['id'] + ">" + $row['start'] +"</option>";
-       $arr[] = array('fecha'=>$parametro);
-}
-      echo var_dump($arr);
- 
-    
+    while ($row = sqlsrv_fetch_array($stmtF, SQLSRV_FETCH_ASSOC)) {
+        $parametro = "<option value=" + $row['id'] + ">" + $row['start'] + "</option>";
+        $arr[] = array('fecha' => $parametro);
+    }
+    echo var_dump($arr);
+
+
     return $cuerpo;
+}
+
+function ObtenerDescPais($pais) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT  descripcionPais FROM  Pais  WHERE  codigoPais ='$pais'";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmtF = sqlsrv_query($conn, $sql);
+    $row = sqlsrv_fetch_array($stmtF);
+    $paisDesc = $row["descripcionPais"];
+    sqlsrv_close($conn);
+    return $paisDesc;
+}
+
+function ObteneridDireccion($dni) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT idPersDirec FROM PERSONA WHERE dni='$dni' ";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmtF = sqlsrv_query($conn, $sql);
+    $row = sqlsrv_fetch_array($stmtF);
+    $idPersDirec = $row["idPersDirec"];
+    sqlsrv_close($conn);
+    return $idPersDirec;
+}
+
+function mostrarPais($nacionalidad) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT  codigoPais, descripcionPais FROM  Pais WHERE  (Habilitado = 0) ORDER BY codigoPais, descripcionPais";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmt = sqlsrv_query($conn, $sql);
+    $listadoPais = array(); //creamos un array
+
+    while ($row = sqlsrv_fetch_array($stmt)) {
+
+        $codigoPais = $row['codigoPais'];
+        $descripcionPais = $row['descripcionPais'];
+
+        $listadoPais[] = array('codigoPais' => $codigoPais, 'descripcionPais' => $descripcionPais);
+    }
+    sqlsrv_close($conn);
+}
+
+function VerificarDNI($nroDoc) {
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT * FROM PERSONA WHERE dni='$nroDoc' ";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmt = sqlsrv_query($conn, $sql);
+    if (sqlsrv_num_rows($stmt)> 0) {
+        $valido= false;
+       return $valido;
+       
+    } else {
+        $valido=true;
+        return $valido;
+       
+    }
+    sqlsrv_close($conn);
 }
 
 ?>

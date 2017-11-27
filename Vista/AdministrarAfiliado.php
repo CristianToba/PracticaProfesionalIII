@@ -11,20 +11,43 @@ if ($_SESSION['login_user'] == '') {
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <!-- bootstrp -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <script src="../css/jquery.min.js"></script>
         <script src="../css/bootstrap.min.js"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>    
-        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
-        <script src="../Funciones/Validaciones.js"></script>
-        <script src="../Funciones/Funciones.php"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- custom scripts --> 
+        <script type="text/javascript" src="js/script.js"></script> 
+
+        <!-- bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" >
+
+        <!-- fullcalendar -->
+        <link href="../js/libs/fullcalendar/fullcalendar.css" rel="stylesheet" />
+        <script src="../js/libs/fullcalendar/lib/jquery-ui.min.js"></script> 
+        <link href="../js/libs/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+        <script src="../js/libs/fullcalendar/lib/moment.min.js"></script>
+        <script type="text/javascript" src="../js/libs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="fullcalendar.js"></script>
+        <!-- jquery -->
+        <script src="../css/jquery.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="../css/demo.css">
         <link rel="stylesheet" href="../css/footer-distributed-with-address-and-phones.css">
+        <script src="../js/libs/jquery/jquery.js" type="text/javascript"></script>
 
+        <!-- funciones -->
+        <script src="../Funciones/Validaciones.js"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
 
-
-
+        <!-- moment -->
+        <script src="../js/libs/moment.js"></script>
     </head>
     <body>
 
@@ -55,6 +78,8 @@ if ($_SESSION['login_user'] == '') {
                             <th>Email</th>
                             <th>Fecha Nac.</th>
                             <th>Nacionalidad</th>
+                            <th>Provincia</th>
+                            <th>Localidad</th>
                             <th>Est. Civil</th>
                             <th>Direccion</th>
                             <th>Tel.Urgencia</th>
@@ -78,9 +103,8 @@ if ($_SESSION['login_user'] == '') {
             </form>
             <div class="row-md-1" align="center" style="margin-top: 10px;">
 
-
-                <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=6">Agregar Afiliado</a></button>
-
+                <input type="button" value="Agregar Afiliado" name="Agregar Afiliado" onclick = "location = '../Funciones/ValidarOpcion.php?parametro=6'" class="btn btn-default" style="margin-left: 10px;"> 
+                
                 <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
             </div>
 
