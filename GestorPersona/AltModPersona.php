@@ -24,7 +24,12 @@ $nacionalidad = $_POST['Nacionalidad'];
 $estCivil = $_POST['EdoCivil'];
 $telFijo = $_POST['TelFijo'];
 $telMovil = $_POST['TelMovil'];
-
+$cantHijo = $_POST['CantHijo'];
+$hobbieAfiliado = $_POST['Hobbie'];
+$ocupacionAfiliado = $_POST['Ocupacion'];
+$oSocAfiliado = $_POST['ObraSocial'];
+$religionAfiliado = $_POST['Religion'];
+$dpto = $_POST['dpto'];
 $telUrg = $_POST['TelUrgencia'];
 $sangre = $_POST['GrpSan'];
 $fechamod = date("Ymd H:i", time() - 14400);
@@ -62,7 +67,8 @@ if ($tipo == 1) {
             $numero = ObtenerMaxPersona($tipo);
             $insert = ObtenerMaxDireccion();
             $valido = VerificarDNI($nroDoc);
-            if ($valido == false) {
+            
+            if ($valido == 1) {
                 $sql_Consulta_Dir = "INSERT INTO DIRECCION(idDireccion,calle,numero,dpto,piso,codigoPostal,idLocalidad) VALUES ($insert,'$direccion',$nroDir,$dpto,$piso,$cP,$localidad)";
                 $stmtdir = sqlsrv_query($link, $sql_Consulta_Dir);
 
@@ -76,7 +82,7 @@ if ($tipo == 1) {
                 ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
                 $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
         , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria, cantHijos, ocupacion, religion, hobbie, telUrgencia, obraSocial, tipoPers, tipoSangre) 
-        VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$paisDesc','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',1,'',$cantHijo,'$ocupacionAfiliado','$religionAfiliado','$hobbieAfiliado','$Urgencia','$oSocAfiliado',1,'$sangre')";
+        VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$paisDesc','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',0,'',$cantHijo,'$ocupacionAfiliado','$religionAfiliado','$hobbieAfiliado','$Urgencia','$oSocAfiliado',1,'$sangre')";
 
                 $stmt = sqlsrv_query($link, $sql_Consulta);
                 if ($stmt === false) {
@@ -163,10 +169,11 @@ if ($tipo == 2) {
                 die(print_r(sqlsrv_errors(), true));
             }
             $numerodir = ObtenerUltDireccion();
+            $paisDesc = ObtenerDescPais($nacionalidad);
 
             ## Consulta para insertar el nuevo registro con el ultimo codigo de persona mas uno
             $sql_Consulta = "INSERT INTO PERSONA(nroPersona,dni,tipoDni, nombre, apellido, mail, fechaNac, sexo, nacionalidad, estadoCivil, idPersDirec
-        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria , telUrgencia,  tipoPers, tipoSangre, idEspecialidad, matricula) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$nacionalidad','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',0,'','$Urgencia',2,'$sangre', '$especialidad', '$matricula')";
+        , telFijo, alta, baja, celular, Habilitado, usuarioAuditoria , telUrgencia,  tipoPers, tipoSangre, idEspecialidad, matricula) VALUES ($numero,$nroDoc,'$tipoDoc','$nombre','$apellido','$email','$fNac','$sexo','$paisDesc','$estCivil',$numerodir,'$Fijo','$fechamod','','$Movil',0,'','$Urgencia',2,'$sangre', '$especialidad', '$matricula')";
 
             $stmt = sqlsrv_query($link, $sql_Consulta);
 
@@ -190,10 +197,15 @@ if ($tipo == 2) {
         try {
 
             include("../Funciones/Consultas.php");
-            ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
-            $sql_Consulta = "UPDATE PERSONA SET dni='$nroDoc',nombre='$nombre',apellido='$apellido',mail='$email',fechaNac='$fNac',sexo='$sexo',nacionalidad='$nacionalidad',estadoCivil='$estCivil',clave='$clave',habilitado='$habilitado',cantHijos='$cantHijo',ocupacion='$ocupacionMedico',religion='$religionMedico', hobbie='$hobbieMedico',tipoDni='$tipoDoc',telFijo='$telFijo',telUrgencia='$telUrg',celular='$telMovil',obraSocial='$oSocMedico',tipoSangre='$sangre' where dni='$nroDoc'";
 
+            $paisDesc = ObtenerDescPais($nacionalidad);
+
+            ## Consulta para insertar el nuevo registro con el ultimo codigo de pais mas uno
+            $sql_Consulta = "UPDATE PERSONA SET dni='$nroDoc',nombre='$nombre',apellido='$apellido',mail='$email',fechaNac='$fNac',sexo='$sexo',nacionalidad='$paisDesc',estadoCivil='$estCivil',clave='$clave',habilitado='$habilitado',cantHijos='$cantHijo',ocupacion='$ocupacionAfiliado', religion='$religionAfiliado' , hobbie='$hobbieAfiliado',tipoDni='$tipoDoc',telFijo='$telFijo',telUrgencia='$telUrg',celular='$telMovil',obraSocial='$oSocAfiliado',tipoSangre='$sangre' where dni='$nroDoc'";
+            $idDireccion = ObteneridDireccion($nroDoc);
+            $sql_ConsultaDir = "UPDATE DIRECCION SET calle= '$direccion', numero= '$nroDir', dpto='$dpto', piso='$piso', codigoPostal='$cP', idLocalidad='$localidad' WHERE idDireccion = '$idDireccion' ";
             $stmt = sqlsrv_query($link, $sql_Consulta);
+            $stmtDir = sqlsrv_query($link, $sql_ConsultaDir);
             if ($stmt === false) {
 
                 print "<script>alert('Registro no modificado')</script>";
@@ -201,7 +213,7 @@ if ($tipo == 2) {
             } else {
                 print "<script>alert('Se registro modificacion de persona')</script>";
 
-                print("<script>window.location.replace('../Vista/AdministrarAfiliado.php');</script>");
+                print("<script>window.location.replace('../Vista/AdministrarMedico.php');</script>");
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

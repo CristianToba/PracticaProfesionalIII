@@ -82,10 +82,9 @@ if ($_SESSION['login_user'] == '') {
             </form>
             <div class="row-md-1" align="center" style="margin-top: 10px;">
 
-
-                <button class="btn btn-default" style="margin-left: 10px;"><a href="../Funciones/ValidarOpcion.php?parametro=9">Agregar Medico</a></button>
-
-                <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
+                <input type="button" value="Agregar Medico" onclick = "location = '../Funciones/ValidarOpcion.php?parametro=9'" name="Agregar Medico" class="btn btn-default" style="margin-left: 10px;"> 
+                
+                <input type="button" value="Volver al Menu" onclick = "location = 'Inicio_Administrador.php'" name="Volver al Menu" class="btn btn-danger" style="margin-left: 10px;"> 
             </div>
 
 

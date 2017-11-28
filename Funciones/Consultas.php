@@ -14,6 +14,7 @@ if (isset($POST['funcion']) && isset($POST['direccion'])) {
     }
 }
 
+//Funciones de Paises
 function ListarPaises() {
     $sql = "SELECT * FROM Pais";
     $serverName = "(local)";
@@ -32,7 +33,62 @@ function ListarPaises() {
         echo "</tr>";
     }
 }
+function ObtenerTodosPaises() {
 
+    $sql = "SELECT * FROM Pais";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmt = sqlsrv_query($conn, $sql);
+    sqlsrv_close($conn);
+    return $stmt;
+}
+function ObtenerMaxPais() {
+    $sql = "SELECT MAX(codigoPais) as codigo FROM PAIS";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $res_Consulta = sqlsrv_query($conn, $sql);
+    $row = sqlsrv_fetch_array($res_Consulta);
+    $MaximoCodigo = $row["codigo"];
+    $MaximoCodigo++;
+    sqlsrv_close($conn);
+    return $MaximoCodigo;
+}
+function ObtenerDescPais($pais) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT  descripcionPais FROM  Pais  WHERE  codigoPais ='$pais'";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmtF = sqlsrv_query($conn, $sql);
+    $row = sqlsrv_fetch_array($stmtF);
+    $paisDesc = $row["descripcionPais"];
+    sqlsrv_close($conn);
+    return $paisDesc;
+}
+function mostrarPais($nacionalidad) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT  codigoPais, descripcionPais FROM  Pais WHERE  (Habilitado = 0) ORDER BY codigoPais, descripcionPais";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmt = sqlsrv_query($conn, $sql);
+    $listadoPais = array(); //creamos un array
+
+    while ($row = sqlsrv_fetch_array($stmt)) {
+
+        $codigoPais = $row['codigoPais'];
+        $descripcionPais = $row['descripcionPais'];
+
+        $listadoPais[] = array('codigoPais' => $codigoPais, 'descripcionPais' => $descripcionPais);
+    }
+    sqlsrv_close($conn);
+}
+
+//Funciones Direccion
 function ObtenerDireccion($codDireccion) {
 
     $sql = "SELECT calle+' '+cast(numero as varchar(6)) as direccion FROM DIRECCION WHERE idDireccion='$codDireccion'";
@@ -47,31 +103,53 @@ function ObtenerDireccion($codDireccion) {
 
     echo $direccion;
 }
+function ObtenerMaxDireccion() {
 
-function ObtenerTodosPaises() {
+    $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
 
-    $sql = "SELECT * FROM Pais";
+
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmt = sqlsrv_query($conn, $sql);
-    sqlsrv_close($conn);
-    return $stmt;
-}
 
-function ObtenerMaxPais() {
-    $sql = "SELECT MAX(codigoPais) as codigo FROM PAIS";
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $res_Consulta = sqlsrv_query($conn, $sql);
+    $res_Consulta = sqlsrv_query($conn, $sqlFinal);
     $row = sqlsrv_fetch_array($res_Consulta);
     $MaximoCodigo = $row["codigo"];
     $MaximoCodigo++;
     sqlsrv_close($conn);
     return $MaximoCodigo;
 }
+function ObtenerUltDireccion() {
 
+    $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
+
+
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    $res_Consulta = sqlsrv_query($conn, $sqlFinal);
+    $row = sqlsrv_fetch_array($res_Consulta);
+    $MaximoCodigo = $row["codigo"];
+    sqlsrv_close($conn);
+    return $MaximoCodigo;
+}
+function ObteneridDireccion($dni) {
+
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT idPersDirec FROM PERSONA WHERE dni='$dni' ";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmtF = sqlsrv_query($conn, $sql);
+    $row = sqlsrv_fetch_array($stmtF);
+    $idPersDirec = $row["idPersDirec"];
+    sqlsrv_close($conn);
+    return $idPersDirec;
+}
+
+
+//Funciones Horarios
 function ObtenerMaxHorario() {
     $sql = "SELECT MAX(idHorario) as codigo FROM Horarios";
     //$result = $this->objeto->ejecutar($sql);
@@ -86,6 +164,8 @@ function ObtenerMaxHorario() {
     return $MaximoCodigo;
 }
 
+
+//Funciones Personas
 function ObtenerMaxPersona($tipoPerParametro) {
     $sql1 = "SELECT MAX(nroPersona) as codigo FROM Persona where tipoPers='1'";
     $sql2 = "SELECT MAX(nroPersona) as codigo FROM Persona where tipoPers='2'";
@@ -111,40 +191,6 @@ function ObtenerMaxPersona($tipoPerParametro) {
     sqlsrv_close($conn);
     return $MaximoCodigo;
 }
-
-function ObtenerMaxDireccion() {
-
-    $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
-
-
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-
-    $res_Consulta = sqlsrv_query($conn, $sqlFinal);
-    $row = sqlsrv_fetch_array($res_Consulta);
-    $MaximoCodigo = $row["codigo"];
-    $MaximoCodigo++;
-    sqlsrv_close($conn);
-    return $MaximoCodigo;
-}
-
-function ObtenerUltDireccion() {
-
-    $sqlFinal = "SELECT MAX(idDireccion) as codigo FROM DIRECCION";
-
-
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-
-    $res_Consulta = sqlsrv_query($conn, $sqlFinal);
-    $row = sqlsrv_fetch_array($res_Consulta);
-    $MaximoCodigo = $row["codigo"];
-    sqlsrv_close($conn);
-    return $MaximoCodigo;
-}
-
 function ObtenerPersona($dni) {
     require_once('../Conexion/Conexion.php');
     $sql = "SELECT * FROM Persona where dni='$dni'";
@@ -154,58 +200,6 @@ function ObtenerPersona($dni) {
     $stmt = sqlsrv_query($conn, $sql);
     sqlsrv_close($conn);
 }
-
-function saca_menu_desplegable($sql) {
-
-    //tomamos los datos del archivo conexion.php  
-    include("../Conexion/Conexion.php");
-    include("../Funciones/Consultas.php");
-    $link = Conectarse();
-    //se envia la consulta  
-
-    $resultado = sqlsrv_query($link, $sql);
-    echo "<select name='cbmCriterio'>";
-
-    while ($fila = sqlsrv_fetch_array($resultado)) {
-
-        echo "<option selected value='$fila[0]'>$fila[1]";
-
-
-        echo "<option value='$fila[0]'>$fila[1]";
-    }
-    echo "</select>";
-    sqlsrv_close($conn);
-}
-
-function EliminarDato($param, $tipo) {
-    $datoElim = $tipo;
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmt = sqlsrv_query($conn, $param);
-    if ($stmt === false) {
-
-        print "<script>alert('Registro no se Elimino Registro')</script>";
-        //die(print_r(sqlsrv_errors(), true));
-    } else {
-
-        if ($datoElim == 'pais') {
-
-            print("<script>window.location.replace('../Vista/AdministrarPais.php');</script>");
-        } elseif ($datoElim == 'horarios') {
-
-            print("<script>window.location.replace('../Vista/AdministrarHorarios.php');</script>");
-        } elseif ($datoElim == 'Afiliado') {
-
-            print("<script>window.location.replace('../Vista/AdministrarAfiliado.php');</script>");
-        } elseif ($datoElim == 'turno') {
-
-            print("<script>window.location.replace('../GestorTurno/BajaTurno.php');</script>");
-        }
-    }
-    sqlsrv_close($conn);
-}
-
 function mostrarGSan($tipoSangre) {
 
     $sangre = $tipoSangre;
@@ -311,7 +305,6 @@ function mostrarGSan($tipoSangre) {
     sqlsrv_close($conn);
     return $GSangre;
 }
-
 function mostrarEstCivil($estCivil) {
     $Tipo = $estCivil;
 
@@ -346,7 +339,6 @@ function mostrarEstCivil($estCivil) {
     sqlsrv_close($conn);
     return $mostrar;
 }
-
 function mostrarTDoc($tipoDoc) {
     $tipo = $tipoDoc;
 
@@ -393,7 +385,6 @@ function mostrarTDoc($tipoDoc) {
     sqlsrv_close($conn);
     return $mostrar;
 }
-
 function mostrarSexo($sexo) {
     $tipo = $sexo;
 
@@ -407,7 +398,6 @@ function mostrarSexo($sexo) {
     }
     return $mostrar;
 }
-
 function mostrarHab($hab) {
     $tipo = $hab;
 
@@ -422,7 +412,26 @@ function mostrarHab($hab) {
 
     return $mostrar;
 }
+function VerificarDNI($nroDoc) {
+    require_once('../Conexion/Conexion.php');
+    $sql = "SELECT * FROM PERSONA WHERE dni='$nroDoc' ";
+    $serverName = "(local)";
+    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $stmt = sqlsrv_query($conn, $sql);
+    if (sqlsrv_num_rows($stmt)> 0) {
+        $valido= false;
+       return $valido;
+       
+    } else {
+        $valido=true;
+        return $valido;
+       
+    }
+    sqlsrv_close($conn);
+}
 
+//Funciones Turno
 function BuscarDatosParaTurno($afiliado, $especialidad, $profesional) {
     require_once('../Conexion/Conexion.php');
     $serverName = "(local)";
@@ -455,7 +464,6 @@ E.idEspecialidad=P.idEspecialidad  WHERE P.matricula= '$profesional' AND E.idEsp
     }
     return $arr;
 }
-
 function mostrarFechasDisponibles($fecha) {
     require_once('../Conexion/Conexion.php');
     $serverName = "(local)";
@@ -476,71 +484,63 @@ function mostrarFechasDisponibles($fecha) {
     return $cuerpo;
 }
 
-function ObtenerDescPais($pais) {
 
-    require_once('../Conexion/Conexion.php');
-    $sql = "SELECT  descripcionPais FROM  Pais  WHERE  codigoPais ='$pais'";
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmtF = sqlsrv_query($conn, $sql);
-    $row = sqlsrv_fetch_array($stmtF);
-    $paisDesc = $row["descripcionPais"];
-    sqlsrv_close($conn);
-    return $paisDesc;
-}
 
-function ObteneridDireccion($dni) {
+function saca_menu_desplegable($sql) {
 
-    require_once('../Conexion/Conexion.php');
-    $sql = "SELECT idPersDirec FROM PERSONA WHERE dni='$dni' ";
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmtF = sqlsrv_query($conn, $sql);
-    $row = sqlsrv_fetch_array($stmtF);
-    $idPersDirec = $row["idPersDirec"];
-    sqlsrv_close($conn);
-    return $idPersDirec;
-}
+    //tomamos los datos del archivo conexion.php  
+    include("../Conexion/Conexion.php");
+    include("../Funciones/Consultas.php");
+    $link = Conectarse();
+    //se envia la consulta  
 
-function mostrarPais($nacionalidad) {
+    $resultado = sqlsrv_query($link, $sql);
+    echo "<select name='cbmCriterio'>";
 
-    require_once('../Conexion/Conexion.php');
-    $sql = "SELECT  codigoPais, descripcionPais FROM  Pais WHERE  (Habilitado = 0) ORDER BY codigoPais, descripcionPais";
-    $serverName = "(local)";
-    $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmt = sqlsrv_query($conn, $sql);
-    $listadoPais = array(); //creamos un array
+    while ($fila = sqlsrv_fetch_array($resultado)) {
 
-    while ($row = sqlsrv_fetch_array($stmt)) {
+        echo "<option selected value='$fila[0]'>$fila[1]";
 
-        $codigoPais = $row['codigoPais'];
-        $descripcionPais = $row['descripcionPais'];
 
-        $listadoPais[] = array('codigoPais' => $codigoPais, 'descripcionPais' => $descripcionPais);
+        echo "<option value='$fila[0]'>$fila[1]";
     }
+    echo "</select>";
     sqlsrv_close($conn);
 }
 
-function VerificarDNI($nroDoc) {
-    require_once('../Conexion/Conexion.php');
-    $sql = "SELECT * FROM PERSONA WHERE dni='$nroDoc' ";
+function EliminarDato($param, $tipo) {
+    $datoElim = $tipo;
     $serverName = "(local)";
     $connectionInfo = array("Database" => "DAMSU", "UID" => "DAMSU", "PWD" => "DAMSU");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $stmt = sqlsrv_query($conn, $sql);
-    if (sqlsrv_num_rows($stmt)> 0) {
-        $valido= false;
-       return $valido;
-       
+    $stmt = sqlsrv_query($conn, $param);
+    if ($stmt === false) {
+
+        print "<script>alert('Registro no se Elimino Registro')</script>";
+        //die(print_r(sqlsrv_errors(), true));
     } else {
-        $valido=true;
-        return $valido;
-       
+
+        if ($datoElim == 'pais') {
+
+            print("<script>window.location.replace('../Vista/AdministrarPais.php');</script>");
+        } elseif ($datoElim == 'horarios') {
+
+            print("<script>window.location.replace('../Vista/AdministrarHorarios.php');</script>");
+        } elseif ($datoElim == 'Afiliado') {
+
+            print("<script>window.location.replace('../Vista/AdministrarAfiliado.php');</script>");
+        } elseif ($datoElim == 'turno') {
+
+            print("<script>window.location.replace('../GestorTurno/BajaTurno.php');</script>");
+        }elseif ($datoElim == 'Medico') {
+
+            print("<script>window.location.replace('../Vista/AdministrarMedico.php');</script>");
+        } 
+        
+        
     }
     sqlsrv_close($conn);
 }
+
 
 ?>

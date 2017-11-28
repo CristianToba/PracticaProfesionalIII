@@ -84,7 +84,8 @@ if ($parametro == 7) {
 //MODIFICACION DE AFILIADO
 if ($parametro == 8) {
     $dni= $_GET['dniAfiliado'];
-    print("<script>window.location.replace('../GestorPersona/Modificar_Persona.php?dniPersona=$dni');</script>");
+    $tipo=1;
+    print("<script>window.location.replace('../GestorPersona/Modificar_Persona.php?dniPersona=$dni&tipo=$tipo');</script>");
     
 }
 }
@@ -92,7 +93,7 @@ if ($parametro == 8) {
 //ADMINISTRAR MEDICO
 if ($parametro>=9 && $parametro<=11){
     //VARIABLES PARA ABM MEDICO
-    $dni= $_GET['dniMedico'];
+    
 
 //ALTA DE AFILIADO
 if ($parametro == 9) {
@@ -102,16 +103,17 @@ if ($parametro == 9) {
 //ELIMINAR MEDICO
 if ($parametro == 10) {
     include("../Funciones/Consultas.php");
-    
+    $dni= $_GET['dniAfiliado'];
     $tipo='Medico';
-    $sqlEliminar="UPDATE PERSONA SET HABILITADO='TRUE',BAJA='$baja' WHERE DNI='$dni'";
+    $sqlEliminar="UPDATE PERSONA SET HABILITADO='true',BAJA='$baja' WHERE DNI='$dni'";
     EliminarDato($sqlEliminar,$tipo);
 }
 
 //MODIFICACION DE MEDICO
 if ($parametro == 11) {
-    $dni= $_GET['dniMedico'];
-    print("<script>window.location.replace('../GestorPersona/Modificar_Persona.php?dniPersona=$dni');</script>");
+    $dni= $_GET['dniAfiliado'];
+    $tipo=2;
+    print("<script>window.location.replace('../GestorPersona/Modificar_Persona.php?dniPersona=$dni& tipo=$tipo');</script>");
     
 }
 }

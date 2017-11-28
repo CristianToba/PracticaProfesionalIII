@@ -104,8 +104,8 @@ if ($_SESSION['login_user'] == '') {
             <div class="row-md-1" align="center" style="margin-top: 10px;">
 
                 <input type="button" value="Agregar Afiliado" name="Agregar Afiliado" onclick = "location = '../Funciones/ValidarOpcion.php?parametro=6'" class="btn btn-default" style="margin-left: 10px;"> 
+                <input type="button" value="Volver al Menu" onclick = "location = 'Inicio_Administrador.php'" name="Volver al Menu" class="btn btn-danger" style="margin-left: 10px;"> 
                 
-                <button class="btn btn-danger" style="margin-left: 10px;"><a href="Inicio_Administrador.php">Volver Menu</a></button>
             </div>
 
 

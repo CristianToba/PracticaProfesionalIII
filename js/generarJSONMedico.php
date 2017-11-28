@@ -23,6 +23,8 @@ while ($row = sqlsrv_fetch_array($stmt)) {
     $Email = $row['mail'];
     $FNac = $row['fechaNac']; 
     $Nacionalidad = $row['nacionalidad'];
+    $provincia = $row['provincia'];
+    $localidad = $row['localidad'];
     $ECivil = $row['estadoCivil'];
     $direccion = $row['direccion'];
     $telurgencia = $row['telUrgencia'];
@@ -33,7 +35,7 @@ while ($row = sqlsrv_fetch_array($stmt)) {
    
 
     $medico[] = array('id' => $id, 'matricula' => $matricula,'dni' => $Dni,'nombre' => $Nombre, 'apellido' => $Apellido,'mail' => $Email, 
-        'fechaNac' => $FNac, 'nacionalidad' => $Nacionalidad,'EstCivil' => $ECivil, 'direccion' => $direccion,      
+        'fechaNac' => $FNac, 'nacionalidad' => $Nacionalidad, 'localidad' => $localidad, 'provincia' => $provincia, 'EstCivil' => $ECivil, 'direccion' => $direccion,      
         'telUrgencia' => $telurgencia,
         'celular' => $celular,'especialidad' => $especialidad, 'orientacion' => $orientacion,
         'Habilitado' => $habilitado);

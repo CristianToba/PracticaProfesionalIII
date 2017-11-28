@@ -116,18 +116,18 @@ if ($_SESSION['login_user'] == '') {
                         <INPUT type="text" NAME="CodigoPostal" MAXLENGTH="4" onKeyPress="return ValidaNumero(event)" ID="Codigo Postal" class="form-control" placeholder="Ingrese C.Postal" required >
                     </div>
 
-                    <div class="col-md-6" style="margin-top: 10px;">
-                        <label for="Localidad" class="col-lg-2 control-label">Localidad: </label>
-                        <INPUT type="text" NAME="Localidad" Size=20 onKeyPress="return ValidaCadena(event)" ID="Localidad" class="form-control" placeholder="Ingrese localidad" required >
+                    <div id="divnacionalidad" class="col-md-6" style="margin-top: 10px;">
+                        <label for="Nacionalidad" class="col-lg-2 control-label">Pais: </label>
+                        <select name="Nacionalidad" id="cmbNacionalidad"></select>
+
                     </div>
-                    <div class="col-md-6" style="margin-top: 10px;">
+
+                    <div id="divprovincia" class="col-md-6" style="margin-top: 10px;">
                         <label for="Provincia" class="col-lg-2 control-label">Provincia: </label>
-                        <INPUT type="text" NAME="Provincia" Size=20 onKeyPress="return ValidaCadena(event)" ID="Provincia" class="form-control" placeholder="Ingrese provincia" required >
+                        <select name="Provincia" id="cmbProvincia"></select>
+
                     </div>
-                    <div class="col-md-6" style="margin-top: 10px;">
-                        <label for="Nacionalidad" class="col-lg-2.5 control-label">Nacionalidad: </label>
-                        <INPUT type="text" NAME="Nacionalidad" Size=20 onKeyPress="return ValidaCadena(event)" ID="Nacionalidad" class="form-control" placeholder="Ingrese Nacionalidad" required >
-                    </div>
+                    
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="sexo" class="col-lg-2 control-label">Sexo:</label>
                         <input checked name="sexo" type="radio" value="Masculino">
@@ -135,9 +135,21 @@ if ($_SESSION['login_user'] == '') {
                         <input name="sexo" type="radio" value="Femenino">
                         Femenino<br>
                     </div>
+
+                    <div id="divlocalidad" class="col-md-6" style="margin-top: 10px;">
+                        <label for="Localidad" class="col-lg-2 control-label">Localidad: </label>
+                        <select name="Localidad" id="cmbLocalidad"></select>
+
+                    </div>
+
                     <div class="col-md-6" style="margin-top: 10px;">
                         <label for="Email" class="col-lg-2 control-label">Email: </label>
                         <INPUT type="email" NAME="email" Size=40 ONBLUR=" validarEmail(correo);" ID="email" class="form-control" placeholder="Ingrese email" required>
+                    </div>
+
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="CantHijos" class="col-lg-2 control-label">Cantidad Hijos: </label>
+                        <INPUT type="text" NAME="CantHijo" MAXLENGTH="5" onKeyPress="return ValidaNumero(event)" ID="CantHijo" class="form-control" placeholder="Ingrese Cant. Hijos" required >
                     </div>
 
                     <div class="col-md-6" style="margin-top: 10px;">
@@ -170,46 +182,59 @@ if ($_SESSION['login_user'] == '') {
                         </select>
                     </div>
 
-                    
-                        <div id="divespecialidad" style="margin-top: 10px;">
-                            <label for="especialidad" class="col-lg-1.5 control-label">Especialidad: </label>
-                            <select name=" especialidad" id="cmbEspecialidad"></select>
 
-                        </div >
+                    <div id="divespecialidad" style="margin-top: 10px;">
+                        <label for="especialidad" class="col-lg-1.5 control-label">Especialidad: </label>
+                        <select name=" especialidad" id="cmbEspecialidad"></select>
 
-                        <div class="col-md-6" style="margin-top: 10px;">
-                            <label for="TelFijo" class="col-lg-2 control-label">Tel.Fijo: </label>
-                            <INPUT type="tel" NAME="CodAreaFijo" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaFijo" class="form-control" placeholder="Cod.Area" required >
-                            -
-                            <INPUT type="tel" NAME="TelFijo" MAXLENGTH="7" onKeyPress="return ValidaNumero(event)" ID="TelFijo" class="form-control" placeholder="Ingrese Telefono Fijo" required >
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px;">
-                            <label for="TelCel" class="col-lg-2 control-label">Celular: </label>
-                            <INPUT type="tel" NAME="CodAreaMovil" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaMovil" class="form-control" placeholder="Cod.Area" required >
-                            -
-                            <INPUT type="tel" NAME="TelMovil" MAXLENGTH="9" onKeyPress="return ValidaNumero(event)" ID="TelMovil" class="form-control" placeholder="Ingrese Telefono Celular" required >
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px;">
-                            <label for="TelUrgencia">Tel.Urgencia: </label>
-                            <INPUT type="tel" NAME="CodAreaUrg" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaUrg" class="form-control" placeholder="Cod.Area" required >
-                            -
-                            <INPUT type="tel" NAME="TelUrgencia" MAXLENGTH="7" onKeyPress="return ValidaNumero(event)" ID="TelUrgencia" class="form-control" placeholder="Ingrese Telefono Urgencia" required >
-                        </div>
+                    </div >
 
-
-
-
-
-                        <div class="col-md-10" style="margin-top: 10px;">
-                            <input type="submit" class="btn btn-default" style="margin-top: 10px;">
-                            <input type="reset" value="Borrar" class="btn btn-danger" style="margin-top: 10px;">
-                            <input type="button" value="Salir" onclick = "location = '../Vista/AdministrarMedico.php'" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
-                        </div>
-                        </FORM>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="TelFijo" class="col-lg-2 control-label">Tel.Fijo: </label>
+                        <INPUT type="tel" NAME="CodAreaFijo" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaFijo" class="form-control" placeholder="Cod.Area" required >
+                        -
+                        <INPUT type="tel" NAME="TelFijo" MAXLENGTH="7" onKeyPress="return ValidaNumero(event)" ID="TelFijo" class="form-control" placeholder="Ingrese Telefono Fijo" required >
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <footer> @2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
-                </div>
-                </body>
-                </html>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="TelCel" class="col-lg-2 control-label">Celular: </label>
+                        <INPUT type="tel" NAME="CodAreaMovil" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaMovil" class="form-control" placeholder="Cod.Area" required >
+                        -
+                        <INPUT type="tel" NAME="TelMovil" MAXLENGTH="9" onKeyPress="return ValidaNumero(event)" ID="TelMovil" class="form-control" placeholder="Ingrese Telefono Celular" required >
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="TelUrgencia">Tel.Urgencia: </label>
+                        <INPUT type="tel" NAME="CodAreaUrg" MAXLENGTH="5" size="5" onKeyPress="return ValidaNumero(event)" ID="CodAreaUrg" class="form-control" placeholder="Cod.Area" required >
+                        -
+                        <INPUT type="tel" NAME="TelUrgencia" MAXLENGTH="7" onKeyPress="return ValidaNumero(event)" ID="TelUrgencia" class="form-control" placeholder="Ingrese Telefono Urgencia" required >
+                    </div>
+
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="Religion" class="col-lg-2 control-label">Religion: </label>
+                        <INPUT type="text" NAME="Religion"  ID="Religion" Size=40 class="form-control" placeholder="Ingrese religion" required >
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="Hobbie" class="col-lg-2 control-label">Hobbie: </label>
+                        <INPUT type="text" NAME="Hobbie"  ID="Hobbie" Size=40 class="form-control" placeholder="Ingrese Hobbie" required >
+                    </div>
+
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="Ocupacion" class="col-lg-2 control-label">Ocupacion: </label>
+                        <INPUT type="text" NAME="Ocupacion"  ID="Ocupacion" Size=40 class="form-control" placeholder="Ingrese ocupacion" required >
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px;">
+                        <label for="ObraSocial" class="col-lg-2 control-label">Obra Social: </label>
+                        <INPUT type="text" NAME="ObraSocial"  ID="ObraSocial" Size=40 class="form-control" placeholder="Ingrese Obra Social" required >
+                    </div>
+                    <div class="col-md-10" style="margin-top: 10px;">
+                        <input type="submit" class="btn btn-default" style="margin-top: 10px;">
+                        <input type="reset" value="Borrar" class="btn btn-danger" style="margin-top: 10px;">
+                        <input type="button" value="Salir" onclick = "location = '../Vista/AdministrarMedico.php'" name="Salir" class="btn btn-danger" style="margin-top: 10px;"> 
+                    </div>
+            </FORM>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <footer> @2016 Todos los derechos reservados. Tèrminos y condiciones </footer>
+    </div>
+</body>
+</html>

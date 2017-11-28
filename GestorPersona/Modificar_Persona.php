@@ -50,6 +50,7 @@ if ($_SESSION['login_user'] == '') {
     <body>
         <?php
         $nroDoc = $_GET['dniPersona'];
+        $tipo=$_GET['tipo'];
         include_once("../Funciones/Consultas.php");
         //$afiliado = ObtenerPersona($nroDoc);
         require_once('../Conexion/Conexion.php');
@@ -89,11 +90,12 @@ if ($_SESSION['login_user'] == '') {
 //$fechamod = date("Ymd H:i", time() - 14400);
             $clave = $row[11];
             $habilitado = $row[14];
+            
         }
         ?>
         <div class="panel panel-primary">
-            <div class="panel-heading"> <b>Modificar Pais</b> </div>
-            <FORM name ="formulario" method="POST" action = "../GestorPersona/AltModPersona.php?parametroTipo=1&parametroAccion=1" class="form-inline">
+            <div class="panel-heading"> <b>Modificar Persona</b> </div>
+            <FORM name ="formulario" method="POST" action = "../GestorPersona/AltModPersona.php?parametroTipo=<?php echo $tipo ?>&parametroAccion=1" class="form-inline">
 
                 <div class="panel-body" >
                     <div class="col-md-6" style="margin-top: 10px;">
@@ -150,13 +152,13 @@ if ($_SESSION['login_user'] == '') {
 
                     <div id="divnacionalidad" class="col-md-6" style="margin-top: 10px;">
                         <label for="Nacionalidad" class="col-lg-2 control-label">Pais: </label>
-                        <select name="Nacionalidad" id="cmbNacionalidad"></select>
+                        <select name="Nacionalidad" id="cmbNacionalidad" required></select>
 
                     </div>
 
                     <div id="divprovincia" class="col-md-6" style="margin-top: 10px;">
                         <label for="Provincia" class="col-lg-2 control-label">Provincia: </label>
-                        <select name="Provincia" id="cmbProvincia"></select>
+                        <select name="Provincia" id="cmbProvincia" required></select>
                         
 
                     </div>
@@ -169,7 +171,7 @@ if ($_SESSION['login_user'] == '') {
 
                     <div id="divlocalidad" class="col-md-6" style="margin-top: 10px;">
                         <label for="Localidad" class="col-lg-2 control-label">Localidad: </label>
-                        <select name="Localidad" id="cmbLocalidad"></select>
+                        <select name="Localidad" id="cmbLocalidad" required></select>
 
                     </div>
 
@@ -244,7 +246,7 @@ if ($_SESSION['login_user'] == '') {
 
                     <input type="submit"  value="Guardar" class="btn btn-default" style="margin-top: 10px;">
 
-                    <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/AdministrarAfiliado.php'" class="btn btn-danger" style="margin-top: 10px;"> 
+                    <input type="button" value="Salir" name="Salir" onclick = "location = '../Vista/inicio_administrador.php'" class="btn btn-danger" style="margin-top: 10px;"> 
 
                 </div>
         </div>
